@@ -1,7 +1,8 @@
 /* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
- * purpose of either: (i) interacting through your browser with the Microsoft
+ * purpose of either: (i) interacting through your b
+    ser with the Microsoft
  * website or online service, subject to the applicable licensing or use
  * terms; or (ii) using the files as included with a Microsoft product subject
  * to that product's license terms. Microsoft reserves all other rights to the
@@ -6814,3 +6815,55 @@ td.visible-print {
     display: none !important;
   }
 }
+
+
+
+.item{
+
+  
+    font-size:14px; 
+    font-weight:bold; 
+}
+
+.containerTwo {
+  padding-right: 30px;
+  padding-left: 30px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.jumbotronTwo {
+  padding: 30px;
+  margin-bottom: 0px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #eeeeee;
+}
+
+.parrafo{
+    text-align:center;
+
+}
+
+.titulo{
+    margin-top:5px;
+    padding-left:30px;
+    font-size:18px;
+    text-decoration:underline;
+    font-family:Verdana;
+
+}
+
+.contenedor-datos{
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+
+.MyClass { color: #007715 }
+.MyClass:active { color: #007715 }
+.MyClass:link { color: #007715 }
+.MyClass:visited { color:#007715}

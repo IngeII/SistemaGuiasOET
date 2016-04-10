@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+    ViewBag.Title = "Administración de Usuarios";
+}
+
+
+<div class="jumbotronTwo">
+
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <p class="titulo">Administración de Usuarios</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9">
+    </div>
+    <div class="col-md-1">
+        <input type="submit" value="Insertar" class="btn btn-default" />
+    </div>
+    <div class="col-md-1">
+        <input type="submit" value="Modificar" class="btn btn-default" />
+    </div>
+    <div class="col-md-1">
+        <input type="submit" value="Eliminar" class="btn btn-default" />
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-5 col-sm-offset-1">
+        <p>Datos personales</p>
+        <div class="panel panel-default" style="height: 500px">
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5 ">
+        <p>Datos de cuenta</p>
+        <div class="panel panel-default" style="height: 500px">
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+<div class="col-lg-11">
+    <div id="btnsBD" style="float: right">
+        <input type="submit" value="Aceptar" class="btn btn-default" />
+        <input type="submit" value="Cancelar" class="btn btn-default" />
+    </div>
+</div>
+</div>
+
+<div class="row">
+@using (Html.BeginForm("Index", "Student", FormMethod.Get))
+{
+    <p>
+        Buscar por nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Buscar" />
+    </p>
+}
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Compañía", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Estación", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Rol", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+    </tr>
+
+    
+    
+
+</table>
+<br />
+
+
