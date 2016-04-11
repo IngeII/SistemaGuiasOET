@@ -27,12 +27,12 @@ namespace GuiasOET.Controllers
             return View();
         }
 
-        public ActionResult AdministracionUsuarios()
+       public ActionResult AdministracionUsuarios()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
+        } 
 
     }
 }
