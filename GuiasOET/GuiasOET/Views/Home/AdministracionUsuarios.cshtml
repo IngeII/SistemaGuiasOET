@@ -1,9 +1,7 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_GeneralLayout.cshtml";
     ViewBag.Title = "Administración de Usuarios";
 }
-
 
 <div class="jumbotronTwo">
 
@@ -13,6 +11,7 @@
         <p class="titulo">Administración de Usuarios</p>
     </div>
 </div>
+<!--BOTONES IMEC-->
 <div class="row">
     <div class="col-md-9">
     </div>
@@ -27,62 +26,288 @@
     </div>
 </div>
 <br>
+<!--DATOS PERSONALES-->
 <div class="row">
     <div class="col-sm-5 col-sm-offset-1">
-        <p>Datos personales</p>
-        <div class="panel panel-default" style="height: 500px">
+        <div class="panel panel-default" style="height: 550px">
             <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6" col-sm-offset-1>
+                        <label for="titulo">Datos personales:</label>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblcedula" for="cedula">Cédula:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtcedula">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblnombre" for="nombre">Nombre:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtnombre">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblape1" for="apellido1">Apellido 1:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtape1">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblape2" for="apellido2">Apellido 2:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtape2">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblemail" for="email">Email:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtemail">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lbldireccion" for="direccion">Dirección:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtdireccion">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lbltelefono" for="telefono">Teléfono:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txttel">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="form-control" id="btnmas" value="+">
+                    </div>
+                </div>
+
+                <br />
+
+                <!--parte que no se si va a servir para meter los telefonos agregados-->
+                 <div class="row">
+                    <div class="col-md-10"  col-sm-offset-1>
+                        <a href="#" class="form-control">First item</a>
+                    </div>
+                     <div class="col-md-2">
+                         <input type="button" class="form-control" id="btnmenos" value="-">
+                     </div>
+                </div>
+                <!--parte que no se si va a servir para meter los telefonos agregados-->
+                    
+
             </div>
         </div>
     </div>
-    <div class="col-sm-5 ">
-        <p>Datos de cuenta</p>
-        <div class="panel panel-default" style="height: 500px">
+
+    <!--DATOS DE LA CUENTA-->
+
+    <div class="col-sm-5 col-sm-offset-1">
+        <div class="panel panel-default" style="height: 550px">
             <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-md-6" col-sm-offset-1>
+                        <label for="titulo">Datos de la cuenta:</label>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblusuario" for="usuario">Usuario:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtusuario">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblcontrasena" for="contrasena">Contraseña:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtcontrasena">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblconfirmar" for="confirmar">Confirmar:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <input type="text" class="form-control" id="txtconfirmar">
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblrol" for="rol">Rol:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="checkbox"  id="chkbxadminglobal">
+                    </div>
+                    <div class="col-md-6" col-sm-offset-1>
+                        <label id="lblag" for="rol">Administrador global</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="checkbox" id="chkbxadminlocal">
+                    </div>
+                    <div class="col-md-6">
+                        <label id="lblal" for="rol">Administrador local</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="checkbox"  id="chkbxguiainterno">
+                    </div>
+                    <div class="col-md-6">
+                        <label id="lblrolgi" for="rol">Guía interno</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="checkbox"  id="chkbxguiaexterno">
+                    </div>
+                    <div class="col-md-6">
+                        <label id="lblrolge" for="rol">Guía externo</label>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblcompania" for="compania">Compañía:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="sel1">
+                            <option value="OET">OET</option>
+                            <option value="ESINTRO">ESINTRO?</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblestacion" for="estacion">Estación:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="sel2">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-md-3" col-sm-offset-1>
+                        <label id="lblestado" for="estado">Estado:</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select class="form-control" id="sel3">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-<div class="col-lg-11">
-    <div id="btnsBD" style="float: right">
-        <input type="submit" value="Aceptar" class="btn btn-default" />
-        <input type="submit" value="Cancelar" class="btn btn-default" />
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="btnsBD" style="float: right">
+                <input type="submit" value="Aceptar" class="btn btn-default" />
+                <input type="submit" value="Cancelar" class="btn btn-default" />
+            </div>
+        </div>
     </div>
-</div>
-</div>
 
-<div class="row">
-@using (Html.BeginForm("Index", "Student", FormMethod.Get))
-{
-    <p>
-        Buscar por nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Buscar" />
-    </p>
-}
-</div>
+    <div class="row">
+        @using (Html.BeginForm("Index", "Student", FormMethod.Get))
+        {
+            <p>
+                Buscar por nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Buscar" />
+            </p>
+        }
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Compañía", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Estación", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Rol", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Compañía", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Estación", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Rol", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+        </tr>
 
-    
-    
+    </table>
+    <br />
 
-</table>
-<br />
+
 
 
