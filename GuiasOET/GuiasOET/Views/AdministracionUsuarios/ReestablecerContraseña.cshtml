@@ -1,14 +1,13 @@
-﻿@model GuiasOET.Models.LoginViewModel
-
+﻿@model GuiasOET.Models.ResetPasswordViewModel
 @{
-    ViewBag.Title = "Inicio se Sesión";
+    ViewBag.Title = "Reestablecer Contraseña";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br>
 <div class="row col-sm-7">
     <div class="col-sm-10 col-sm-push-1">
-        <h2>Iniciar Sesión</h2>
+        <h2>Modificar Contraseña</h2>
         <hr />
     </div>
 </div>
@@ -16,25 +15,23 @@
 <div class="row col-sm-7">
 
 
-    @using (Html.BeginForm("Login", "Seguridad", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+    @using (Html.BeginForm("ReestablecerContraseña", "AdministracionUsuarios", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
     {
 
 
         @Html.AntiForgeryToken()
-      
+
         <div class="col-sm-9 col-sm-push-1">
             @Html.ValidationSummary(true)
             <div class="form-group">
-                <div class="panel panel-default" style="height: 100%; width: 100%; border-color: black; ">
+                <div class="panel panel-default" style="height: 100%; width: 70%; border-color: black; ">
                     <div class="panel-body">
                         <br>
                         @Html.ValidationSummary("", new { @class = "text-danger" })
-                        @Html.LabelFor(m => m.UserName, new { @class = "col-sm-2 control-label" })
                         <div class="form-group">
-
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-9 col-sm-push-1">
                                 @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-
                             </div>
                         </div>
                         <br>
@@ -49,19 +46,23 @@
                         <br>
                         <br>
                         <div class="form-group">
-                            <div class="col-sm-9 col-sm-push-3">
-                                <input type="submit" value="Ingresar" class="btn btn-default" style="width:28%" />
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-9 col-sm-push-1">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+
                             </div>
                         </div>
                         <br>
                         <br>
+
+
                         <div class="form-group">
                             <div class="col-sm-9 col-sm-push-3">
-                                <p>
-                                    @Html.ActionLink("¿Olvidó su contraseña?", "ReestablecerContraseña")
-                                </p>
+                                <input type="submit" value="Aceptar" class="btn btn-default" style="width:28%" />
                             </div>
                         </div>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -75,9 +76,6 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-
-
 
 
 

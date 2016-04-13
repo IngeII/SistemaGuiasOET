@@ -55,21 +55,8 @@ namespace GuiasOET.Controllers
 
 
         //
-        // GET: /Seguridad/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
+     
 
-        //
-        // GET: /Seguridad/ReestablecerContraseña
-        [AllowAnonymous]
-        public ActionResult ReestablecerContraseña()
-        {
-            return View();
-        }
 
 
 

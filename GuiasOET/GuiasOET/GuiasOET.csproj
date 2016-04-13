@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministracionUsuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
@@ -267,10 +268,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\AdministracionUsuarios.cshtml" />
     <Content Include="Views\Shared\_GeneralLayout.cshtml" />
-    <Content Include="Views\Seguridad\Login.cshtml" />
-    <Content Include="Views\Seguridad\ReestablecerContraseña.cshtml" />
+    <Content Include="Views\AdministracionUsuarios\Login.cshtml" />
+    <Content Include="Views\AdministracionUsuarios\AdministracionUsuarios.cshtml" />
+    <Content Include="Views\AdministracionUsuarios\ReestablecerContraseña.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
