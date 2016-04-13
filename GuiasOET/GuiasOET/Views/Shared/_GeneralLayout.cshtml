@@ -37,21 +37,23 @@
         </div>
 
     </div>
-
-    <div class="container -content" style="background:#ff6a00">
-       
+    <div class="container body-content">
+        @RenderBody()
     </div>
-    @RenderBody()
 
-    <footer>
-        <div class="panel-footer" style="position:fixed; width:100%; bottom: 0; background: #7BC143; text-align: center">
-            <p>&copy; @DateTime.Now.Year - Organización de Estudios Tropicales</p>
-        </div>
-    </footer>
+        <footer>
+            <div class="panel-footer" style="position:fixed; width:100%; bottom: 0; background: #7BC143; text-align: center">
+                <p>&copy; @DateTime.Now.Year - Organización de Estudios Tropicales</p>
+            </div>
+        </footer>
+ 
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>
