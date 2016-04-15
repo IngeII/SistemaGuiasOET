@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GUIAS_ASIGNAINTERNO">
+    <Key>
+      <PropertyRef Name="NUMERORESERVACION" />
+      <PropertyRef Name="CEDULAINTERNO" />
+    </Key>
+    <Property Name="NOTASASIGNA" Type="varchar2" MaxLength="100" />
+    <Property Name="CONFIRMACIONASIGNA" Type="varchar2" MaxLength="10" />
+    <Property Name="NUMERORESERVACION" Type="varchar2" MaxLength="15" Nullable="false" />
+    <Property Name="CEDULAINTERNO" Type="varchar2" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GUIAS_ASOCIAEXTERNO">
+    <Key>
+      <PropertyRef Name="NUMERORESERVACION" />
+      <PropertyRef Name="CEDULAEXTERNO" />
+    </Key>
+    <Property Name="NOTASASOCIA" Type="varchar2" MaxLength="100" />
+    <Property Name="CONFIRMACIONASOCIA" Type="varchar2" MaxLength="10" />
+    <Property Name="NUMERORESERVACION" Type="varchar2" MaxLength="15" Nullable="false" />
+    <Property Name="CEDULAEXTERNO" Type="varchar2" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GUIAS_COMPANIA">
+    <Key>
+      <PropertyRef Name="NOMBRECOMPANIA" />
+    </Key>
+    <Property Name="NOMBRECOMPANIA" Type="varchar2" MaxLength="10" Nullable="false" />
+    <Property Name="UBICACION" Type="varchar2" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="GUIAS_EMPLEADO">
+    <Key>
+      <PropertyRef Name="CEDULA" />
+    </Key>
+    <Property Name="CEDULA" Type="varchar2" MaxLength="9" Nullable="false" />
+    <Property Name="NOMBREEMPLEADO" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="APELLIDO1" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="APELLIDO2" Type="varchar2" MaxLength="20" />
+    <Property Name="EMAIL" Type="varchar2" MaxLength="30" />
+    <Property Name="ESTADO" Type="varchar2" MaxLength="7" />
+    <Property Name="DIRECCION" Type="varchar2" MaxLength="100" />
+    <Property Name="USUARIO" Type="varchar2" MaxLength="20" />
+    <Property Name="CONTRASENA" Type="varchar2" MaxLength="100" />
+    <Property Name="TIPOEMPLEADO" Type="varchar2" MaxLength="15" Nullable="false" />
+    <Property Name="NOMBREESTACION" Type="varchar2" MaxLength="55" />
+  </EntityType>
+  <EntityType Name="GUIAS_ESTACION">
+    <Key>
+      <PropertyRef Name="NOMBREESTACION" />
+    </Key>
+    <Property Name="NOMBREESTACION" Type="varchar2" MaxLength="55" Nullable="false" />
+    <Property Name="UBICACION" Type="varchar2" MaxLength="60" />
+    <Property Name="NOMBRECOMPANIA" Type="varchar2" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GUIAS_HORARIODISPONIBLE">
+    <Key>
+      <PropertyRef Name="CEDULAEXTERNO" />
+    </Key>
+    <Property Name="FECHA" Type="date" />
+    <Property Name="HORA" Type="varchar2" MaxLength="13" />
+    <Property Name="CEDULAEXTERNO" Type="varchar2" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GUIAS_RESERVACION">
+    <Key>
+      <PropertyRef Name="NUMERORESERVACION" />
+    </Key>
+    <Property Name="NUMERORESERVACION" Type="varchar2" MaxLength="15" Nullable="false" />
+    <Property Name="NUMEROPERSONAS" Type="number" Precision="38" Scale="0" />
+    <Property Name="HORAMODIFICACION" Type="varchar2" MaxLength="13" />
+    <Property Name="FECHAMODIFICACION" Type="date" />
+    <Property Name="TURNO" Type="varchar2" MaxLength="20" />
+    <Property Name="FECHA" Type="date" />
+    <Property Name="HORA" Type="varchar2" MaxLength="13" />
+  </EntityType>
+  <EntityType Name="GUIAS_ROLDIASLIBRES">
+    <Key>
+      <PropertyRef Name="CEDULAINTERNO" />
+    </Key>
+    <Property Name="FECHA" Type="date" />
+    <Property Name="CEDULAINTERNO" Type="varchar2" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GUIAS_TELEFONO">
+    <Key>
+      <PropertyRef Name="CEDULAEMPLEADO" />
+      <PropertyRef Name="TELEFONO" />
+    </Key>
+    <Property Name="CEDULAEMPLEADO" Type="varchar2" MaxLength="9" Nullable="false" />
+    <Property Name="TELEFONO" Type="varchar2" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ASIGNA_INTERNO">
+    <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+    <End Role="GUIAS_ASIGNAINTERNO" Type="Self.GUIAS_ASIGNAINTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_EMPLEADO">
+        <PropertyRef Name="CEDULA" />
+      </Principal>
+      <Dependent Role="GUIAS_ASIGNAINTERNO">
+        <PropertyRef Name="CEDULAINTERNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ASIGNA_RESERVACION">
+    <End Role="GUIAS_RESERVACION" Type="Self.GUIAS_RESERVACION" Multiplicity="1" />
+    <End Role="GUIAS_ASIGNAINTERNO" Type="Self.GUIAS_ASIGNAINTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_RESERVACION">
+        <PropertyRef Name="NUMERORESERVACION" />
+      </Principal>
+      <Dependent Role="GUIAS_ASIGNAINTERNO">
+        <PropertyRef Name="NUMERORESERVACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ASOCIA_EXTERNO">
+    <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+    <End Role="GUIAS_ASOCIAEXTERNO" Type="Self.GUIAS_ASOCIAEXTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_EMPLEADO">
+        <PropertyRef Name="CEDULA" />
+      </Principal>
+      <Dependent Role="GUIAS_ASOCIAEXTERNO">
+        <PropertyRef Name="CEDULAEXTERNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ASOCIA_RESERVACION">
+    <End Role="GUIAS_RESERVACION" Type="Self.GUIAS_RESERVACION" Multiplicity="1" />
+    <End Role="GUIAS_ASOCIAEXTERNO" Type="Self.GUIAS_ASOCIAEXTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_RESERVACION">
+        <PropertyRef Name="NUMERORESERVACION" />
+      </Principal>
+      <Dependent Role="GUIAS_ASOCIAEXTERNO">
+        <PropertyRef Name="NUMERORESERVACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EMPLEADO_ESTACION">
+    <End Role="GUIAS_ESTACION" Type="Self.GUIAS_ESTACION" Multiplicity="0..1" />
+    <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_ESTACION">
+        <PropertyRef Name="NOMBREESTACION" />
+      </Principal>
+      <Dependent Role="GUIAS_EMPLEADO">
+        <PropertyRef Name="NOMBREESTACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTACION_COMPANIA">
+    <End Role="GUIAS_COMPANIA" Type="Self.GUIAS_COMPANIA" Multiplicity="1" />
+    <End Role="GUIAS_ESTACION" Type="Self.GUIAS_ESTACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_COMPANIA">
+        <PropertyRef Name="NOMBRECOMPANIA" />
+      </Principal>
+      <Dependent Role="GUIAS_ESTACION">
+        <PropertyRef Name="NOMBRECOMPANIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HD_EXTERNO">
+    <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+    <End Role="GUIAS_HORARIODISPONIBLE" Type="Self.GUIAS_HORARIODISPONIBLE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_EMPLEADO">
+        <PropertyRef Name="CEDULA" />
+      </Principal>
+      <Dependent Role="GUIAS_HORARIODISPONIBLE">
+        <PropertyRef Name="CEDULAEXTERNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROL_INTERNO">
+    <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+    <End Role="GUIAS_ROLDIASLIBRES" Type="Self.GUIAS_ROLDIASLIBRES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_EMPLEADO">
+        <PropertyRef Name="CEDULA" />
+      </Principal>
+      <Dependent Role="GUIAS_ROLDIASLIBRES">
+        <PropertyRef Name="CEDULAINTERNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TELEFONO_EMPLEADO">
+    <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+    <End Role="GUIAS_TELEFONO" Type="Self.GUIAS_TELEFONO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GUIAS_EMPLEADO">
+        <PropertyRef Name="CEDULA" />
+      </Principal>
+      <Dependent Role="GUIAS_TELEFONO">
+        <PropertyRef Name="CEDULAEMPLEADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="GUIAS_ASIGNAINTERNO" EntityType="Self.GUIAS_ASIGNAINTERNO" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_ASOCIAEXTERNO" EntityType="Self.GUIAS_ASOCIAEXTERNO" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_COMPANIA" EntityType="Self.GUIAS_COMPANIA" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_EMPLEADO" EntityType="Self.GUIAS_EMPLEADO" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_ESTACION" EntityType="Self.GUIAS_ESTACION" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_HORARIODISPONIBLE" EntityType="Self.GUIAS_HORARIODISPONIBLE" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_RESERVACION" EntityType="Self.GUIAS_RESERVACION" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_ROLDIASLIBRES" EntityType="Self.GUIAS_ROLDIASLIBRES" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_TELEFONO" EntityType="Self.GUIAS_TELEFONO" Schema="SYSTEM" store:Type="Tables" />
+    <AssociationSet Name="FK_ASIGNA_INTERNO" Association="Self.FK_ASIGNA_INTERNO">
+      <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+      <End Role="GUIAS_ASIGNAINTERNO" EntitySet="GUIAS_ASIGNAINTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ASIGNA_RESERVACION" Association="Self.FK_ASIGNA_RESERVACION">
+      <End Role="GUIAS_RESERVACION" EntitySet="GUIAS_RESERVACION" />
+      <End Role="GUIAS_ASIGNAINTERNO" EntitySet="GUIAS_ASIGNAINTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ASOCIA_EXTERNO" Association="Self.FK_ASOCIA_EXTERNO">
+      <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+      <End Role="GUIAS_ASOCIAEXTERNO" EntitySet="GUIAS_ASOCIAEXTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ASOCIA_RESERVACION" Association="Self.FK_ASOCIA_RESERVACION">
+      <End Role="GUIAS_RESERVACION" EntitySet="GUIAS_RESERVACION" />
+      <End Role="GUIAS_ASOCIAEXTERNO" EntitySet="GUIAS_ASOCIAEXTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EMPLEADO_ESTACION" Association="Self.FK_EMPLEADO_ESTACION">
+      <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
+      <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTACION_COMPANIA" Association="Self.FK_ESTACION_COMPANIA">
+      <End Role="GUIAS_COMPANIA" EntitySet="GUIAS_COMPANIA" />
+      <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HD_EXTERNO" Association="Self.FK_HD_EXTERNO">
+      <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+      <End Role="GUIAS_HORARIODISPONIBLE" EntitySet="GUIAS_HORARIODISPONIBLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROL_INTERNO" Association="Self.FK_ROL_INTERNO">
+      <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+      <End Role="GUIAS_ROLDIASLIBRES" EntitySet="GUIAS_ROLDIASLIBRES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TELEFONO_EMPLEADO" Association="Self.FK_TELEFONO_EMPLEADO">
+      <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+      <End Role="GUIAS_TELEFONO" EntitySet="GUIAS_TELEFONO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
