@@ -352,3 +352,5 @@ C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGu
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.resources.dll
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.Razor.resources.dll
+C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Oracle.ManagedDataAccess.EntityFramework.dll
