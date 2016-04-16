@@ -1,18 +1,22 @@
-﻿@model GuiasOET.Models.ResetPasswordViewModel
+﻿@model GuiasOET.Models.GUIAS_EMPLEADO.ModificarContraseña
 @{
     ViewBag.Title = "Reestablecer Contraseña";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br>
-<div class="row col-sm-7">
-    <div class="col-sm-10 col-sm-push-1">
-        <h2>Modificar Contraseña</h2>
-        <hr />
-    </div>
+<div class="row col-sm-11 col-sm-offset-1">
+    <h2>@ViewBag.Title</h2>
 </div>
 
-<div class="row col-sm-7">
+<div class="row col-sm-10 col-sm-offset-1">
+    <hr />
+</div>
+
+<br>
+<br>
+
+<div class="row col-sm-12">
 
 
     @using (Html.BeginForm("ReestablecerContraseña", "AdministracionUsuarios", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
@@ -21,41 +25,41 @@
 
         @Html.AntiForgeryToken()
 
-        <div class="col-sm-9 col-sm-push-1">
+        <div class="col-sm-5 col-sm-push-1">
             @Html.ValidationSummary(true)
             <div class="form-group">
-                <div class="panel panel-default" style="height: 100%; width: 70%; border-color: black; ">
+                <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
                         <div class="form-group">
-                            @Html.LabelFor(m => m.UserName, new { @class = "col-sm-2 control-label" })
+                            @Html.LabelFor(m => m.USUARIO, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-9 col-sm-push-1">
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.USUARIO, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.USUARIO, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <br>
                         <br>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-sm-2 control-label" })
+                            @Html.LabelFor(m => m.CONTRASENA, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-9 col-sm-push-1">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.PasswordFor(m => m.CONTRASENA, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CONTRASENA, "", new { @class = "text-danger" })
 
                             </div>
                         </div>
                         <br>
                         <br>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-2 control-label" })
+                            @Html.LabelFor(m => m.CONFIRMACIONCONTRASENA, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-9 col-sm-push-1">
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-
+                                @Html.PasswordFor(m => m.CONFIRMACIONCONTRASENA, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CONFIRMACIONCONTRASENA, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <br>
                         <br>
-
-
                         <div class="form-group">
                             <div class="col-sm-9 col-sm-push-3">
                                 <input type="submit" value="Aceptar" class="btn btn-default" style="width:28%" />
@@ -76,6 +80,10 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+
 
 
 

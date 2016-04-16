@@ -89,5 +89,36 @@ namespace GuiasOET.Models
         public virtual GUIAS_ROLDIASLIBRES GUIAS_ROLDIASLIBRES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUIAS_TELEFONO> GUIAS_TELEFONO { get; set; }
+
+        public class LoginModel
+        {
+            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario ")]
+            [Display(Name = "Usuario:")]
+            public string USUARIO { get; set; }
+
+            [Required(ErrorMessage = "*Debe ingresar la contraseña")]
+            [DataType(DataType.Password)]
+            [Display(Name = "Contraseña:")]
+            public string CONTRASENA { get; set; }
+        }
+
+        public class ModificarContraseña
+        {
+            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario ")]
+            [Display(Name = "Usuario:")]
+            public string USUARIO { get; set; }
+
+            [Required(ErrorMessage = "*Debe ingresar la contraseña")]
+            [DataType(DataType.Password)]
+            [Display(Name = "Contraseña: ")]
+            public string CONTRASENA { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirmar Contraseña: ")]
+            [Compare("CONTRASENA", ErrorMessage = "*La contraseña y la confirmación de la contraseña no coinciden")]
+            [NotMapped]
+            public string CONFIRMACIONCONTRASENA { get; set; }
+
+        }
     }
 }
