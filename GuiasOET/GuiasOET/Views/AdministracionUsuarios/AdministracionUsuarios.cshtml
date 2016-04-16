@@ -38,10 +38,10 @@
 
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <!--DATOS PERSONALES-->
-<div class="row">
+<div class="row" style="width:auto">
     <div class="col-sm-5 col-sm-offset-1">
-        <div class="panel panel-default" style="height: 550px">
-            <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="panel-body" style="height: 55%; width:auto">
                 <div class="row">
                     <div class="col-md-6" col-sm-offset-1>
                         <label for="titulo">Datos personales:</label>
@@ -156,8 +156,8 @@
     <!--DATOS DE LA CUENTA-->
 
     <div class="col-sm-5 col-sm-offset-1">
-        <div class="panel panel-default" style="height: 550px">
-            <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="panel-body"style="height: 55%; width:auto">
 
                 <div class="row">
                     <div class="col-md-6" col-sm-offset-1>
@@ -168,10 +168,11 @@
 
                 <div class="row">
                     <div class="col-md-3" col-sm-offset-1>
-                        <label id="lblusuario" for="usuario">Usuario:</label>
+                        @Html.LabelFor(model => model.modeloEmpleado.USUARIO, htmlAttributes: new { @class = "control-label col-md-2" })
                     </div>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" id="txtusuario">
+                        @Html.EditorFor(model => model.modeloEmpleado.USUARIO, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.modeloEmpleado.USUARIO, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -179,10 +180,11 @@
 
                 <div class="row">
                     <div class="col-md-3" col-sm-offset-1>
-                        <label id="lblcontrasena" for="contrasena">Contraseña:</label>
+                        @Html.LabelFor(model => model.modeloEmpleado.CONTRASENA, htmlAttributes: new { @class = "control-label col-md-2" })
                     </div>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" id="txtcontrasena">
+                        @Html.EditorFor(model => model.modeloEmpleado.CONTRASENA, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.modeloEmpleado.CONTRASENA, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -193,7 +195,8 @@
                         <label id="lblconfirmar" for="confirmar">Confirmar:</label>
                     </div>
                     <div class="col-md-7">
-                        <input type="text" class="form-control" id="txtconfirmar">
+                        @Html.EditorFor(model => model.modeloEmpleado.CONTRASENA, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.modeloEmpleado.CONTRASENA, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -201,7 +204,7 @@
 
                 <div class="row">
                     <div class="col-md-3" col-sm-offset-1>
-                        <label id="lblrol" for="rol">Rol:</label>
+                        @Html.LabelFor(model => model.modeloEmpleado.TIPOEMPLEADO, htmlAttributes: new { @class = "control-label col-md-2" })
                     </div>
                     <div class="col-md-2">
                         <input type="checkbox" id="chkbxadminglobal">
@@ -259,7 +262,7 @@
 
                 <div class="row">
                     <div class="col-md-3" col-sm-offset-1>
-                        <label id="lblestacion" for="estacion">Estación:</label>
+                        @Html.LabelFor(model => model.modeloEmpleado.NOMBREESTACION, htmlAttributes: new { @class = "control-label col-md-2" })
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" id="sel2">
@@ -274,7 +277,7 @@
 
                 <div class="row">
                     <div class="col-md-3" col-sm-offset-1>
-                        <label id="lblestado" for="estado">Estado:</label>
+                        @Html.LabelFor(model => model.modeloEmpleado.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" id="sel3">
