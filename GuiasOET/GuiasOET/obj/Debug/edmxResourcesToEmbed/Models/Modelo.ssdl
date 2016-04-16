@@ -32,16 +32,16 @@
       <PropertyRef Name="CEDULA" />
     </Key>
     <Property Name="CEDULA" Type="varchar2" MaxLength="9" Nullable="false" />
-    <Property Name="NOMBREEMPLEADO" Type="varchar2" MaxLength="20" Nullable="false" />
-    <Property Name="APELLIDO1" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="NOMBREEMPLEADO" Type="varchar2" MaxLength="20" />
+    <Property Name="APELLIDO1" Type="varchar2" MaxLength="20" />
     <Property Name="APELLIDO2" Type="varchar2" MaxLength="20" />
     <Property Name="EMAIL" Type="varchar2" MaxLength="30" />
     <Property Name="ESTADO" Type="varchar2" MaxLength="7" />
     <Property Name="DIRECCION" Type="varchar2" MaxLength="100" />
-    <Property Name="USUARIO" Type="varchar2" MaxLength="20" />
-    <Property Name="CONTRASENA" Type="varchar2" MaxLength="100" />
+    <Property Name="USUARIO" Type="varchar2" MaxLength="20" Nullable="false" />
+    <Property Name="CONTRASENA" Type="varchar2" MaxLength="100" Nullable="false" />
     <Property Name="TIPOEMPLEADO" Type="varchar2" MaxLength="15" Nullable="false" />
-    <Property Name="NOMBREESTACION" Type="varchar2" MaxLength="55" />
+    <Property Name="NOMBREESTACION" Type="varchar2" MaxLength="55" Nullable="false" />
   </EntityType>
   <EntityType Name="GUIAS_ESTACION">
     <Key>
@@ -135,7 +135,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_EMPLEADO_ESTACION">
-    <End Role="GUIAS_ESTACION" Type="Self.GUIAS_ESTACION" Multiplicity="0..1" />
+    <End Role="GUIAS_ESTACION" Type="Self.GUIAS_ESTACION" Multiplicity="1" />
     <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="GUIAS_ESTACION">
