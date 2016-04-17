@@ -16,8 +16,16 @@ namespace GuiasOET.Controllers
         public ActionResult AdministracionUsuarios()
         {
             ViewBag.Message = "Your contact page.";
-
+            CargarEstacionesDropDownList();
             return View();
+        }
+
+        private void CargarEstacionesDropDownList(object estacionSeleccionada = null)
+        {
+            var EstacionesQuery = from d in baseDatos.GUIAS_ESTACION
+                                   orderby d.NOMBREESTACION
+                                   select d;
+            ViewBag.NOMBREESTACION = new SelectList(EstacionesQuery, "NOMBREESTACION", "NOMBREESTACION", estacionSeleccionada);
         }
 
         // GET: /Seguridad/Login
@@ -27,7 +35,7 @@ namespace GuiasOET.Controllers
             return View();
         }
 
-        // POST: /AdministracionRecursos/Login
+        // POST: /AdministracionUsuarios/Login
         [HttpPost, ActionName("Login")]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string usuario, string contrasena)
@@ -67,6 +75,42 @@ namespace GuiasOET.Controllers
 
         }
 
+        // GET: ListaUsuarios
+        public ActionResult ListaUsuarios()
+        {
+            return View(baseDatos.GUIAS_EMPLEADO.ToList());
+        }
+
+        // GET: ListaUsuarios
+        public ActionResult InsertarUsuario()
+        {
+            CargarEstacionesDropDownList();
+            return View();
+        }
+
+
+        // POST: /AdministracionUsuarios/Insertar
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        
+        public ActionResult AdministracionUsuarios([Bind(Include = "CEDULA,NOMBREEMPLEADO,APELLIDO1,APELLIDO2,EMAIL,ESTADO,DIRECCION,USUARIO,CONTRASENA,NOMBREESTACION,TIPOEMPLEADO")] GUIAS_EMPLEADO usuario)
+        {
+            usuario.ESTADO = 1;
+            usuario.TIPOEMPLEADO = 1;
+            usuario.NOMBREESTACION = "No existe";
+
+            if (ModelState.IsValid)
+            {
+                baseDatos.GUIAS_EMPLEADO.Add(usuario);
+                baseDatos.SaveChanges();
+                return RedirectToAction("AdministracionUsuarios");
+            }
+            else {
+                ModelState.AddModelError("", "El usuario insertado no es válido");
+            }
+
+            return View(usuario);
+        }
 
         //
         // GET: /Seguridad/ReestablecerContraseña

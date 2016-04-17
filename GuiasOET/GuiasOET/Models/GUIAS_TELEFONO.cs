@@ -7,9 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace GuiasOET.Models
 {
     using System;
@@ -17,14 +14,7 @@ namespace GuiasOET.Models
     
     public partial class GUIAS_TELEFONO
     {
-        [Required]
-        [StringLength(9)]
-        [Display(Name = "Cédula:")]
         public string CEDULAEMPLEADO { get; set; }
-
-        [Required]
-        [StringLength(11)]
-        [Display(Name = "Teléfono:")]
         public string TELEFONO { get; set; }
     
         public virtual GUIAS_EMPLEADO GUIAS_EMPLEADO { get; set; }

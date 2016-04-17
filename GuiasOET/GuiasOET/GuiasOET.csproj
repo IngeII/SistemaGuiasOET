@@ -238,6 +238,7 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetaData.cs" />
     <Compile Include="Models\Modelo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +254,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -336,6 +338,8 @@
     <Content Include="Views\AdministracionUsuarios\AdministracionUsuarios.cshtml" />
     <Content Include="Views\AdministracionUsuarios\Login.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ReestablecerContraseña.cshtml" />
+    <Content Include="Views\AdministracionUsuarios\ListaUsuarios.cshtml" />
+    <Content Include="Views\AdministracionUsuarios\InsertarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

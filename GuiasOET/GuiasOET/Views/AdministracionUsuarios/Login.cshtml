@@ -1,4 +1,4 @@
-﻿@model GuiasOET.Models.GUIAS_EMPLEADO.LoginModel
+﻿@model GuiasOET.Models.GUIAS_EMPLEADO
 
 @{
     ViewBag.Title = "Iniciar Sesión";
@@ -23,12 +23,9 @@
     @using (Html.BeginForm("Login", "AdministracionUsuarios", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
     {
 
-
         @Html.AntiForgeryToken()
 
         <div class="col-sm-5 col-sm-push-1">
-
-
 
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -74,9 +71,7 @@
 
     }
 
-
 </div>
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

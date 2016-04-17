@@ -6,15 +6,12 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace GuiasOET.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class GUIAS_EMPLEADO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,60 +21,17 @@ namespace GuiasOET.Models
             this.GUIAS_ASOCIAEXTERNO = new HashSet<GUIAS_ASOCIAEXTERNO>();
             this.GUIAS_TELEFONO = new HashSet<GUIAS_TELEFONO>();
         }
-
-        [Required]
-        [StringLength(9)]
-        [Display(Name = "Cédula:")]
+    
         public string CEDULA { get; set; }
-
-        [Required]
-        [StringLength(20)]
-        [Display(Name = "Nombre:")]
         public string NOMBREEMPLEADO { get; set; }
-
-        [Required]
-        [StringLength(20)]
-        [Display(Name = "Primer apellido:")]
         public string APELLIDO1 { get; set; }
-
-        [Required]
-        [StringLength(20)]
-        [Display(Name = "Segundo apellido:")]
         public string APELLIDO2 { get; set; }
-
-        [Required]
-        [StringLength(30)]
-        [Display(Name = "Email:")]
         public string EMAIL { get; set; }
-
-        [Required]
-        [StringLength(7)]
-        [Display(Name = "Estado:")]
-        public string ESTADO { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Dirección:")]
+        public decimal ESTADO { get; set; }
         public string DIRECCION { get; set; }
-
-        [Required]
-        [StringLength(20)]
-        [Display(Name = "Usuario:")]
         public string USUARIO { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Contraseña:")]
         public string CONTRASENA { get; set; }
-
-        [Required]
-        [StringLength(15)]
-        [Display(Name = "Tipo empleado:")]
-        public string TIPOEMPLEADO { get; set; }
-
-        [Required]
-        [StringLength(55)]
-        [Display(Name = "Nombre estación:")]
+        public decimal TIPOEMPLEADO { get; set; }
         public string NOMBREESTACION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -89,36 +43,5 @@ namespace GuiasOET.Models
         public virtual GUIAS_ROLDIASLIBRES GUIAS_ROLDIASLIBRES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUIAS_TELEFONO> GUIAS_TELEFONO { get; set; }
-
-        public class LoginModel
-        {
-            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario ")]
-            [Display(Name = "Usuario:")]
-            public string USUARIO { get; set; }
-
-            [Required(ErrorMessage = "*Debe ingresar la contraseña")]
-            [DataType(DataType.Password)]
-            [Display(Name = "Contraseña:")]
-            public string CONTRASENA { get; set; }
-        }
-
-        public class ModificarContraseña
-        {
-            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario ")]
-            [Display(Name = "Usuario:")]
-            public string USUARIO { get; set; }
-
-            [Required(ErrorMessage = "*Debe ingresar la contraseña")]
-            [DataType(DataType.Password)]
-            [Display(Name = "Contraseña: ")]
-            public string CONTRASENA { get; set; }
-
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirmar Contraseña: ")]
-            [Compare("CONTRASENA", ErrorMessage = "*La contraseña y la confirmación de la contraseña no coinciden")]
-            [NotMapped]
-            public string CONFIRMACIONCONTRASENA { get; set; }
-
-        }
     }
 }

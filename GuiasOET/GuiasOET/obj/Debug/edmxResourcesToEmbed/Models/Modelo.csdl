@@ -88,11 +88,11 @@
     <Property Name="APELLIDO1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="APELLIDO2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="ESTADO" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Name="ESTADO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="CONTRASENA" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="TIPOEMPLEADO" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TIPOEMPLEADO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
     <Property Name="NOMBREESTACION" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="GUIAS_ASIGNAINTERNO" Relationship="Model.FK_ASIGNA_INTERNO" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ASIGNAINTERNO" />
     <NavigationProperty Name="GUIAS_ASOCIAEXTERNO" Relationship="Model.FK_ASOCIA_EXTERNO" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ASOCIAEXTERNO" />

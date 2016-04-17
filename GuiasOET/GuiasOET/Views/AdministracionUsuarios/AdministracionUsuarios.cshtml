@@ -1,11 +1,5 @@
 ﻿@model GuiasOET.Models.ManejoModelos
 
-
-@{
-    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
-    ViewBag.Title = "Administración de Usuarios";
-}
-
 <div class="jumbotronTwo">
 
 </div>
@@ -15,28 +9,13 @@
 </div>
 </div>
 
-
-
-<!--BOTONES IMEC-->
-<div class="row">
-    <div class="col-md-9">
-    </div>
-    <div class="col-md-1">
-        <input type="submit" value="Insertar" class="btn btn-default" />
-    </div>
-    <div class="col-md-1">
-        <input type="submit" value="Modificar" class="btn btn-default" />
-    </div>
-    <div class="col-md-1">
-        <input type="submit" value="Eliminar" class="btn btn-default" />
-    </div>
-</div>
-<br>
-
 @using (Html.BeginForm())
 {
 
+@Html.AntiForgeryToken()
+
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 <!--DATOS PERSONALES-->
 <div class="row" style="width:auto">
     <div class="col-sm-5 col-sm-offset-1">
@@ -130,7 +109,7 @@
                         @Html.ValidationMessageFor(model => model.modeloTelefono.TELEFONO, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-2">
-                        <input type="button" class="form-control" id="btnmas" value="+">
+                        <input type="button" class="form-control" id="btnmas" value="+"> 
                     </div>
                 </div>
 
@@ -142,12 +121,10 @@
                         <a href="#" class="form-control">First item</a>
                     </div>
                     <div class="col-md-2">
-                        <input type="button" class="form-control" id="btnmenos" value="-">
+                        <input type="button" class="form-control" id="btnmenos" value="-"> 
                     </div>
                 </div>
                 <!--parte que no se si va a servir para meter los telefonos agregados-->
-
-
             </div>
         </div>
     </div>
@@ -253,7 +230,7 @@
                     <div class="col-md-7">
                         <select class="form-control" id="sel1">
                             <option value="OET">OET</option>
-                            <option value="ESINTRO">ESINTRO?</option>
+                            <option value="ESINTRO">ESINTRO</option>
                         </select>
                     </div>
                 </div>
@@ -262,15 +239,13 @@
 
                 <div class="row">
                     <div class="col-md-3" col-sm-offset-1>
-                        @Html.LabelFor(model => model.modeloEmpleado.NOMBREESTACION, htmlAttributes: new { @class = "control-label col-md-2" })
-                    </div>
-                    <div class="col-md-7">
-                        <select class="form-control" id="sel2">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
+                        <label class="control-label col-md-2" for="NOMBREESTACION">Nombre estación:</label>
+                     <div class="col-md-7">
+                            @Html.DropDownList("NOMBREESTACION", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.modeloEmpleado.NOMBREESTACION, "", new { @class = "text-danger" })
+                     </div>
+                        </div>
+                 
                 </div>
 
                 <br />
@@ -281,9 +256,8 @@
                     </div>
                     <div class="col-md-7">
                         <select class="form-control" id="sel3">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                            <option value="1">Activo</option>
+                            <option value="2">Inactivo</option>
                         </select>
                     </div>
                 </div>
@@ -293,44 +267,16 @@
     </div>
 </div>
 
-}
-    <div class="row">
-        <div class="col-lg-12">
-            <div id="btnsBD" style="float: right">
-                <input type="submit" value="Aceptar" class="btn btn-default" />
-                <input type="submit" value="Cancelar" class="btn btn-default" />
-            </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div id="btnsBD" style="float: right">
+            <input type="submit" value="Aceptar usuario" class="btn btn-default" />
+            <input type="submit" value="Borrar datos" class="btn btn-default" />
         </div>
     </div>
-
-    <div class="row">
-        @using (Html.BeginForm("Index", "Student", FormMethod.Get))
-        {
-            <p>
-                Buscar por nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-                <input type="submit" value="Buscar" />
-            </p>
-        }
-    </div>
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th>
-                @Html.ActionLink("Compañía", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th>
-                @Html.ActionLink("Estación", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th>
-                @Html.ActionLink("Rol", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-        </tr>
-
-    </table>
-    <br />
+</div>
+}
+    
 
 
 
