@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="48ac5e74834b4f6f9f3b0fdb365eb917" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="Model.GUIAS_ASIGNAINTERNO" Width="1.5" PointX="7.5" PointY="6.5" />
+        <EntityTypeShape EntityType="Model.GUIAS_ASIGNAINTERNO" Width="1.5" PointX="10.5" PointY="6.5" />
         <EntityTypeShape EntityType="Model.GUIAS_ASOCIAEXTERNO" Width="1.5" PointX="7.5" PointY="3.5" />
         <EntityTypeShape EntityType="Model.GUIAS_COMPANIA" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Model.GUIAS_EMPLEADO" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="Model.GUIAS_EMPLEADO" Width="1.5" PointX="5.25" PointY="5.375" />
         <EntityTypeShape EntityType="Model.GUIAS_ESTACION" Width="1.5" PointX="3" PointY="6.625" />
-        <EntityTypeShape EntityType="Model.GUIAS_HORARIODISPONIBLE" Width="1.5" PointX="7.5" PointY="14.875" />
+        <EntityTypeShape EntityType="Model.GUIAS_HORARIODISPONIBLE" Width="1.5" PointX="7.5" PointY="12.5" />
         <EntityTypeShape EntityType="Model.GUIAS_RESERVACION" Width="1.5" PointX="5.25" PointY="1.25" />
-        <EntityTypeShape EntityType="Model.GUIAS_ROLDIASLIBRES" Width="1.5" PointX="7.5" PointY="12.5" />
-        <EntityTypeShape EntityType="Model.GUIAS_TELEFONO" Width="1.5" PointX="7.5" PointY="10.25" />
+        <EntityTypeShape EntityType="Model.GUIAS_ROLDIASLIBRES" Width="1.5" PointX="7.5" PointY="15.125" />
+        <EntityTypeShape EntityType="Model.GUIAS_TELEFONO" Width="1.5" PointX="7.5" PointY="7.25" />
         <AssociationConnector Association="Model.FK_ASIGNA_INTERNO" />
         <AssociationConnector Association="Model.FK_ASIGNA_RESERVACION" />
         <AssociationConnector Association="Model.FK_ASOCIA_EXTERNO" />

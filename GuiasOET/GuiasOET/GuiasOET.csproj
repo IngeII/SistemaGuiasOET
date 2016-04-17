@@ -335,7 +335,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_GeneralLayout.cshtml" />
-    <Content Include="Views\AdministracionUsuarios\AdministracionUsuarios.cshtml" />
     <Content Include="Views\AdministracionUsuarios\Login.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ReestablecerContraseña.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ListaUsuarios.cshtml" />

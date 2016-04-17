@@ -1,5 +1,10 @@
 ﻿@model GuiasOET.Models.ManejoModelos
 
+@{
+    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+    ViewBag.Title = "Lista de Usuarios";
+}
+
 <div class="jumbotronTwo">
 
 </div>
@@ -7,6 +12,14 @@
     <div class="col-md-9">
         <h2>@ViewBag.Title</h2>
     </div>
+    <br />
+    <div class="col-md-9">
+        <div style="float: left">
+            @Html.ActionLink("Regresar a la lista de usuarios", "ListaUsuarios")
+        </div>
+        <br />
+    </div>
+
 </div>
 
 @using (Html.BeginForm())
@@ -238,14 +251,6 @@
                     <br />
 
                     <div class="row">
-                        <div class="col-md-3" col-sm-offset-1>
-                            <label class="control-label col-md-2" for="NOMBREESTACION">Nombre estación:</label>
-                            <div class="col-md-7">
-                                @Html.DropDownList("NOMBREESTACION", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.modeloEmpleado.NOMBREESTACION, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
                     </div>
 
                     <br />
@@ -270,8 +275,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div id="btnsBD" style="float: right">
-                <input type="submit" value="Aceptar usuario" class="btn btn-default" />
-                <input type="submit" value="Borrar datos" class="btn btn-default" />
+                <input type="submit" value="Aceptar usuario" name ="Aceptar usuario" class="btn btn-default"  />
+                <input type="submit" value="Borrar datos" name ="Borrar datos" class="btn btn-default" />
+                <br />
             </div>
         </div>
     </div>

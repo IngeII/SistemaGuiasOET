@@ -32,6 +32,7 @@
     <EntitySetMapping Name="GUIAS_EMPLEADO">
       <EntityTypeMapping TypeName="Model.GUIAS_EMPLEADO">
         <MappingFragment StoreEntitySet="GUIAS_EMPLEADO">
+          <ScalarProperty Name="CONFIRMAREMAIL" ColumnName="CONFIRMAREMAIL" />
           <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
           <ScalarProperty Name="TIPOEMPLEADO" ColumnName="TIPOEMPLEADO" />
           <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />

@@ -11,10 +11,17 @@ namespace GuiasOET.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class GUIAS_TELEFONO
     {
+        [StringLength(9)]
+        [Display(Name = "Cédula:")]
         public string CEDULAEMPLEADO { get; set; }
+
+        [StringLength(11)]
+        [Display(Name = "Teléfono:")]
         public string TELEFONO { get; set; }
     
         public virtual GUIAS_EMPLEADO GUIAS_EMPLEADO { get; set; }

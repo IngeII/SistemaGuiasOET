@@ -40,8 +40,9 @@
     <Property Name="DIRECCION" Type="varchar2" MaxLength="100" />
     <Property Name="USUARIO" Type="varchar2" MaxLength="20" Nullable="false" />
     <Property Name="CONTRASENA" Type="varchar2" MaxLength="100" Nullable="false" />
-    <Property Name="TIPOEMPLEADO" Type="number" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="TIPOEMPLEADO" Type="varchar2" MaxLength="50" Nullable="false" />
     <Property Name="NOMBREESTACION" Type="varchar2" MaxLength="55" Nullable="false" />
+    <Property Name="CONFIRMAREMAIL" Type="number" Precision="38" Scale="0" />
   </EntityType>
   <EntityType Name="GUIAS_ESTACION">
     <Key>

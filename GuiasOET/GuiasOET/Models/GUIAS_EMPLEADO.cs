@@ -7,14 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-
 namespace GuiasOET.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class GUIAS_EMPLEADO
     {
@@ -31,32 +29,27 @@ namespace GuiasOET.Models
         [Display(Name = "Cédula:")]
         public string CEDULA { get; set; }
 
-        [Required]
         [StringLength(20)]
         [Display(Name = "Nombre:")]
         public string NOMBREEMPLEADO { get; set; }
 
-        [Required]
         [StringLength(20)]
         [Display(Name = "Primer apellido:")]
         public string APELLIDO1 { get; set; }
 
-        [Required]
         [StringLength(20)]
         [Display(Name = "Segundo apellido:")]
         public string APELLIDO2 { get; set; }
 
-        [Required]
         [StringLength(30)]
         [Display(Name = "Email:")]
         public string EMAIL { get; set; }
 
         [Required]
-        [StringLength(7)]
+        [Range(0,1)]
         [Display(Name = "Estado:")]
         public decimal ESTADO { get; set; }
 
-        [Required]
         [StringLength(100)]
         [Display(Name = "Dirección:")]
         public string DIRECCION { get; set; }
@@ -67,18 +60,23 @@ namespace GuiasOET.Models
         public string USUARIO { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(30)]
         [Display(Name = "Contraseña:")]
         public string CONTRASENA { get; set; }
 
         [Required]
-        [Display(Name = "Tipo empleado:")]
-        public decimal TIPOEMPLEADO { get; set; }
+        [StringLength(50)]
+        [Display(Name = "Rol:")]
+        public string TIPOEMPLEADO { get; set; }
 
         [Required]
         [StringLength(55)]
         [Display(Name = "Nombre estación:")]
         public string NOMBREESTACION { get; set; }
+
+        [Required]
+        [Range(0, 1)]
+        public Nullable<decimal> CONFIRMAREMAIL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUIAS_ASIGNAINTERNO> GUIAS_ASIGNAINTERNO { get; set; }
