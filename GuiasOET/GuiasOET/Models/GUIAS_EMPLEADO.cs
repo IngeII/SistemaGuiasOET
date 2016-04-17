@@ -7,6 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+
 namespace GuiasOET.Models
 {
     using System;
@@ -21,17 +25,59 @@ namespace GuiasOET.Models
             this.GUIAS_ASOCIAEXTERNO = new HashSet<GUIAS_ASOCIAEXTERNO>();
             this.GUIAS_TELEFONO = new HashSet<GUIAS_TELEFONO>();
         }
-    
+
+        [Required]
+        [StringLength(9)]
+        [Display(Name = "Cédula:")]
         public string CEDULA { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        [Display(Name = "Nombre:")]
         public string NOMBREEMPLEADO { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        [Display(Name = "Primer apellido:")]
         public string APELLIDO1 { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        [Display(Name = "Segundo apellido:")]
         public string APELLIDO2 { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        [Display(Name = "Email:")]
         public string EMAIL { get; set; }
+
+        [Required]
+        [StringLength(7)]
+        [Display(Name = "Estado:")]
         public decimal ESTADO { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "Dirección:")]
         public string DIRECCION { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        [Display(Name = "Usuario:")]
         public string USUARIO { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "Contraseña:")]
         public string CONTRASENA { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo empleado:")]
         public decimal TIPOEMPLEADO { get; set; }
+
+        [Required]
+        [StringLength(55)]
+        [Display(Name = "Nombre estación:")]
         public string NOMBREESTACION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
