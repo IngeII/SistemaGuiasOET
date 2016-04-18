@@ -22,6 +22,7 @@ namespace GuiasOET.Models
 
         [StringLength(11)]
         [Display(Name = "Teléfono:")]
+        [DataType(DataType.PhoneNumber)]
         public string TELEFONO { get; set; }
     
         public virtual GUIAS_EMPLEADO GUIAS_EMPLEADO { get; set; }

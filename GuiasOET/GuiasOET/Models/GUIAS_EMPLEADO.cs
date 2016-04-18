@@ -43,6 +43,7 @@ namespace GuiasOET.Models
 
         [StringLength(30)]
         [Display(Name = "Email:")]
+        [DataType(DataType.EmailAddress)]
         public string EMAIL { get; set; }
 
         [Required]

@@ -198,60 +198,64 @@
                             @Html.LabelFor(model => model.modeloEmpleado.TIPOEMPLEADO, htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-2">
-                            <input type="checkbox" id="chkbxadminglobal">
+                            <input name="tipoUsuario" type="radio" id="checkGlobal" value="Administrador Global" checked/>
                         </div>
                         <div class="col-md-6" col-sm-offset-1>
-                            <label id="lblag" for="rol">Administrador global</label>
+                            <label for="checkGlobal">Administrador global</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-2">
-                            <input type="checkbox" id="chkbxadminlocal">
+                            <input type="radio" name="tipoUsuario" id="checkLocal" value="Administrador Local">
                         </div>
                         <div class="col-md-6">
-                            <label id="lblal" for="rol">Administrador local</label>
+                            <label for="checkLocal">Administrador local</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-2">
-                            <input type="checkbox" id="chkbxguiainterno">
+                            <input name="tipoUsuario" type="radio" id="checkInterno" value="Guía Interno">
                         </div>
                         <div class="col-md-6">
-                            <label id="lblrolgi" for="rol">Guía interno</label>
+                            <label for="checkInterno">Guía interno</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-2">
-                            <input type="checkbox" id="chkbxguiaexterno">
+                            <input type="radio" name="tipoUsuario" id="checkExterno" value="Guía Externo">
                         </div>
                         <div class="col-md-6">
-                            <label id="lblrolge" for="rol">Guía externo</label>
+                            <label for="checkExterno">Guía externo</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="radio" name="tipoUsuario" id="checkInternoLocal" value="Administrador Local/Guía Interno">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="checkInternoLocal">Administrador Local / Guía Interno</label>
                         </div>
                     </div>
 
                     <br />
 
-                    <div class="row">
-                        <div class="col-md-3" col-sm-offset-1>
-                            <label id="lblcompania" for="compania">Compañía:</label>
-                        </div>
-                        <div class="col-md-7">
-                            <select class="form-control" id="sel1">
-                                <option value="OET">OET</option>
-                                <option value="ESINTRO">ESINTRO</option>
-                            </select>
-                        </div>
-                    </div>
+                    <<div class="row">
+                        <label class="control-label col-md-2" for="NOMBREESTACION">Nombre estación:</label>
 
-                    <br />
+                    <div class="col-md-7">
+                        @Html.DropDownList("NOMBREESTACION", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.modeloEmpleado.NOMBREESTACION, "", new { @class = "text-danger" })
+                        </div>
 
-                    <div class="row">
 
                     </div>
 
@@ -262,9 +266,10 @@
                             @Html.LabelFor(model => model.modeloEmpleado.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-7">
-                            <select class="form-control" id="sel3">
-                                <option value="1">Activo</option>
-                                <option value="2">Inactivo</option>
+                            
+                            <select name="modeloEmpleado.ESTADO" class="form-control" id="sel3">
+                                <option value="0" selected="selected">Activo</option>
+                                <option value="1" >Inactivo</option>
                             </select>
                         </div>
                     </div>
@@ -277,8 +282,8 @@
     <div class="row">
         <div class="col-lg-12">
             <div id="btnsBD" style="float: right">
-                <input type="submit" value="Aceptar usuario" name ="Aceptar usuario" class="btn btn-default"  />
-                <input type="submit" value="Borrar datos" name ="Borrar datos" class="btn btn-default" />
+                <input type="submit" value="Aceptar usuario" class="btn btn-default"  />
+                <input type="reset" value="Borrar datos" class="btn btn-default" />
                 <br />
             </div>
         </div>

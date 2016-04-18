@@ -32,16 +32,15 @@ namespace GuiasOET.Controllers
             } */
 
 
-            //CargarEstacionesDropDownList();
-
+            CargarEstacionesDropDownList();
             return View();
         }
 
         private void CargarEstacionesDropDownList(object estacionSeleccionada = null)
         {
             var EstacionesQuery = from d in baseDatos.GUIAS_ESTACION
-                                  orderby d.NOMBREESTACION
-                                  select d;
+                                   orderby d.NOMBREESTACION
+                                   select d;
             ViewBag.NOMBREESTACION = new SelectList(EstacionesQuery, "NOMBREESTACION", "NOMBREESTACION", estacionSeleccionada);
         }
 
@@ -116,7 +115,7 @@ namespace GuiasOET.Controllers
         // GET: ListaUsuarios
         public ActionResult InsertarUsuario()
         {
-            //CargarEstacionesDropDownList();
+            CargarEstacionesDropDownList();
             return View();
         }
 
@@ -172,10 +171,9 @@ namespace GuiasOET.Controllers
         // POST: /AdministracionUsuarios/Insertar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult InsertarUsuario(ManejoModelos nuevoUsuario)
+        public ActionResult InsertarUsuario(ManejoModelos nuevoUsuario, string tipoUsuario)
         {
-            /*Por ahorita para que no se caiga*/
-            nuevoUsuario.modeloEmpleado.TIPOEMPLEADO = "Guía Externo";
+            nuevoUsuario.modeloEmpleado.TIPOEMPLEADO = tipoUsuario;
 
             if (nuevoUsuario.modeloEmpleado.USUARIO == null)
             {
@@ -195,11 +193,9 @@ namespace GuiasOET.Controllers
                 }
                 else
                 {
-                    /*Validar el combobox estado y convertirlo a 0 o 1 para la base*/
-                    /**/
+                    
+                    /*validar estación*/
                     nuevoUsuario.modeloTelefono.CEDULAEMPLEADO = nuevoUsuario.modeloEmpleado.CEDULA;
-                    nuevoUsuario.modeloEmpleado.ESTADO = 1;
-                    nuevoUsuario.modeloEmpleado.TIPOEMPLEADO = "Administrador Global";
                     nuevoUsuario.modeloEmpleado.NOMBREESTACION = "No existe";
                     nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
 
@@ -208,12 +204,10 @@ namespace GuiasOET.Controllers
                         ViewBag.Message = "Nuevo usuario creado con éxito.";
                         baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
                         baseDatos.SaveChanges();
-                        return RedirectToAction("AdministracionUsuarios");
+                        return RedirectToAction("InsertarUsuarios");
                     }
                     else
                     {
-
-
                         ModelState.AddModelError("", "El usuario insertado no es válido");
                     }
                 }
@@ -221,11 +215,25 @@ namespace GuiasOET.Controllers
 
             /*Si el rol no es ni guía externo ni interno*/
             else {
-                /*Validar el combobox estado y convertirlo a 0 o 1 para la base*/
+                /*validar estación*/
+                nuevoUsuario.modeloTelefono.CEDULAEMPLEADO = nuevoUsuario.modeloEmpleado.CEDULA;
+                nuevoUsuario.modeloEmpleado.NOMBREESTACION = "No existe";
+                nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+                if (ModelState.IsValid)
+                {
+                    ViewBag.Message = "Nuevo usuario creado con éxito.";
+                    baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
+                    baseDatos.SaveChanges();
+                    return RedirectToAction("InsertarUsuario");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "El usuario insertado no es válido");
+                }
             }
 
-
-            //CargarEstacionesDropDownList();
+            CargarEstacionesDropDownList();
             return View(nuevoUsuario);
         }
 
