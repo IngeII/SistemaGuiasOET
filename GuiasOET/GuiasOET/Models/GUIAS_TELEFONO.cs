@@ -23,6 +23,7 @@ namespace GuiasOET.Models
         [StringLength(11)]
         [Display(Name = "Teléfono:")]
         [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "El teléfono solo puede estar compuesto por números")]
         public string TELEFONO { get; set; }
     
         public virtual GUIAS_EMPLEADO GUIAS_EMPLEADO { get; set; }

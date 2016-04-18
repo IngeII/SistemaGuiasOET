@@ -27,18 +27,22 @@ namespace GuiasOET.Models
         [Required]
         [StringLength(9)]
         [Display(Name = "Cédula:")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "La cédula solo puede estar compuesta por números")]
         public string CEDULA { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Nombre:")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage = "El nombre solo puede estar compuesta por letras")]
         public string NOMBREEMPLEADO { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Primer apellido:")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage = "El primer apellido solo puede estar compuesta por letras")]
         public string APELLIDO1 { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Segundo apellido:")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage = "El segundo apellido solo puede estar compuesta por letras")]
         public string APELLIDO2 { get; set; }
 
         [StringLength(30)]
