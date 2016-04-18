@@ -10,5 +10,10 @@ namespace GuiasOET.Models
         public GuiasOET.Models.GUIAS_EMPLEADO modeloEmpleado { get; set; }
         public GuiasOET.Models.GUIAS_TELEFONO modeloTelefono { get; set; }
 
+        public ManejoModelos(GuiasOET.Models.GUIAS_EMPLEADO empleado)
+        {
+            modeloEmpleado = empleado;
+        }
+
     }
 }

@@ -5,26 +5,35 @@ using System.Web;
 using System.Web.Mvc;
 using GuiasOET.Models;
 using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
+using System.Net;
+using System.Web.UI.HtmlControls;
+using System.Data.Entity;
 
 namespace GuiasOET.Controllers
 {
     public class AdministracionUsuariosController : Controller
     {
+
         private Entities baseDatos = new Entities();
+        
 
         // GET: AdministracioUsuarios
         public ActionResult AdministracionUsuarios()
         {
+
+            
             //CargarEstacionesDropDownList();
+           
             return View();
         }
 
         private void CargarEstacionesDropDownList(object estacionSeleccionada = null)
         {
             var EstacionesQuery = from d in baseDatos.GUIAS_ESTACION
-                                   orderby d.NOMBREESTACION
-                                   select d;
-            ViewBag.NOMBREESTACION =  new SelectList(EstacionesQuery, "NOMBREESTACION", "NOMBREESTACION", estacionSeleccionada);
+                                  orderby d.NOMBREESTACION
+                                  select d;
+            ViewBag.NOMBREESTACION = new SelectList(EstacionesQuery, "NOMBREESTACION", "NOMBREESTACION", estacionSeleccionada);
         }
 
         // GET: /Seguridad/Login
@@ -77,7 +86,9 @@ namespace GuiasOET.Controllers
         // GET: ListaUsuarios
         public ActionResult ListaUsuarios()
         {
-            return View(baseDatos.GUIAS_EMPLEADO.ToList());
+
+              return View(baseDatos.GUIAS_EMPLEADO.ToList());
+          
         }
 
         // GET: ListaUsuarios
@@ -86,6 +97,59 @@ namespace GuiasOET.Controllers
             //CargarEstacionesDropDownList();
             return View();
         }
+
+        // GET: Modificar usuario
+        public ActionResult ModificarUsuario(int? id)
+        {
+
+            string identificacion;
+            ManejoModelos modelo;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            identificacion = id.ToString();
+            modelo = new ManejoModelos (baseDatos.GUIAS_EMPLEADO.Find(identificacion));
+   
+            if (modelo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(modelo);
+        }
+
+        [HttpPost, ActionName("ModificarUsuario")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModificarPost(int? id)
+        {
+
+            
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ManejoModelos modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(id.ToString()));
+
+            var employeeToUpdate = modelo;
+            if (TryUpdateModel(employeeToUpdate))  {
+                try
+                {
+                 
+                    baseDatos.SaveChanges();
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                }
+            }
+            return View(employeeToUpdate);
+        }
+
+
+
+
 
         // POST: /AdministracionUsuarios/Insertar
         [HttpPost]
