@@ -41,13 +41,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Nombre", "AdministracionUsuarios", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Nombre", "ListaUsuarios", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Estación", "AdministracionUsuarios", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Estación", "ListaUsuarios", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Rol", "AdministracionUsuarios", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Rol", "ListaUsuarios", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
     </tr>
 
@@ -66,9 +66,9 @@
             </td>
 
             <td>
-                @Html.ActionLink("Consultar", "Delete", new { id = item.CEDULA }) |
+                @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }) |
                 @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }) |
-                @Html.ActionLink("Eliminar", "Details", new { id = item.CEDULA }) 
+                @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.CEDULA }) 
             </td>
         </tr>
     }

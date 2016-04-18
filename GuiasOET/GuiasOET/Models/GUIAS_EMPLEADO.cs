@@ -61,22 +61,29 @@ namespace GuiasOET.Models
 
         [Required]
         [StringLength(30)]
+        [DataType(DataType.Password)]
         [Display(Name = "Contraseña:")]
         public string CONTRASENA { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         [Display(Name = "Rol:")]
         public string TIPOEMPLEADO { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(55)]
         [Display(Name = "Nombre estación:")]
         public string NOMBREESTACION { get; set; }
 
-        [Required]
+        //[Required]
         [Range(0, 1)]
         public Nullable<decimal> CONFIRMAREMAIL { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar*: ")]
+        [Compare("CONTRASENA", ErrorMessage = "*La contraseña y la confirmación de la contraseña no coinciden")]
+        [NotMapped]
+        public string CONFIRMACIONCONTRASENA { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUIAS_ASIGNAINTERNO> GUIAS_ASIGNAINTERNO { get; set; }

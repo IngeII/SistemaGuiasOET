@@ -169,33 +169,61 @@ namespace GuiasOET.Controllers
             return View(employeeToUpdate);
         }
 
-
-
-
-
         // POST: /AdministracionUsuarios/Insertar
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult InsertarUsuario(ManejoModelos nuevoUsuario)
         {
-                nuevoUsuario.modeloTelefono.CEDULAEMPLEADO = nuevoUsuario.modeloEmpleado.CEDULA;
-                nuevoUsuario.modeloEmpleado.ESTADO = 1;
-                nuevoUsuario.modeloEmpleado.TIPOEMPLEADO = "Administrador Global";
-                nuevoUsuario.modeloEmpleado.NOMBREESTACION = "No existe";
-                nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
+            /*Por ahorita para que no se caiga*/
+            nuevoUsuario.modeloEmpleado.TIPOEMPLEADO = "Guía Externo";
 
-                if (ModelState.IsValid)
+            if (nuevoUsuario.modeloEmpleado.USUARIO == null)
+            {
+                ModelState.AddModelError("", "El nombre de usuario es un campo obligatorio.");
+            }
+
+            if (nuevoUsuario.modeloEmpleado.CONTRASENA == null || nuevoUsuario.modeloEmpleado.CONFIRMACIONCONTRASENA == null)
+            {
+                ModelState.AddModelError("", "La contraseña es un campo obligatorio.");
+            }
+
+            if (nuevoUsuario.modeloEmpleado.TIPOEMPLEADO.Contains("Guía"))
+            {
+                if (nuevoUsuario.modeloEmpleado.NOMBREEMPLEADO == null || nuevoUsuario.modeloEmpleado.APELLIDO1 == null || nuevoUsuario.modeloEmpleado.APELLIDO2 == null || nuevoUsuario.modeloEmpleado.DIRECCION == null)
                 {
-                    ViewBag.Message = "Nuevo usuario creado con éxito.";
-                    baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
-                    baseDatos.SaveChanges();
-                    return RedirectToAction("AdministracionUsuarios");
+                    ModelState.AddModelError("", "Para agregar un guía los datos correspondientes a nombre, apellidos y dirección son obligatorios.");
                 }
                 else
                 {
-                    
-                    ModelState.AddModelError("", "El usuario insertado no es válido");
+                    /*Validar el combobox estado y convertirlo a 0 o 1 para la base*/
+                    /**/
+                    nuevoUsuario.modeloTelefono.CEDULAEMPLEADO = nuevoUsuario.modeloEmpleado.CEDULA;
+                    nuevoUsuario.modeloEmpleado.ESTADO = 1;
+                    nuevoUsuario.modeloEmpleado.TIPOEMPLEADO = "Administrador Global";
+                    nuevoUsuario.modeloEmpleado.NOMBREESTACION = "No existe";
+                    nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+                    if (ModelState.IsValid)
+                    {
+                        ViewBag.Message = "Nuevo usuario creado con éxito.";
+                        baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
+                        baseDatos.SaveChanges();
+                        return RedirectToAction("AdministracionUsuarios");
+                    }
+                    else
+                    {
+
+
+                        ModelState.AddModelError("", "El usuario insertado no es válido");
+                    }
                 }
+            }
+
+            /*Si el rol no es ni guía externo ni interno*/
+            else {
+                /*Validar el combobox estado y convertirlo a 0 o 1 para la base*/
+            }
+
 
             //CargarEstacionesDropDownList();
             return View(nuevoUsuario);

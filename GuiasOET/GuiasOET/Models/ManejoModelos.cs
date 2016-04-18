@@ -15,5 +15,10 @@ namespace GuiasOET.Models
             modeloEmpleado = empleado;
         }
 
+        public ManejoModelos()
+        {
+
+        }
+
     }
 }

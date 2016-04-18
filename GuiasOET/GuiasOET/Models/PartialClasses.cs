@@ -48,4 +48,70 @@ namespace GuiasOET.Models
 
     }
 
+    /*public partial class ManejoModelos {
+        public class InsertarUsuarioCampos
+        {
+            [Required(ErrorMessage = "*El campo cédula es obligatorio")]
+            [StringLength(9)]
+            [Display(Name = "Cédula*:")]
+            public string CEDULA { get; set; }
+
+            [StringLength(20)]
+            [Display(Name = "Nombre:")]
+            public string NOMBREEMPLEADO { get; set; }
+
+            [StringLength(20)]
+            [Display(Name = "Primer apellido:")]
+            public string APELLIDO1 { get; set; }
+
+            [StringLength(20)]
+            [Display(Name = "Segundo apellido:")]
+            public string APELLIDO2 { get; set; }
+
+            [StringLength(30)]
+            [Display(Name = "Email:")]
+            public string EMAIL { get; set; }
+
+            [Required]
+            [Range(0, 1)]
+            [Display(Name = "Estado:")]
+            public decimal ESTADO { get; set; }
+
+            [StringLength(100)]
+            [Display(Name = "Dirección:")]
+            public string DIRECCION { get; set; }
+
+            [StringLength(20)]
+            [Required(ErrorMessage = "*El campo usuario es obligatorio")]
+            [Display(Name = "Usuario*:")]
+            public string USUARIO { get; set; }
+
+            [Required(ErrorMessage = "*El campo contraseña es obligatorio")]
+            [StringLength(30)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Contraseña*:")]
+            public string CONTRASENA { get; set; }
+
+            //[Required(ErrorMessage = "*El rol es obligatorio")]
+            [StringLength(50)]
+            [Display(Name = "Rol*:")]
+            public string TIPOEMPLEADO { get; set; }
+
+            //[Required(ErrorMessage = "*El nombre de la estación es obligatorio")]
+            [StringLength(55)]
+            [Display(Name = "Nombre estación:")]
+            public string NOMBREESTACION { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirmar*: ")]
+            [Compare("CONTRASENA", ErrorMessage = "*La contraseña y la confirmación de la contraseña no coinciden")]
+            [NotMapped]
+            public string CONFIRMACIONCONTRASENA { get; set; }
+
+            [StringLength(11)]
+            [Display(Name = "Teléfono:")]
+            public string TELEFONO { get; set; }
+        }
+    }*/
+
 }

@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_GeneralLayout.cshtml";
-    ViewBag.Title = "Lista de Usuarios";
+    ViewBag.Title = "Insertar usuario";
 }
 
 <div class="jumbotronTwo">
@@ -43,7 +43,7 @@
 
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
-                            @Html.LabelFor(model => model.modeloEmpleado.CEDULA, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(m => m.modeloEmpleado.CEDULA, htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-7">
                             @Html.EditorFor(model => model.modeloEmpleado.CEDULA, new { htmlAttributes = new { @class = "form-control" } })
@@ -55,6 +55,7 @@
 
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
+                            
                             @Html.LabelFor(model => model.modeloEmpleado.NOMBREEMPLEADO, htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-7">
@@ -182,11 +183,11 @@
 
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
-                            <label id="lblconfirmar" for="confirmar">Confirmar:</label>
+                            @Html.LabelFor(model => model.modeloEmpleado.CONFIRMACIONCONTRASENA, htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-7">
-                            @Html.EditorFor(model => model.modeloEmpleado.CONTRASENA, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.modeloEmpleado.CONTRASENA, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.modeloEmpleado.CONFIRMACIONCONTRASENA, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.modeloEmpleado.CONFIRMACIONCONTRASENA, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -251,6 +252,7 @@
                     <br />
 
                     <div class="row">
+
                     </div>
 
                     <br />
