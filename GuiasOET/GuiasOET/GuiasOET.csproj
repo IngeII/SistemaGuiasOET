@@ -340,6 +340,7 @@
     <Content Include="Views\AdministracionUsuarios\ListaUsuarios.cshtml" />
     <Content Include="Views\AdministracionUsuarios\InsertarUsuario.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ModificarUsuario.cshtml" />
+    <Content Include="Views\AdministracionUsuarios\CerrarSesionLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

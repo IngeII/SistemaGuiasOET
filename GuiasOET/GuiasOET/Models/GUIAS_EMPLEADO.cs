@@ -77,7 +77,7 @@ namespace GuiasOET.Models
         [Required]
         [Range(0, 1)]
         public Nullable<decimal> CONFIRMAREMAIL { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUIAS_ASIGNAINTERNO> GUIAS_ASIGNAINTERNO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

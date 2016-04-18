@@ -1,4 +1,27 @@
-﻿body {
+﻿/*Se utiliza para cambiar el color de la letra */
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+ /*Se utiliza para cambiar el color al presionar label */
+.navbar-default .nav > li > a:hover{
+    color:#000000;
+}
+
+.navbar-default .navbar-nav > li > a:focus {
+  color: #000000;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #b6ff00;
+  background-color: ActiveCaption;
+    
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }

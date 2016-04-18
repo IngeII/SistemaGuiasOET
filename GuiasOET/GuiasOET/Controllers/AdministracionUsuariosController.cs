@@ -16,15 +16,24 @@ namespace GuiasOET.Controllers
     {
 
         private Entities baseDatos = new Entities();
-        
+
 
         // GET: AdministracioUsuarios
         public ActionResult AdministracionUsuarios()
         {
 
-            
+         /*   if (Session["NombreUsuarioLogueado"] != null)
+            {
+                return View("AdministracionUsuarios");
+            }
+            else
+            {
+                return RedirectToAction("Login"); 
+            } */
+
+
             //CargarEstacionesDropDownList();
-           
+
             return View();
         }
 
@@ -43,8 +52,8 @@ namespace GuiasOET.Controllers
             return View();
         }
 
-        // POST: /AdministracionUsuarios/Login
-        [HttpPost, ActionName("Login")]
+        // POST: /AdministracionRecursos/Login
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string usuario, string contrasena)
         {
@@ -63,7 +72,11 @@ namespace GuiasOET.Controllers
                 if (Guia.CONTRASENA == contrasena)
                 {
                     ModelState.Clear();
-                    return RedirectToAction("AdministracionUsuarios");
+                    Session["IdUsuarioLogueado"] = Guia.CEDULA.ToString();
+                    Session["NombreUsuarioLogueado"] = Guia.NOMBREEMPLEADO.ToString() + " " + Guia.APELLIDO1.ToString() + " " + Guia.APELLIDO2.ToString();
+                    Session["RolUsuarioLogueado"] = Guia.TIPOEMPLEADO.ToString();
+                    // FormsAuthentication.SetAuthCookie(Guia.USUARIO, false);
+                    return RedirectToAction("ListaUsuarios");
                 }
                 else
                 {
@@ -87,8 +100,17 @@ namespace GuiasOET.Controllers
         public ActionResult ListaUsuarios()
         {
 
-              return View(baseDatos.GUIAS_EMPLEADO.ToList());
-          
+            /*    if (Session["NombreUsuarioLogueado"] != null)
+                {
+                    return View(baseDatos.GUIAS_EMPLEADO.ToList());
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }  */
+
+            return View(baseDatos.GUIAS_EMPLEADO.ToList());
+
         }
 
         // GET: ListaUsuarios
@@ -186,6 +208,21 @@ namespace GuiasOET.Controllers
         public ActionResult ReestablecerContraseña()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CerrarSesionLogin()
+        {
+            Session["IdUsuarioLogueado"] = null;
+            Session["NombreUsuarioLogueado"] = null;
+            Session["RolUsuarioLogueado"] = null;
+            //  FormsAuthentication.SignOut();
+
+            /*     Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                 Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
+                 Response.Cache.SetNoStore(); */
+            return RedirectToAction("Login");
         }
 
 

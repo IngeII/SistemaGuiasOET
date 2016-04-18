@@ -7,53 +7,69 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
 </head>
 <body style="background: #FFFFFF;">
     <div class="navbar navbar-inverse navbar-fixed-top" style="background: #7BC143; border: hidden">
 
         <div class="navbar-collapse collapse" style="background: #7BC143">
-            <div class="containerTwo">
-                <img src="~/images/logo.png" width="200" height="60" />
+            <div class="row col-sm-12">
+                <div class="col-sm-4">
+                    <div class="containerTwo">
+                        <img src="~/images/logo.png" width="200" height="60" />
+                    </div>
+                </div>
+                <div class="col-sm-8 col-sm-pull-2">
+                    <br>
+                    @if (Session["NombreUsuarioLogueado"] != null)
+                    {
+                        <ul class="nav navbar-nav navbar-right" style="background:#7BC143">
+                            <li> <br>@Html.Label("Bienvenid@ " + Session["NombreUsuarioLogueado"].ToString(), new { style = "color:#FFFFFF" })  </li>
+                        </ul>
+                    }
+
+                </div>
+                </div>
+                </div>
+
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-default">
+                        <ul class="nav navbar-nav">
+                            <li class="item">@Html.ActionLink("Inicio", "Index", "Home", new { style = "color:white" })</li>
+                            <li class="item">@Html.ActionLink("Administración de usuarios", "About", "Home", new { style = "color:white" })</li>
+                            <li class="item">@Html.Partial("CerrarSesionLogin") </li>
+                        </ul>
+                    </div>
+
+                </div>
+
             </div>
-            
-        </div>
-
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <div class="container body-content">
+                @RenderBody()
             </div>
 
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="item">@Html.ActionLink("Inicio", "Index", "Home", new { style = "color:white" })</li>
-                    <li class="item">@Html.ActionLink("Administración de usuarios", "About", "Home", new { style = "color:white" })</li>
-                </ul>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
-
-        <footer>
-            <div class="panel-footer" style="position:fixed; width:100%; bottom: 0; background: #7BC143; text-align: center">
-                <p>&copy; @DateTime.Now.Year - Organización de Estudios Tropicales</p>
-            </div>
-        </footer>
- 
+            <footer>
+                <div class="panel-footer" style="position:fixed; width:100%; bottom: 0; background: #7BC143; text-align: center">
+                    <p>&copy; @DateTime.Now.Year - Organización de Estudios Tropicales</p>
+                </div>
+            </footer>
 
 
-        
 
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
 </body>
 </html>
