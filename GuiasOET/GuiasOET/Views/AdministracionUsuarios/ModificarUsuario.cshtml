@@ -199,10 +199,10 @@
                             @Html.LabelFor(model => model.modeloEmpleado.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-7">
-                            <select name="modeloEmpleado.ESTADO" class="form-control">
-                                <option value="0" selected="selected">Activo</option>
-                                <option value="1">Inactivo</option>
-                            </select>
+                         
+                                @* Lista de opciones. *@
+                                @Html.ListBox("Opcion", (List<SelectListItem>) ViewBag.opciones, new { @class = "form-control" })
+                              
                         </div>
                     </div>
 

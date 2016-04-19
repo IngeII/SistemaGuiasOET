@@ -175,6 +175,7 @@ namespace GuiasOET.Controllers
 
             string identificacion;
             ManejoModelos modelo;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -189,6 +190,13 @@ namespace GuiasOET.Controllers
             {
                 return HttpNotFound();
             }
+            // Genera una variable de tipo lista con opciones para un ListBox.
+            bool activo = modelo.modeloEmpleado.ESTADO == 1;
+            bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
+            ViewBag.opciones = new List<SelectListItem> {
+                new SelectListItem { Text = "Activo", Value = "1", Selected = activo},
+                new SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
+            };
             return View(modelo);
         }
 
