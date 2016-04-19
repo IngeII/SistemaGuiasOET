@@ -24,7 +24,7 @@ namespace GuiasOET.Models
             this.GUIAS_TELEFONO = new HashSet<GUIAS_TELEFONO>();
         }
 
-        [Required]
+        [Required(ErrorMessage = "La cédula es un campo requerido.")]
         [StringLength(9)]
         [Display(Name = "Cédula:")]
         [RegularExpression(@"^[0-9]+$", ErrorMessage = "La cédula solo puede estar compuesta por números")]
@@ -32,17 +32,17 @@ namespace GuiasOET.Models
 
         [StringLength(20)]
         [Display(Name = "Nombre:")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage = "El nombre solo puede estar compuesta por letras")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El nombre solo puede estar compuesto por letras")]
         public string NOMBREEMPLEADO { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Primer apellido:")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage = "El primer apellido solo puede estar compuesta por letras")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El primer apellido solo puede estar compuesto por letras")]
         public string APELLIDO1 { get; set; }
 
         [StringLength(20)]
         [Display(Name = "Segundo apellido:")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage = "El segundo apellido solo puede estar compuesta por letras")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El segundo apellido solo puede estar compuesto por letras")]
         public string APELLIDO2 { get; set; }
 
         [StringLength(30)]
@@ -50,7 +50,7 @@ namespace GuiasOET.Models
         [DataType(DataType.EmailAddress)]
         public string EMAIL { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El estado es un campo requerido.")]
         [Range(0,1)]
         [Display(Name = "Estado:")]
         public decimal ESTADO { get; set; }
@@ -59,12 +59,12 @@ namespace GuiasOET.Models
         [Display(Name = "Dirección:")]
         public string DIRECCION { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El usuario es un campo requerido.")]
         [StringLength(20)]
         [Display(Name = "Usuario:")]
         public string USUARIO { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "La contraseña es un campo requerido.")]
         [StringLength(30)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña:")]

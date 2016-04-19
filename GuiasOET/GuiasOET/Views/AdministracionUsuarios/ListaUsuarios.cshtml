@@ -19,7 +19,7 @@
 
     <div class="col-lg-12">
         <div style="float: right">
-            @Html.ActionLink("Insertar usuario", "InsertarUsuario")
+           @Html.ActionLink("Insertar usuario", "InsertarUsuario", null, new { @class = "btn btn-default" })
             
         </div>
     </div>
@@ -31,9 +31,9 @@
     @using (Html.BeginForm("ListaUsuarios", "AdministracionUsuarios", FormMethod.Get))
     {
         <p>
-            Buscar por nombre: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+           Criterio de búsqueda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
             <input type="submit" value="Buscar" class="btn btn-default" />
-            <input type="submit" value="Ver todos" class="btn btn-default" />
+            <input type="reset" value="Ver todos" class="btn btn-default" />
         </p>
     }
 </div>
@@ -66,9 +66,9 @@
             </td>
 
             <td>
-                @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }) |
-                @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }) |
-                @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.CEDULA }) 
+                @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" }) 
+                @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" }) 
+                @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
             </td>
         </tr>
     }

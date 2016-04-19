@@ -107,66 +107,170 @@ namespace GuiasOET.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult InsertarUsuario(ManejoModelos nuevoUsuario, string tipoUsuario)
         {
+            /*Se obtiene el tipo de usuario con los radiobutton*/
             nuevoUsuario.modeloEmpleado.TIPOEMPLEADO = tipoUsuario;
 
+            /*Si el tipo de empleado es cualquier tipo de guía hay que verificar que haya dado los datos completos*/
             if (nuevoUsuario.modeloEmpleado.TIPOEMPLEADO.Contains("Guía"))
             {
+                /*Si falta algún dato personal del guía no se debe permitir la inserción*/
                 if (nuevoUsuario.modeloEmpleado.NOMBREEMPLEADO == null || nuevoUsuario.modeloEmpleado.APELLIDO1 == null || nuevoUsuario.modeloEmpleado.APELLIDO2 == null || nuevoUsuario.modeloEmpleado.DIRECCION == null)
                 {
-                    ModelState.AddModelError("", "Para agregar un guía los datos correspondientes a nombre, apellidos y dirección son obligatorios.");
+                    ModelState.AddModelError("", "Para agregar un guía los datos correspondientes a nombre, apellidos y dirección son requeridos.");
                 }
                 else
                 {
-
-                    /*validar estación*/
-                    nuevoUsuario.modeloTelefono.CEDULAEMPLEADO = nuevoUsuario.modeloEmpleado.CEDULA;
-                    nuevoUsuario.modeloEmpleado.NOMBREESTACION = "No existe";
-                    nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
-
-                    if (ModelState.IsValid)
+                    /*Si es un guía pero no se le asoció ninguna estación no debe dejar guardarlo*/
+                    if (nuevoUsuario.modeloEmpleado.NOMBREESTACION.Contains("Ninguna"))
                     {
-                        ViewBag.Message = "Nuevo usuario creado con éxito.";
-                        baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
-                        baseDatos.SaveChanges();
-                        CargarEstacionesDropDownList();
-                        return RedirectToAction("InsertarUsuarios");
+                        ModelState.AddModelError("", "El guía debe tener asociado una estación en el sistema.");
                     }
+                    /*Si si se asoció una estación válida al guía se guarda en la base de datos*/
                     else
                     {
+
+                        /*Validación de los telefonos falta*/
                         
-                        ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema");
-                        CargarEstacionesDropDownList();
-                        return View(nuevoUsuario);
-                    }
+                        nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+                        /*Si el modelo es válido se guarda en la base como una tupla*/
+                        if (ModelState.IsValid)
+                        {
+                            GUIAS_EMPLEADO usuarios = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == nuevoUsuario.modeloEmpleado.USUARIO);
+                            GUIAS_EMPLEADO cedula = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.CEDULA == nuevoUsuario.modeloEmpleado.CEDULA);
+                            if (usuarios == null && cedula == null)
+                            {
+                                baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
+                                baseDatos.SaveChanges();
+                                insertarTelefonos(nuevoUsuario);
+                                CargarEstacionesDropDownList();
+                                return RedirectToAction("InsertarUsuario");
+                            }
+                            else if(usuarios != null)
+                            {
+                                ModelState.AddModelError("", "Ya existe existe nombre de usuario en el sistema.");
+                            }
+                            else if (cedula != null)
+                            {
+                                ModelState.AddModelError("", "Ya existe este número de cédula en el sistema.");
+                            }
+                        }
+                        /*Si el modelo es inválido no lo agrega a la base*/
+                        else
+                        {
+                            /*Muestra un mensaje de error al usuario*/
+                            if (nuevoUsuario.modeloEmpleado.CONTRASENA == null)
+                            {
+                                ModelState.AddModelError("", "Debe ingresar una contraseña para este usuario.");
+                            }
+                            else {
+                                if (nuevoUsuario.modeloEmpleado.CONTRASENA.Contains(nuevoUsuario.modeloEmpleado.CONFIRMACIONCONTRASENA))
+                                {
+                                    ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
+                                }
+                            }
+                            CargarEstacionesDropDownList();
+                            return View(nuevoUsuario);
+                        }
+                    } 
                 }
             }
 
-            /*Si el rol no es ni guía externo ni interno*/
+            /*Si el rol es cualquier tipo de administrador*/
             else
             {
-                /*validar estación*/
-                nuevoUsuario.modeloTelefono.CEDULAEMPLEADO = nuevoUsuario.modeloEmpleado.CEDULA;
-                nuevoUsuario.modeloEmpleado.NOMBREESTACION = "No existe";
+                /*validar telefonos*/
                 nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
 
-                if (ModelState.IsValid)
+                /*Si no se escogió ninguna estación y el tipo de empleado es Administrador Local no debe dejar guardar en la base*/
+                if (nuevoUsuario.modeloEmpleado.NOMBREESTACION.Contains("Ninguna") && nuevoUsuario.modeloEmpleado.TIPOEMPLEADO.Contains("Local"))
                 {
-                    ViewBag.Message = "Nuevo usuario creado con éxito.";
-                    baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
-                    baseDatos.SaveChanges();
-                    CargarEstacionesDropDownList();
-                    return RedirectToAction("InsertarUsuario");
+                    ModelState.AddModelError("", "El administrador local debe tener asociado una estación en el sistema.");
+
                 }
+                /*Si el usuario es administrador global o escogió una estación entra a este else*/
                 else
                 {
-                    ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema");
-                    CargarEstacionesDropDownList();
-                    return View(nuevoUsuario);
-                }
+                    /*Se realiza una ultima verificación que si el tipo de usuario es administrador Global no sea asociado a ninguna estación*/
+                    if (nuevoUsuario.modeloEmpleado.TIPOEMPLEADO.Contains("Global"))
+                    {
+                        nuevoUsuario.modeloEmpleado.NOMBREESTACION = "Ninguna";
+                    }
+
+                    /*Si el modelo es válido se guarda en la base como una tupla*/
+                    if (ModelState.IsValid)
+                    {
+                        GUIAS_EMPLEADO usuarios = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == nuevoUsuario.modeloEmpleado.USUARIO);
+                        GUIAS_EMPLEADO cedula = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.CEDULA == nuevoUsuario.modeloEmpleado.CEDULA);
+                        if (usuarios == null && cedula == null)
+                        {
+                            baseDatos.GUIAS_EMPLEADO.Add(nuevoUsuario.modeloEmpleado);
+                            baseDatos.SaveChanges();
+                            insertarTelefonos(nuevoUsuario);
+                            CargarEstacionesDropDownList();
+                            return RedirectToAction("InsertarUsuario");
+                        }
+                        else if (usuarios != null)
+                        {
+                            ModelState.AddModelError("", "Ya existe existe nombre de usuario en el sistema.");
+                        }
+                        else if (cedula != null)
+                        {
+                            ModelState.AddModelError("", "Ya existe este número de cédula en el sistema.");
+                        }
+                    }
+
+                    /*Si el modelo no es válido no se guarda en la base de datos*/
+                    else
+                    {
+                        /*Muestra un mensaje de error al usuario*/
+                        if (nuevoUsuario.modeloEmpleado.CONTRASENA == null)
+                        {
+                            ModelState.AddModelError("", "Debe ingresar una contraseña para este usuario.");
+                        }
+                        else
+                        {
+                            if (nuevoUsuario.modeloEmpleado.CONTRASENA.Contains(nuevoUsuario.modeloEmpleado.CONFIRMACIONCONTRASENA))
+                            {
+                                ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
+                            }
+                        }
+                        CargarEstacionesDropDownList();
+                        return View(nuevoUsuario);
+                    }
+                } 
             }
 
             CargarEstacionesDropDownList();
             return View();    
+        }
+
+        public void insertarTelefonos(ManejoModelos telefonos)
+        {
+            if (telefonos.modeloTelefono.TELEFONO != null)
+            {
+                telefonos.modeloTelefono.CEDULAEMPLEADO = telefonos.modeloEmpleado.CEDULA;
+                baseDatos.GUIAS_TELEFONO.Add(telefonos.modeloTelefono);
+                baseDatos.SaveChanges();
+            }
+            if (telefonos.modeloTelefono2.TELEFONO != null)
+            {
+                telefonos.modeloTelefono2.CEDULAEMPLEADO = telefonos.modeloEmpleado.CEDULA;
+                baseDatos.GUIAS_TELEFONO.Add(telefonos.modeloTelefono2);
+                baseDatos.SaveChanges();
+            }
+            if (telefonos.modeloTelefono3.TELEFONO != null)
+            {
+                telefonos.modeloTelefono3.CEDULAEMPLEADO = telefonos.modeloEmpleado.CEDULA;
+                baseDatos.GUIAS_TELEFONO.Add(telefonos.modeloTelefono3);
+                baseDatos.SaveChanges();
+            }
+            if (telefonos.modeloTelefono4.TELEFONO != null)
+            {
+                telefonos.modeloTelefono4.CEDULAEMPLEADO = telefonos.modeloEmpleado.CEDULA;
+                baseDatos.GUIAS_TELEFONO.Add(telefonos.modeloTelefono4);
+                baseDatos.SaveChanges();
+            }
         }
 
         // GET: Modificar usuario
