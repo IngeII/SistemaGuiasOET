@@ -623,6 +623,5 @@ C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.Razor.
 C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.resources.dll
 C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache
 C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.dll
 C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.pdb

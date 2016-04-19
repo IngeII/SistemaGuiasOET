@@ -180,8 +180,11 @@ namespace GuiasOET.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             identificacion = id.ToString();
+
             modelo = new ManejoModelos (baseDatos.GUIAS_EMPLEADO.Find(identificacion));
-   
+
+           // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
+            modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
             if (modelo == null)
             {
                 return HttpNotFound();
@@ -193,26 +196,63 @@ namespace GuiasOET.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ModificarPost(int? id)
         {
-        
+            ManejoModelos modelo;
+            String tipoEmpleado = "";
             
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ManejoModelos modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(id.ToString()));
+            var empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
 
+            tipoEmpleado = empleado.TIPOEMPLEADO.ToString();
+            modelo = new ManejoModelos(empleado);
             var employeeToUpdate = modelo;
-            if (TryUpdateModel(employeeToUpdate))  {
-                try
+            if (tipoEmpleado.Equals("Guía"))
+            {
+                if (employeeToUpdate.modeloEmpleado.NOMBREEMPLEADO == null || employeeToUpdate.modeloEmpleado.APELLIDO1 == null || employeeToUpdate.modeloEmpleado.APELLIDO2 == null || employeeToUpdate.modeloEmpleado.DIRECCION == null)
                 {
-                 
-                    baseDatos.SaveChanges();
+                    ModelState.AddModelError("", "Para modificar un guía los datos correspondientes a nombre, apellidos y dirección son obligatorios.");
                 }
-                catch (RetryLimitExceededException /* dex */)
+
+                if (TryUpdateModel(employeeToUpdate))
                 {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                    try
+                    {
+                        ViewBag.Message = "Usuario modificado con éxito.";
+                        baseDatos.SaveChanges();
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                    }
+                }else
+                {
+                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
+
+                }
+            }
+            else
+            {
+                if (TryUpdateModel(employeeToUpdate))
+                {
+                    try
+                    {
+                        ViewBag.Message = "Usuario modificado con éxito.";
+                        baseDatos.SaveChanges();
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
+
                 }
             }
             return View(employeeToUpdate);

@@ -15,6 +15,12 @@ namespace GuiasOET.Models
             modeloEmpleado = empleado;
         }
 
+        public ManejoModelos(GuiasOET.Models.GUIAS_EMPLEADO empleado, GuiasOET.Models.GUIAS_TELEFONO telefono)
+        {
+
+            modeloEmpleado = empleado;
+        }
+
         public ManejoModelos()
         {
 
