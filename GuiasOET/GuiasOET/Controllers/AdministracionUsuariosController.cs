@@ -10,6 +10,7 @@ using System.Net;
 using System.Web.UI.HtmlControls;
 using System.Data.Entity;
 using PagedList;
+using MvcFlashMessages;
 
 namespace GuiasOET.Controllers
 {
@@ -190,6 +191,10 @@ namespace GuiasOET.Controllers
                                 baseDatos.SaveChanges();
                                 insertarTelefonos(nuevoUsuario);
                                 CargarEstacionesDropDownList();
+
+
+                                //service.Invoke(); // Do something awesome.
+                                this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
                                 return RedirectToAction("InsertarUsuario");
                             }
                             else if(usuarios != null)
@@ -217,6 +222,8 @@ namespace GuiasOET.Controllers
                             }
                             CargarEstacionesDropDownList();
                             ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
+                            //service.Invoke(); // Do something awesome.
+                            this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
                             return View(nuevoUsuario);
                         }
                     } 
@@ -255,6 +262,8 @@ namespace GuiasOET.Controllers
                             baseDatos.SaveChanges();
                             insertarTelefonos(nuevoUsuario);
                             CargarEstacionesDropDownList();
+                            //service.Invoke(); // Do something awesome.
+                            this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
                             return RedirectToAction("InsertarUsuario");
                         }
                         else if (usuarios != null)
@@ -283,12 +292,16 @@ namespace GuiasOET.Controllers
                             }
                         }
                         CargarEstacionesDropDownList();
+                        //service.Invoke(); // Do something awesome.
+                        this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
                         return View(nuevoUsuario);
                     }
                 } 
             }
 
             CargarEstacionesDropDownList();
+            //service.Invoke(); // Do something awesome.
+            this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
             return View();    
         }
 
