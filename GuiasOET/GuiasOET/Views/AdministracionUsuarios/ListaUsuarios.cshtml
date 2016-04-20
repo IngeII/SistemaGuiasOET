@@ -1,79 +1,100 @@
-﻿@model IEnumerable<GuiasOET.Models.GUIAS_EMPLEADO>
+﻿@model PagedList.IPagedList<GuiasOET.Models.GUIAS_EMPLEADO>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 
-@{
-    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
-    ViewBag.Title = "Lista de Usuarios";
-}
+    @{
+        Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+        ViewBag.Title = "Lista de Usuarios";
+    }
 
-<div class="jumbotronTwo">
+    <div class="jumbotronTwo">
 
-</div>
-<div class="row">
-    <div class="col-md-9">
-        <h2>@ViewBag.Title</h2>
     </div>
-</div>
-
-<div class="row">
-
-    <div class="col-lg-12">
-        <div style="float: right">
-           @Html.ActionLink("Insertar usuario", "InsertarUsuario", null, new { @class = "btn btn-default" })
-            
+    <div class="row">
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
         </div>
     </div>
 
-</div>
-<br>
+    <div class="row">
 
-<div class="row">
-    @using (Html.BeginForm("ListaUsuarios", "AdministracionUsuarios", FormMethod.Get))
-    {
-        <p>
-           Criterio de búsqueda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Buscar" class="btn btn-default" />
-            <input type="reset" value="Ver todos" class="btn btn-default" />
-        </p>
-    }
-</div>
+        <div class="col-lg-12">
+            <div style="float: right">
+                @Html.ActionLink("Insertar usuario", "InsertarUsuario", null, new { @class = "btn btn-default" })
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Nombre", "ListaUsuarios", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Estación", "ListaUsuarios", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Rol", "ListaUsuarios", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-    </tr>
+            </div>
+        </div>
 
-    
-    @foreach (var item in Model)
-    {
+    </div>
+    <br>
+
+    <div class="row">
+        @using (Html.BeginForm("ListaUsuarios", "AdministracionUsuarios", FormMethod.Get))
+        {
+            <p>
+                Criterio de búsqueda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </p>
+        }
+    </div>
+
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NOMBREEMPLEADO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NOMBREESTACION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TIPOEMPLEADO)
-            </td>
-
-            <td>
-                @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" }) 
-                @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" }) 
-                @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
-            </td>
+            <th>
+                @Html.ActionLink("Nombre", "ListaUsuarios", new { sortOrder = ViewBag.NombreSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Primer Apellido", "ListaUsuarios", new { sortOrder = ViewBag.Ape1SortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Segundo Apellido", "ListaUsuarios", new { sortOrder = ViewBag.Ape2SortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Estación", "ListaUsuarios", new { sortOrder = ViewBag.EstacionSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Rol", "ListaUsuarios", new { sortOrder = ViewBag.RolSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Email
+            </th>
         </tr>
-    }
-     
 
-</table>
-<br />
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBREEMPLEADO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.APELLIDO1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.APELLIDO2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBREESTACION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIPOEMPLEADO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMAIL)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("ListaUsuarios",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 

@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Net;
 using System.Web.UI.HtmlControls;
 using System.Data.Entity;
+using PagedList;
 
 namespace GuiasOET.Controllers
 {
@@ -79,23 +80,63 @@ namespace GuiasOET.Controllers
 
         // GET: ListaUsuarios
         /*Método GET de la pantalla ListaUsuarios*/
-        public ActionResult ListaUsuarios()
+        public ActionResult ListaUsuarios(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NombreSortParm = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
+            ViewBag.Ape1SortParm = String.IsNullOrEmpty(sortOrder) ? "Apellido1" : "";
+            ViewBag.Ape2SortParm = String.IsNullOrEmpty(sortOrder) ? "Apellido2" : "";
+            ViewBag.EstacionSortParm = String.IsNullOrEmpty(sortOrder) ? "Estacion" : "";
+            ViewBag.RolSortParm = String.IsNullOrEmpty(sortOrder) ? "Rol" : "";
 
-            /*    if (Session["NombreUsuarioLogueado"] != null)
-                {
-                    return View(baseDatos.GUIAS_EMPLEADO.ToList());
-                }
-                else
-                {
-                    return RedirectToAction("Login");
-                }  */
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
-            return View(baseDatos.GUIAS_EMPLEADO.ToList());
+            ViewBag.CurrentFilter = searchString;
 
+            var empleados = from e in baseDatos.GUIAS_EMPLEADO select e;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
+                                       || e.NOMBREEMPLEADO.Contains(searchString) || e.APELLIDO2.Contains(searchString)
+                                       || e.NOMBREESTACION.Contains(searchString) || e.TIPOEMPLEADO.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Nombre":
+                    empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+                    break;
+                case "Apellido1":
+                    empleados = empleados.OrderBy(e => e.APELLIDO1);
+                    break;
+                case "Apellido2":
+                    empleados = empleados.OrderBy(e => e.APELLIDO2);
+                    break;
+                case "Estacion":
+                    empleados = empleados.OrderBy(e => e.NOMBREESTACION);
+                    break;
+                case "Rol":
+                    empleados = empleados.OrderBy(e => e.TIPOEMPLEADO);
+                    break;
+                default:
+                    empleados = empleados.OrderBy(e => e.NOMBREESTACION);
+                    break;
+            }
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(empleados.ToPagedList(pageNumber, pageSize));
         }
 
-       /*Método get de la pantalla InsertarUsuario*/
+        /*Método get de la pantalla InsertarUsuario*/
         public ActionResult InsertarUsuario()
         {
             CargarEstacionesDropDownList();
