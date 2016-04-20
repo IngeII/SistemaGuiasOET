@@ -170,6 +170,7 @@ namespace GuiasOET.Controllers
                                 }
                             }
                             CargarEstacionesDropDownList();
+                            ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
                             return View(nuevoUsuario);
                         }
                     } 

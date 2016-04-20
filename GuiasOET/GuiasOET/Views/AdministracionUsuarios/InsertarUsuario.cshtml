@@ -222,40 +222,40 @@
                             @Html.LabelFor(model => model.modeloEmpleado.TIPOEMPLEADO, htmlAttributes: new { @class = "control-label col-md-2" })
                         </div>
                         <div class="col-md-2">
-                            <input name="tipoUsuario" type="radio" id="checkGlobal" value="Administrador Global" checked/>
+                            @Html.RadioButton("tipoUsuario", "Administrador Global", new { id = "tipoUsuario_1" })
                         </div>
                         <div class="col-md-6" col-sm-offset-1>
-                            <label for="checkGlobal">Administrador global</label>
+                            <label for="tipoUsuario_1">Administrador global</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-2">
-                            <input type="radio" name="tipoUsuario" id="checkLocal" value="Administrador Local">
+                            @Html.RadioButton("tipoUsuario", "Administrador Local", new { id = "tipoUsuario_2" })
                         </div>
                         <div class="col-md-6">
-                            <label for="checkLocal">Administrador local</label>
+                            <label for="tipoUsuario_2">Administrador local</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-2">
-                            <input name="tipoUsuario" type="radio" id="checkInterno" value="Guía Interno">
+                            @Html.RadioButton("tipoUsuario", "Guía Interno", new { id = "tipoUsuario_3" })
                         </div>
                         <div class="col-md-6">
-                            <label for="checkInterno">Guía interno</label>
+                            <label for="tipoUsuario_3">Guía interno</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-2">
-                            <input type="radio" name="tipoUsuario" id="checkExterno" value="Guía Externo">
+                            @Html.RadioButton("tipoUsuario", "Guía Externo", true, new { id = "tipoUsuario_4" })
                         </div>
                         <div class="col-md-6">
-                            <label for="checkExterno">Guía externo</label>
+                            <label for="tipoUsuario_4">Guía externo</label>
                         </div>
                     </div>
 
@@ -263,10 +263,10 @@
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-2">
-                            <input type="radio" name="tipoUsuario" id="checkInternoLocal" value="Administrador Local/Guía Interno">
+                            @Html.RadioButton("tipoUsuario", "Administrador Local/Guía Interno", new { id = "tipoUsuario_5" })
                         </div>
                         <div class="col-md-6">
-                            <label for="checkInternoLocal">Administrador Local / Guía Interno</label>
+                            <label for="tipoUsuario_5">Administrador Local / Guía Interno</label>
                         </div>
                     </div>
 
