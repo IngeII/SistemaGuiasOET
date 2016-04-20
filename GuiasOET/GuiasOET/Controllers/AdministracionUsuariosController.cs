@@ -566,7 +566,7 @@ namespace GuiasOET.Controllers
         // GET: Modificar usuario
         public ActionResult EliminarUsuario(int? id)
         {
-
+            CargarEstacionesDropDownList();
             string identificacion;
             ManejoModelos modelo;
 
@@ -583,12 +583,13 @@ namespace GuiasOET.Controllers
             modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion), telefonos);
 
             // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
-            modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
+            //modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
             if (modelo == null)
             {
                 return HttpNotFound();
             }
             // Genera una variable de tipo lista con opciones para un ListBox.
+
             bool activo = modelo.modeloEmpleado.ESTADO == 1;
             bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
             ViewBag.opciones = new List<System.Web.Mvc.SelectListItem> {
@@ -618,16 +619,12 @@ namespace GuiasOET.Controllers
             var employeeToUpdate = modelo;
             if (tipoEmpleado.Equals("Guía"))
             {
-                if (employeeToUpdate.modeloEmpleado.NOMBREEMPLEADO == null || employeeToUpdate.modeloEmpleado.APELLIDO1 == null || employeeToUpdate.modeloEmpleado.APELLIDO2 == null || employeeToUpdate.modeloEmpleado.DIRECCION == null)
-                {
-                    ModelState.AddModelError("", "Para modificar un guía los datos correspondientes a nombre, apellidos y dirección son obligatorios.");
-                }
 
                 if (TryUpdateModel(employeeToUpdate))
                 {
                     try
                     {
-                        ViewBag.Message = "Usuario modificado con éxito.";
+                        ViewBag.Message = "Usuario eliminado con éxito.";
                         baseDatos.SaveChanges();
                     }
                     catch (RetryLimitExceededException /* dex */)
@@ -665,8 +662,5 @@ namespace GuiasOET.Controllers
             }
             return View(employeeToUpdate);
         }
-
-
-
     }
 }
