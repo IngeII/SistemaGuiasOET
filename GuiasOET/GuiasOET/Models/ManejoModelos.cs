@@ -22,13 +22,54 @@ namespace GuiasOET.Models
         {
 
             modeloEmpleado = empleado;
+            modeloTelefono = telefono;
         }
 
         public ManejoModelos(GuiasOET.Models.GUIAS_EMPLEADO empleado, GuiasOET.Models.GUIAS_TELEFONO telefono, GuiasOET.Models.GUIAS_TELEFONO telefono2, GuiasOET.Models.GUIAS_TELEFONO telefono3, GuiasOET.Models.GUIAS_TELEFONO telefono4)
         {
 
             modeloEmpleado = empleado;
+            modeloTelefono = telefono;
+            modeloTelefono2 = telefono2;
+            modeloTelefono3 = telefono3;
+            modeloTelefono4 = telefono4;
+
         }
+
+        public ManejoModelos(GuiasOET.Models.GUIAS_EMPLEADO empleado, IEnumerable<GUIAS_TELEFONO> telefonos)
+        {
+
+            int indice = 0;
+            modeloEmpleado = empleado;
+
+            if (telefonos!=null) {
+                while (indice < telefonos.Count()) {
+
+                    switch (indice)
+                    {
+                        case 0:
+                            modeloTelefono = telefonos.ElementAt(indice);
+                            break;
+                        case 1:
+                            modeloTelefono2 = telefonos.ElementAt(indice);
+                            break;
+                        case 2:
+                            modeloTelefono3 = telefonos.ElementAt(indice);
+                            break;
+                        default:
+                            modeloTelefono4 = telefonos.ElementAt(indice);
+                            break;
+
+                    }
+                    ++indice;
+                }
+            }
+            
+
+        }
+
+
+
 
         public ManejoModelos()
         {

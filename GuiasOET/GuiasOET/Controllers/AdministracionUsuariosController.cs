@@ -286,9 +286,13 @@ namespace GuiasOET.Controllers
             }
             identificacion = id.ToString();
 
-            modelo = new ManejoModelos (baseDatos.GUIAS_EMPLEADO.Find(identificacion));
+            string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
+            
+            IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
 
-           // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
+            modelo = new ManejoModelos (baseDatos.GUIAS_EMPLEADO.Find(identificacion),telefonos);
+
+            // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
             modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
             if (modelo == null)
             {
@@ -297,76 +301,162 @@ namespace GuiasOET.Controllers
             // Genera una variable de tipo lista con opciones para un ListBox.
             bool activo = modelo.modeloEmpleado.ESTADO == 1;
             bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
-            ViewBag.opciones = new List<SelectListItem> {
-                new SelectListItem { Text = "Activo", Value = "1", Selected = activo},
-                new SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
+            ViewBag.opciones = new List<System.Web.Mvc.SelectListItem> {
+                new System.Web.Mvc.SelectListItem { Text = "Activo", Value = "1", Selected = activo},
+                new System.Web.Mvc.SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
             };
+
             return View(modelo);
         }
 
         [HttpPost, ActionName("ModificarUsuario")]
         [ValidateAntiForgeryToken]
-        public ActionResult ModificarPost(int? id)
+        public ActionResult ModificarPost(int? id, string estado)
         {
             ManejoModelos modelo;
-            String tipoEmpleado = "";
             
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
+            string identificacion = id.ToString();
 
-            tipoEmpleado = empleado.TIPOEMPLEADO.ToString();
-            modelo = new ManejoModelos(empleado);
+            string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
+
+            IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
+
+            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion), telefonos);
+
+            string a = modelo.modeloTelefono.CEDULAEMPLEADO;
+
             var employeeToUpdate = modelo;
-            if (tipoEmpleado.Equals("Guía"))
+
+            if (employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Guía"))
             {
+                /*Si falta algún dato personal del guía no se debe permitir la inserción*/
                 if (employeeToUpdate.modeloEmpleado.NOMBREEMPLEADO == null || employeeToUpdate.modeloEmpleado.APELLIDO1 == null || employeeToUpdate.modeloEmpleado.APELLIDO2 == null || employeeToUpdate.modeloEmpleado.DIRECCION == null)
                 {
-                    ModelState.AddModelError("", "Para modificar un guía los datos correspondientes a nombre, apellidos y dirección son obligatorios.");
-                }
-
-                if (TryUpdateModel(employeeToUpdate))
-                {
-                    try
-                    {
-                        ViewBag.Message = "Usuario modificado con éxito.";
-                        baseDatos.SaveChanges();
-                    }
-                    catch (RetryLimitExceededException /* dex */)
-                    {
-                        //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
-                    }
-                }else
-                {
-                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
-
-                }
-            }
-            else
-            {
-                if (TryUpdateModel(employeeToUpdate))
-                {
-                    try
-                    {
-                        ViewBag.Message = "Usuario modificado con éxito.";
-                        baseDatos.SaveChanges();
-                    }
-                    catch (RetryLimitExceededException /* dex */)
-                    {
-                        //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
-                    }
+                    ModelState.AddModelError("", "Para modificar un guía los datos correspondientes a nombre, apellidos y dirección son requeridos.");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
+                    /*Si es un guía pero no se le asoció ninguna estación no debe dejar guardarlo*/
+                    if (employeeToUpdate.modeloEmpleado.NOMBREESTACION.Contains("Ninguna"))
+                    {
+                        ModelState.AddModelError("", "El guía debe tener asociado una estación en el sistema.");
+                    }
+                    /*Si si se asoció una estación válida al guía se guarda en la base de datos*/
+                    else
+                    {
 
+                        /*Validación de los telefonos falta*/
+
+                        employeeToUpdate.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+                        /*Si el modelo es válido se guarda en la base como una tupla*/
+                        if (TryUpdateModel(employeeToUpdate))
+                        {
+                            try
+                            {
+                                ViewBag.Message = "Usuario modificado con éxito.";
+                                employeeToUpdate.modeloEmpleado.ESTADO = Int32.Parse(estado);
+                                string b = employeeToUpdate.modeloTelefono.CEDULAEMPLEADO;
+                                baseDatos.SaveChanges();
+                            }
+                            catch (RetryLimitExceededException /* dex */)
+                            {
+                                //Log the error (uncomment dex variable name and add a line here to write a log.
+                                ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
+
+                            /*Muestra un mensaje de error al usuario*/
+                            if (employeeToUpdate.modeloEmpleado.CONTRASENA == null)
+                            {
+                                ModelState.AddModelError("", "Debe ingresar una contraseña para este usuario.");
+                            }
+                            else
+                            {
+                                if (employeeToUpdate.modeloEmpleado.CONTRASENA.Contains(employeeToUpdate.modeloEmpleado.CONFIRMACIONCONTRASENA))
+                                {
+                                    ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
+                                }
+                            }
+
+                        }
+                    }
                 }
             }
+
+            /*Si el rol es cualquier tipo de administrador*/
+            else
+            {
+                /*validar telefonos*/
+                employeeToUpdate.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+                /*Si no se escogió ninguna estación y el tipo de empleado es Administrador Local no debe dejar guardar en la base*/
+                if (employeeToUpdate.modeloEmpleado.NOMBREESTACION.Contains("Ninguna") && employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Local"))
+                {
+                    ModelState.AddModelError("", "El administrador local debe tener asociado una estación en el sistema.");
+
+                }
+                /*Si el usuario es administrador global o escogió una estación entra a este else*/
+                else
+                {
+                    /*Se realiza una ultima verificación que si el tipo de usuario es administrador Global no sea asociado a ninguna estación*/
+                    if (employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Global"))
+                    {
+                        employeeToUpdate.modeloEmpleado.NOMBREESTACION = "Ninguna";
+                    }
+
+                    /*Si el modelo es válido se guarda en la base como una tupla*/
+                    if (TryUpdateModel(employeeToUpdate))
+                    {
+                        try
+                        {
+                            ViewBag.Message = "Usuario modificado con éxito.";
+                            employeeToUpdate.modeloEmpleado.ESTADO = Int32.Parse(estado);
+                            baseDatos.SaveChanges();
+                           
+                        }
+                        catch (RetryLimitExceededException /* dex */)
+                        {
+                            //Log the error (uncomment dex variable name and add a line here to write a log.
+                            ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                        }
+                    }
+                    /*Si el modelo no es válido no se guarda en la base de datos*/
+                    else
+                    {
+                        /*Muestra un mensaje de error al usuario*/
+                        if (employeeToUpdate.modeloEmpleado.CONTRASENA == null)
+                        {
+                            ModelState.AddModelError("", "Debe ingresar una contraseña para este usuario.");
+                        }
+                        else
+                        {
+                            if (employeeToUpdate.modeloEmpleado.CONTRASENA.Contains(employeeToUpdate.modeloEmpleado.CONFIRMACIONCONTRASENA))
+                            {
+                                ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+            
+            bool activo = modelo.modeloEmpleado.ESTADO == 1;
+            bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
+            ViewBag.opciones = new List<SelectListItem> {
+                new SelectListItem { Text = "Activo", Value = "1", Selected = activo},
+                new SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
+            };
             return View(employeeToUpdate);
         }
 

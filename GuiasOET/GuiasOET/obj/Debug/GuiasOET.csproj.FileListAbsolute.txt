@@ -445,7 +445,6 @@ C:\Users\Luis\Desktop\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.W
 C:\Users\Luis\Desktop\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Users\Luis\Desktop\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.dll
 C:\Users\Luis\Desktop\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.pdb
-C:\Users\Luis\Desktop\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache
 C:\Users\gblanco\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\ApplicationInsights.config
 C:\Users\gblanco\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\roslyn\csc.exe
 C:\Users\gblanco\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -625,3 +624,4 @@ C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebPag
 C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.dll
 C:\Users\Luis\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.pdb
 C:\Users\gblanco\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache
+C:\Users\Luis\Desktop\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache

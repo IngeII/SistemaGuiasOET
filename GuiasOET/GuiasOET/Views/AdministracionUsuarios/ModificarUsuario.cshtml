@@ -114,32 +114,55 @@
                     </div>
 
                     <br />
-
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
-                            @Html.LabelFor(model => model.modeloTelefono.TELEFONO, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <label class="control-label col-md-2" for="telefono1">Teléfono 1:</label>
                         </div>
                         <div class="col-md-7">
                             @Html.EditorFor(model => model.modeloTelefono.TELEFONO, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.modeloTelefono.TELEFONO, "", new { @class = "text-danger" })
                         </div>
-                        <div class="col-md-2">
-                            <input type="button" class="form-control" id="btnmas" value="+">
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+                            <label class="control-label col-md-2" for="telefono2">Teléfono 2:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.modeloTelefono2.TELEFONO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.modeloTelefono2.TELEFONO, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <br />
 
-                    <!--parte que no se si va a servir para meter los telefonos agregados-->
                     <div class="row">
-                        <div class="col-md-10" col-sm-offset-1>
-                            <a href="#" class="form-control">First item</a>
+                        <div class="col-md-3" col-sm-offset-1>
+                            <label class="control-label col-md-2" for="telefono3">Teléfono 3:</label>
                         </div>
-                        <div class="col-md-2">
-                            <input type="button" class="form-control" id="btnmenos" value="-">
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.modeloTelefono3.TELEFONO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.modeloTelefono3.TELEFONO, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <!--parte que no se si va a servir para meter los telefonos agregados-->
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+                            <label class="control-label col-md-2" for="telefono4">Teléfono 4:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.modeloTelefono4.TELEFONO, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.modeloTelefono4.TELEFONO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+                  
+
                 </div>
             </div>
         </div>
@@ -201,7 +224,7 @@
                         <div class="col-md-7">
                          
                                 @* Lista de opciones. *@
-                                @Html.ListBox("Opcion", (List<SelectListItem>) ViewBag.opciones, new { @class = "form-control" })
+                                @Html.ListBox("estado", (List<SelectListItem>) ViewBag.opciones, new { @class = "form-control" })
                               
                         </div>
                     </div>
