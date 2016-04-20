@@ -21,7 +21,8 @@
 
         <div class="col-lg-12">
             <div style="float: right">
-                @Html.ActionLink("Insertar usuario", "InsertarUsuario", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Insertar usuario", "InsertarUsuario", null, new { @class = "btn btn-default;", @style = "background-color: #7BC143; color:white;" })
+
 
             </div>
         </div>
@@ -34,7 +35,7 @@
         {
             <p>
                 Criterio de búsqueda: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-                <input type="submit" value="Buscar" class="btn btn-default" />
+                <input type="submit" value="Buscar" class="btn btn-default" style="background-color: #7BC143; color:white;" />
             </p>
         }
     </div>
@@ -85,9 +86,9 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default",  @style = "background-color: #7BC143; color:white;" })
+                    @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default", @style = "background-color: #7BC143; color:white;" })
+                    @Html.ActionLink("Eliminar", "EliminarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default", @style = "background-color: #F26631; color:white;" })
                 </td>
             </tr>
         }

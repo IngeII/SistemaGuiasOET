@@ -135,7 +135,12 @@ namespace GuiasOET.Controllers
             int pageNumber = (page ?? 1);
             return View(empleados.ToPagedList(pageNumber, pageSize));
         }
-
+        // GET: Inicio
+        /*Método GET de la pantalla ListaUsuarios*/
+        public ActionResult Inicio(int? page)
+        {
+            return View();
+        }
         /*Método get de la pantalla InsertarUsuario*/
         public ActionResult InsertarUsuario()
         {
