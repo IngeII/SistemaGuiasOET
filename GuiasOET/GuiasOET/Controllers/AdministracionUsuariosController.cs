@@ -562,8 +562,8 @@ namespace GuiasOET.Controllers
                  Response.Cache.SetNoStore(); */
             return RedirectToAction("Login");
         }
-		
-		// GET: Eliminar usuario
+
+        // GET: Modificar usuario
         public ActionResult EliminarUsuario(int? id)
         {
 
@@ -576,7 +576,11 @@ namespace GuiasOET.Controllers
             }
             identificacion = id.ToString();
 
-            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
+            string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
+
+            IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
+
+            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion), telefonos);
 
             // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
             modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
@@ -587,10 +591,11 @@ namespace GuiasOET.Controllers
             // Genera una variable de tipo lista con opciones para un ListBox.
             bool activo = modelo.modeloEmpleado.ESTADO == 1;
             bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
-            ViewBag.opciones = new List<SelectListItem> {
-                new SelectListItem { Text = "Activo", Value = "1", Selected = activo},
-                new SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
+            ViewBag.opciones = new List<System.Web.Mvc.SelectListItem> {
+                new System.Web.Mvc.SelectListItem { Text = "Activo", Value = "1", Selected = activo},
+                new System.Web.Mvc.SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
             };
+
             return View(modelo);
         }
 
