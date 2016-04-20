@@ -485,6 +485,104 @@ namespace GuiasOET.Controllers
                  Response.Cache.SetNoStore(); */
             return RedirectToAction("Login");
         }
+		
+		// GET: Eliminar usuario
+        public ActionResult EliminarUsuario(int? id)
+        {
+
+            string identificacion;
+            ManejoModelos modelo;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            identificacion = id.ToString();
+
+            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
+
+            // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
+            modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
+            if (modelo == null)
+            {
+                return HttpNotFound();
+            }
+            // Genera una variable de tipo lista con opciones para un ListBox.
+            bool activo = modelo.modeloEmpleado.ESTADO == 1;
+            bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
+            ViewBag.opciones = new List<SelectListItem> {
+                new SelectListItem { Text = "Activo", Value = "1", Selected = activo},
+                new SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
+            };
+            return View(modelo);
+        }
+
+        [HttpPost, ActionName("EliminarUsuario")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EliminarUsuarioPost(int? id)
+        {
+            ManejoModelos modelo;
+            String tipoEmpleado = "";
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
+
+            tipoEmpleado = empleado.TIPOEMPLEADO.ToString();
+            modelo = new ManejoModelos(empleado);
+            var employeeToUpdate = modelo;
+            if (tipoEmpleado.Equals("Guía"))
+            {
+                if (employeeToUpdate.modeloEmpleado.NOMBREEMPLEADO == null || employeeToUpdate.modeloEmpleado.APELLIDO1 == null || employeeToUpdate.modeloEmpleado.APELLIDO2 == null || employeeToUpdate.modeloEmpleado.DIRECCION == null)
+                {
+                    ModelState.AddModelError("", "Para modificar un guía los datos correspondientes a nombre, apellidos y dirección son obligatorios.");
+                }
+
+                if (TryUpdateModel(employeeToUpdate))
+                {
+                    try
+                    {
+                        ViewBag.Message = "Usuario modificado con éxito.";
+                        baseDatos.SaveChanges();
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
+
+                }
+            }
+            else
+            {
+                if (TryUpdateModel(employeeToUpdate))
+                {
+                    try
+                    {
+                        ViewBag.Message = "Usuario modificado con éxito.";
+                        baseDatos.SaveChanges();
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
+
+                }
+            }
+            return View(employeeToUpdate);
+        }
 
 
 
