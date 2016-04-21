@@ -192,9 +192,7 @@ namespace GuiasOET.Controllers
                                 insertarTelefonos(nuevoUsuario);
                                 CargarEstacionesDropDownList();
 
-
-                                //service.Invoke(); // Do something awesome.
-                                this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
+                                this.Flash("error", "Good job! Whatever you did must have worked!");
                                 return RedirectToAction("InsertarUsuario");
                             }
                             else if(usuarios != null)
@@ -223,7 +221,7 @@ namespace GuiasOET.Controllers
                             CargarEstacionesDropDownList();
                             ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
                             //service.Invoke(); // Do something awesome.
-                            this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
+                            this.Flash("error", "Good job! Whatever you did must have worked!");
                             return View(nuevoUsuario);
                         }
                     } 
@@ -263,7 +261,7 @@ namespace GuiasOET.Controllers
                             insertarTelefonos(nuevoUsuario);
                             CargarEstacionesDropDownList();
                             //service.Invoke(); // Do something awesome.
-                            this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
+                            this.Flash("error", "Good job! Whatever you did must have worked!");
                             return RedirectToAction("InsertarUsuario");
                         }
                         else if (usuarios != null)
@@ -294,7 +292,9 @@ namespace GuiasOET.Controllers
                         CargarEstacionesDropDownList();
                         //service.Invoke(); // Do something awesome.
                         ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
-                        this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
+                        var action = Url.Action("Index", "Flash");
+                        this.Flash("error", "Good job! Whatever you did must have worked!");
+
                         return View(nuevoUsuario);
                     }
                 } 
@@ -302,7 +302,7 @@ namespace GuiasOET.Controllers
 
             CargarEstacionesDropDownList();
             //service.Invoke(); // Do something awesome.
-            this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
+            this.Flash("error", "Good job! Whatever you did must have worked!");
             return View();    
         }
 

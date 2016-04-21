@@ -6,6 +6,11 @@
     color: #222;
     background-color: #bbb;
     border-color: #999;
+    padding: 15px;
+    margin-bottom: 21px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
 }
 
 .flash-message .close {
