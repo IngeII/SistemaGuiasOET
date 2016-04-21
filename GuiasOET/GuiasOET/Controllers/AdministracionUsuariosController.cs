@@ -404,9 +404,24 @@ namespace GuiasOET.Controllers
             return View(modelo);
         }
 
+
+        public void borrarTelefonos(IEnumerable<GUIAS_TELEFONO> telefonos)
+        {
+            String a = telefonos.ElementAt(0).CEDULAEMPLEADO.ToString();
+            GUIAS_TELEFONO T;
+
+            for (int i = 0; i < telefonos.Count(); ++i) {
+                T = baseDatos.GUIAS_TELEFONO.Find(telefonos.ElementAt(i).CEDULAEMPLEADO.ToString(), telefonos.ElementAt(i).TELEFONO.ToString());
+                baseDatos.GUIAS_TELEFONO.Remove(T);
+            }
+            
+            baseDatos.SaveChanges();
+        }
+
+
         [HttpPost, ActionName("ModificarUsuario")]
         [ValidateAntiForgeryToken]
-        public ActionResult ModificarPost(int? id, string estado)
+        public ActionResult ModificarPost(int? id, string estado,ManejoModelos usuario)
         {
             ManejoModelos modelo;
             
@@ -421,11 +436,13 @@ namespace GuiasOET.Controllers
 
             IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
 
-            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion), telefonos);
+            
+            borrarTelefonos(telefonos);
 
-            string a = modelo.modeloTelefono.CEDULAEMPLEADO;
+            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
 
             var employeeToUpdate = modelo;
+
 
             if (employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Guía"))
             {
@@ -456,8 +473,9 @@ namespace GuiasOET.Controllers
                             {
                                 ViewBag.Message = "Usuario modificado con éxito.";
                                 employeeToUpdate.modeloEmpleado.ESTADO = Int32.Parse(estado);
-                                string b = employeeToUpdate.modeloTelefono.CEDULAEMPLEADO;
                                 baseDatos.SaveChanges();
+                                insertarTelefonos(usuario);
+    
                             }
                             catch (RetryLimitExceededException /* dex */)
                             {
@@ -516,7 +534,8 @@ namespace GuiasOET.Controllers
                             ViewBag.Message = "Usuario modificado con éxito.";
                             employeeToUpdate.modeloEmpleado.ESTADO = Int32.Parse(estado);
                             baseDatos.SaveChanges();
-                           
+                            insertarTelefonos(usuario);
+
                         }
                         catch (RetryLimitExceededException /* dex */)
                         {
