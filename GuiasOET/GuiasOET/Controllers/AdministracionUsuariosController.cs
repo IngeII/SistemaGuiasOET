@@ -293,6 +293,7 @@ namespace GuiasOET.Controllers
                         }
                         CargarEstacionesDropDownList();
                         //service.Invoke(); // Do something awesome.
+                        ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
                         this.Flash("info", "Hey! The service was invoked. Isn't that awesome?");
                         return View(nuevoUsuario);
                     }
@@ -336,7 +337,7 @@ namespace GuiasOET.Controllers
         // GET: Modificar usuario
         public ActionResult ConsultarUsuario(int? id)
         {
-            CargarEstacionesDropDownList();
+            
             string identificacion;
             ManejoModelos modelo;
 
@@ -357,13 +358,16 @@ namespace GuiasOET.Controllers
             {
                 return HttpNotFound();
             }
-            // Genera una variable de tipo lista con opciones para un ListBox.
-            bool activo = modelo.modeloEmpleado.ESTADO == 1;
-            bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
-            ViewBag.opciones = new List<System.Web.Mvc.SelectListItem> {
-                new System.Web.Mvc.SelectListItem { Text = "Activo", Value = "1", Selected = activo},
-                new System.Web.Mvc.SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
-            };
+            
+            ViewBag.tipoUsuario = modelo.modeloEmpleado.TIPOEMPLEADO;
+
+            if (modelo.modeloEmpleado.ESTADO == 0)
+            {
+                ViewBag.estado = "Inactivo";
+            }
+            else {
+                ViewBag.estado = "Activo";
+            }
 
             return View(modelo);
         }
