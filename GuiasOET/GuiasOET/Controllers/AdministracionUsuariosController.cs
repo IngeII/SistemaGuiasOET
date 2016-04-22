@@ -843,7 +843,7 @@ namespace GuiasOET.Controllers
             {
                 try
                 {
-                    this.Flash("Éxito", "Usuario modificado con éxito");
+                    this.Flash("Éxito", "Usuario eliminado con éxito");
                     employeeToDelete.modeloEmpleado.ESTADO = Int32.Parse(estado2);
                     baseDatos.SaveChanges();
 
@@ -851,7 +851,7 @@ namespace GuiasOET.Controllers
                 catch (RetryLimitExceededException /* dex */)
                 {
                     //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
+                    ModelState.AddModelError("", "No es posible eliminar en este momento, intente más tarde");
                 }
             }
             return View(employeeToDelete);
