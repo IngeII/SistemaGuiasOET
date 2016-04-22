@@ -1,22 +1,26 @@
 ﻿@model GuiasOET.Models.GUIAS_EMPLEADO.ReestablecerContraseñaMetadata
 @{
-    ViewBag.Title = "Reestablecer Contraseña";
+    ViewBag.Title = "Restablecer Contraseña";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br>
-<div class="row col-sm-11 col-sm-offset-1">
-    <h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-9">
+        <h2>@ViewBag.Title</h2>
+    </div>
 </div>
 
-<div class="row col-sm-10 col-sm-offset-1">
-    <hr />
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+
 </div>
 
 <br>
-<br>
 
-<div class="row col-sm-12">
+<div class="row">
 
 
     @using (Html.BeginForm("ReestablecerContraseña", "AdministracionUsuarios", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
@@ -25,7 +29,7 @@
 
         @Html.AntiForgeryToken()
 
-        <div class="col-sm-5 col-sm-push-1">
+        <div class="col-sm-5">
             @Html.ValidationSummary(true)
             <div class="form-group">
                 <div class="panel panel-default">
@@ -46,7 +50,6 @@
                             <div class="col-sm-9 col-sm-push-1">
                                 @Html.PasswordFor(m => m.CONTRASENA, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.CONTRASENA, "", new { @class = "text-danger" })
-
                             </div>
                         </div>
                         <br>
@@ -80,30 +83,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -26,6 +26,8 @@ namespace GuiasOET.Models
             [Display(Name = "Nueva Contraseña: ")]
             public string CONTRASENA { get; set; }
 
+
+            // este es un atributo de GUIAS_EMPLEADO que no esta en la Base de Datos
             [DataType(DataType.Password)]
             [Display(Name = "Confirmar Contraseña: ")]
             [Compare("CONTRASENA", ErrorMessage = "*La contraseña y la confirmación de la contraseña no coinciden")]
@@ -35,15 +37,27 @@ namespace GuiasOET.Models
 
         public class LoginMetadata
         {
-            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario ")]
-            [Display(Name = "Usuario:")]
-            public string USUARIO { get; set; }
+            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario o correo ")]
+            [Display(Name = "Usuario o correo:")]
+            public string USUARIO_EMAIL { get; set; }
 
             [Required(ErrorMessage = "*Debe ingresar la contraseña")]
             [DataType(DataType.Password)]
             [Display(Name = "Contraseña:")]
             public string CONTRASENA { get; set; }
-        } 
+        }
+
+
+        public class OlvidarContrasenaMetadata
+        {
+            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario o correo ")]
+            [Display(Name = "Usuario o correo:")]
+            public string USUARIO_EMAIL { get; set; }
+
+        }
+
+
+
 
 
     }

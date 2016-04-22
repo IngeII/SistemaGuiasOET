@@ -11,6 +11,8 @@ using System.Web.UI.HtmlControls;
 using System.Data.Entity;
 using PagedList;
 using MvcFlashMessages;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace GuiasOET.Controllers
 {
@@ -35,24 +37,30 @@ namespace GuiasOET.Controllers
             return View();
         }
 
-        // POST: /AdministracionRecursos/Login
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string usuario, string contrasena)
+        public ActionResult Login(string USUARIO_EMAIL, string CONTRASENA)
         {
-
             //Se retorna la primera aparicion del empleado que tiene como usuario el especificado por el usuario,
             //como el usuario es un campo único no habrán problemas. 
-            GUIAS_EMPLEADO Guia = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == usuario);
+            GUIAS_EMPLEADO Guia;
+            bool esCorreo = USUARIO_EMAIL.Contains("@");
+            Debug.WriteLine("es Correo: " + esCorreo);
+            if (esCorreo == true)
+            {
+                Guia = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.EMAIL == USUARIO_EMAIL);
+            }
+            else
+            {
+                Guia = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == USUARIO_EMAIL);
+            }
 
-            /*     GUIAS_EMPLEADO Guia  = (GUIAS_EMPLEADO) from empleado in baseDatos.GUIAS_EMPLEADO
-                                       where empleado.USUARIO.Equals(usuario)
-                                       select empleado; */
 
             if (Guia != null)
             {
                 //Verifica contra la contraseña encriptada
-                if (Guia.CONTRASENA == contrasena)
+                if (Guia.CONTRASENA == CONTRASENA)
                 {
                     ModelState.Clear();
                     Session["IdUsuarioLogueado"] = Guia.CEDULA.ToString();
@@ -78,6 +86,7 @@ namespace GuiasOET.Controllers
 
 
         }
+
 
         // GET: ListaUsuarios
         /*Método GET de la pantalla ListaUsuarios*/
@@ -573,21 +582,177 @@ namespace GuiasOET.Controllers
             return View(employeeToUpdate);
         }
 
-        
-
-
-        //
-        // GET: /Seguridad/ReestablecerContraseña
-        [AllowAnonymous]
-        public ActionResult ReestablecerContraseña()
+        // GET: /AdministracionUsuarios/OlvidarContrasena
+        public ActionResult OlvidarContrasena()
         {
             return View();
         }
+
+        // GET: /Seguridad/ReestablecerContraseña
+        [AllowAnonymous]
+        public ActionResult ModificarContrasena()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> OlvidarContrasena(string USUARIO_EMAIL)
+        {
+
+            GUIAS_EMPLEADO GuiaActualizar;
+            bool esCorreo = USUARIO_EMAIL.Contains("@");
+            Debug.WriteLine("es Correo: " + esCorreo);
+            if (esCorreo == true)
+            {
+                GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.EMAIL == USUARIO_EMAIL);
+            }
+            else
+            {
+                GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == USUARIO_EMAIL);
+            }
+            Debug.WriteLine("usuario es: " + USUARIO_EMAIL);
+
+            if (GuiaActualizar != null)
+            {
+                string email = GuiaActualizar.EMAIL;
+                Debug.WriteLine("email es: " + email);
+                //var persona = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == usuario);
+                GuiaActualizar.CONFIRMACIONCONTRASENA = GuiaActualizar.CONTRASENA;
+                GuiaActualizar.CONFIRMAREMAIL = 1;
+                /// UpdateModel(persona);
+                //baseDatos.SaveChanges();
+                if (TryUpdateModel(GuiaActualizar))
+                {
+                    try
+                    {
+                        baseDatos.SaveChanges();
+                        var message = new MailMessage();
+                        message.To.Add(new MailAddress(email));  // replace with valid value 
+                        message.Subject = "Your email subject";
+                        var callbackUrl = Url.Action("ReestablecerContraseña", "AdministracionUsuarios", null, protocol: Request.Url.Scheme);
+                        string mensaje = "Please reset your password by clicking <a href =\"" + callbackUrl + "\">AQUI</a>";
+                        message.Body = string.Format(mensaje);
+                        message.IsBodyHtml = true;
+
+                        using (var smtp = new SmtpClient())
+                        {
+                            await smtp.SendMailAsync(message);
+                            return RedirectToAction("ConfirmarOlvidoContrasena");
+
+                        }
+
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        ModelState.AddModelError("", "Los datos no se pudieron guardar");
+                        return RedirectToAction("OlvidarContrasena");
+                    }
+
+                }
+
+                else
+                {
+                    ModelState.Clear();
+                    ModelState.AddModelError("", "No se pudieron guarda cambios");
+                    return View("OlvidarContrasena");
+                }
+            }
+            else
+            {
+                ModelState.Clear();
+                ModelState.AddModelError("", "El usuario o correo no se encuentra en el sistema");
+                return View("OlvidarContrasena");
+            }
+
+        }
+
+
+
+
+        // GET: /AdministracionUsuarios/ConfirmarOlvidoContrasena
+        public ActionResult ConfirmarOlvidoContrasena()
+        {
+            return View();
+        }
+
+        // GET: /Seguridad/ReestablecerContraseña
+        public ActionResult ReestablecerContraseña()
+        {
+            return View("ReestablecerContraseña");
+        }
+
+        // POST: /AdministracionUsuarios/ReestablecerContraseña
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReestablecerContraseña(string usuario, string contrasena, string confirmacioncontrasena)
+        {
+
+            var GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == usuario);
+
+            /*     GUIAS_EMPLEADO Guia  = (GUIAS_EMPLEADO) from empleado in baseDatos.GUIAS_EMPLEADO
+                                       where empleado.USUARIO.Equals(usuario)
+                                       select empleado; */
+
+            if (GuiaActualizar != null)
+            {
+
+                if (GuiaActualizar.CONFIRMAREMAIL == 1)
+                {
+                    GuiaActualizar.CONFIRMACIONCONTRASENA = GuiaActualizar.CONTRASENA;
+                    GuiaActualizar.CONFIRMAREMAIL = 0;
+                    if (TryUpdateModel(GuiaActualizar))
+                    {
+                        try
+                        {
+                            baseDatos.SaveChanges();
+                            Session["IdUsuarioLogueado"] = GuiaActualizar.CEDULA.ToString();
+                            Session["NombreUsuarioLogueado"] = GuiaActualizar.NOMBREEMPLEADO.ToString() + " " + GuiaActualizar.APELLIDO1.ToString() + " " + GuiaActualizar.APELLIDO2.ToString();
+                            Session["RolUsuarioLogueado"] = GuiaActualizar.TIPOEMPLEADO.ToString();
+                            return RedirectToAction("ListaUsuarios");
+                        }
+                        catch (RetryLimitExceededException /* dex */)
+                        {
+                            //Log the error (uncomment dex variable name and add a line here to write a log.
+                            ModelState.AddModelError("", "No fue posible guardar los cambios");
+                            return View("ReestablecerContraseña");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "No fue posible guardar los cambios");
+                        return View("ReestablecerContraseña");
+                    }
+                }
+                else
+                {
+                    ModelState.Clear();
+                    ModelState.AddModelError("", "Debe realizar una solicitud para restablecer la contraseña");
+                    return View();
+                }
+            }
+            else
+            {
+
+                ModelState.Clear();
+                ModelState.AddModelError("", "El usuario no se encuentra en el sistema");
+                return View();
+            }
+        }
+
+        //  return View();
+        //  }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CerrarSesionLogin()
         {
+            Debug.WriteLine("entre a cerrar sesion");
             Session["IdUsuarioLogueado"] = null;
             Session["NombreUsuarioLogueado"] = null;
             Session["RolUsuarioLogueado"] = null;
@@ -596,8 +761,15 @@ namespace GuiasOET.Controllers
             /*     Response.Cache.SetCacheability(HttpCacheability.NoCache);
                  Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
                  Response.Cache.SetNoStore(); */
-            return RedirectToAction("Login");
+            //    return RedirectToAction("Login");
+            return RedirectToActionPermanent("Login");
         }
+
+
+
+
+
+
 
         // GET: Modificar usuario
         public ActionResult EliminarUsuario(int? id)
