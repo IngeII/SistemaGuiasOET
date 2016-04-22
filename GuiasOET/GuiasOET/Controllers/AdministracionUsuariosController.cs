@@ -107,7 +107,8 @@ namespace GuiasOET.Controllers
             {
                 empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
                                        || e.NOMBREEMPLEADO.Contains(searchString) || e.APELLIDO2.Contains(searchString)
-                                       || e.NOMBREESTACION.Contains(searchString) || e.TIPOEMPLEADO.Contains(searchString));
+                                       || e.NOMBREESTACION.Contains(searchString) || e.TIPOEMPLEADO.Contains(searchString)
+                                       || e.USUARIO.Contains(searchString) || e.EMAIL.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -191,8 +192,7 @@ namespace GuiasOET.Controllers
                                 baseDatos.SaveChanges();
                                 insertarTelefonos(nuevoUsuario);
                                 CargarEstacionesDropDownList();
-
-                                this.Flash("error", "Good job! Whatever you did must have worked!");
+                                this.Flash("Éxito", "Nuevo usuario creado con éxito");
                                 return RedirectToAction("InsertarUsuario");
                             }
                             else if(usuarios != null)
@@ -215,13 +215,11 @@ namespace GuiasOET.Controllers
                             else {
                                 if (nuevoUsuario.modeloEmpleado.CONTRASENA.Contains(nuevoUsuario.modeloEmpleado.CONFIRMACIONCONTRASENA))
                                 {
-                                    ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
+                                   // ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
                                 }
                             }
                             CargarEstacionesDropDownList();
                             ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
-                            //service.Invoke(); // Do something awesome.
-                            this.Flash("error", "Good job! Whatever you did must have worked!");
                             return View(nuevoUsuario);
                         }
                     } 
@@ -261,7 +259,7 @@ namespace GuiasOET.Controllers
                             insertarTelefonos(nuevoUsuario);
                             CargarEstacionesDropDownList();
                             //service.Invoke(); // Do something awesome.
-                            this.Flash("error", "Good job! Whatever you did must have worked!");
+                            this.Flash("Éxito", "Nuevo usuario creado con éxito");
                             return RedirectToAction("InsertarUsuario");
                         }
                         else if (usuarios != null)
@@ -286,15 +284,13 @@ namespace GuiasOET.Controllers
                         {
                             if (nuevoUsuario.modeloEmpleado.CONTRASENA.Contains(nuevoUsuario.modeloEmpleado.CONFIRMACIONCONTRASENA))
                             {
-                                ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
+                                //ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
                             }
                         }
                         CargarEstacionesDropDownList();
                         //service.Invoke(); // Do something awesome.
                         ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
                         var action = Url.Action("Index", "Flash");
-                        this.Flash("error", "Good job! Whatever you did must have worked!");
-
                         return View(nuevoUsuario);
                     }
                 } 
@@ -302,7 +298,6 @@ namespace GuiasOET.Controllers
 
             CargarEstacionesDropDownList();
             //service.Invoke(); // Do something awesome.
-            this.Flash("error", "Good job! Whatever you did must have worked!");
             return View();    
         }
 
@@ -475,7 +470,7 @@ namespace GuiasOET.Controllers
                         {
                             try
                             {
-                                ViewBag.Message = "Usuario modificado con éxito.";
+                                this.Flash("Éxito", "Usuario modificado con éxito");
                                 employeeToUpdate.modeloEmpleado.ESTADO = Int32.Parse(estado);
                                 baseDatos.SaveChanges();
                                 insertarTelefonos(usuario);
@@ -535,7 +530,7 @@ namespace GuiasOET.Controllers
                     {
                         try
                         {
-                            ViewBag.Message = "Usuario modificado con éxito.";
+                            this.Flash("Éxito", "Usuario modificado con éxito");
                             employeeToUpdate.modeloEmpleado.ESTADO = Int32.Parse(estado);
                             baseDatos.SaveChanges();
                             insertarTelefonos(usuario);

@@ -45,6 +45,7 @@ namespace GuiasOET.Models
         [RegularExpression(@"^[a-zA-Z''-'\s]+$", ErrorMessage = "El segundo apellido solo puede estar compuesto por letras")]
         public string APELLIDO2 { get; set; }
 
+        [Required(ErrorMessage = "El email es un campo requerido.")]
         [StringLength(30)]
         [Display(Name = "Email:")]
         [DataType(DataType.EmailAddress)]
