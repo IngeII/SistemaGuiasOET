@@ -791,84 +791,72 @@ namespace GuiasOET.Controllers
             modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion), telefonos);
 
             // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
-            //modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
             if (modelo == null)
             {
                 return HttpNotFound();
             }
-            // Genera una variable de tipo lista con opciones para un ListBox.
 
-            bool activo = modelo.modeloEmpleado.ESTADO == 1;
-            bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
-            ViewBag.opciones = new List<System.Web.Mvc.SelectListItem> {
-                new System.Web.Mvc.SelectListItem { Text = "Activo", Value = "1", Selected = activo},
-                new System.Web.Mvc.SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
-            };
+            ViewBag.tipoUsuario = modelo.modeloEmpleado.TIPOEMPLEADO;
+
+            if (modelo.modeloEmpleado.ESTADO == 0)
+            {
+                ViewBag.estado = "Inactivo";
+            }
+            else {
+                ViewBag.estado = "Activo";
+            }
 
             return View(modelo);
         }
 
         [HttpPost, ActionName("EliminarUsuario")]
         [ValidateAntiForgeryToken]
-        public ActionResult EliminarUsuarioPost(int? id)
+        public ActionResult EliminarUsuarioPost(int? id, ManejoModelos usuario)
         {
             ManejoModelos modelo;
-            String tipoEmpleado = "";
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
+            string identificacion = id.ToString();
 
-            tipoEmpleado = empleado.TIPOEMPLEADO.ToString();
-            modelo = new ManejoModelos(empleado);
-            var employeeToUpdate = modelo;
-            if (tipoEmpleado.Equals("Guía"))
+            string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
+
+            IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
+            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
+
+            var employeeToDelete = modelo;
+
+            employeeToDelete.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+            string estado1 = employeeToDelete.modeloEmpleado.ESTADO.ToString();
+            String estado2 = "0";
+
+            if (estado1.Equals("1"))
             {
+                estado2 = "0";
+            }
 
-                if (TryUpdateModel(employeeToUpdate))
+            /*Si el modelo es válido se guarda en la base como una tupla*/
+            if (TryUpdateModel(employeeToDelete))
+            {
+                try
                 {
-                    try
-                    {
-                        ViewBag.Message = "Usuario eliminado con éxito.";
-                        baseDatos.SaveChanges();
-                    }
-                    catch (RetryLimitExceededException /* dex */)
-                    {
-                        //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
-                    }
+                    this.Flash("Éxito", "Usuario modificado con éxito");
+                    employeeToDelete.modeloEmpleado.ESTADO = Int32.Parse(estado2);
+                    baseDatos.SaveChanges();
+
                 }
-                else
+                catch (RetryLimitExceededException /* dex */)
                 {
-                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
-
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
                 }
             }
-            else
-            {
-                if (TryUpdateModel(employeeToUpdate))
-                {
-                    try
-                    {
-                        ViewBag.Message = "Usuario modificado con éxito.";
-                        baseDatos.SaveChanges();
-                    }
-                    catch (RetryLimitExceededException /* dex */)
-                    {
-                        //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "No es posible modificar en este momento, intente más tarde");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Verifique que los campos obligatorios, posean datos");
+            return View(employeeToDelete);
 
-                }
-            }
-            return View(employeeToUpdate);
         }
+
     }
-}
+    }
