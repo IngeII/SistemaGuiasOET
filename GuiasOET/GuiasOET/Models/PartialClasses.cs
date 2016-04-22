@@ -17,9 +17,10 @@ namespace GuiasOET.Models
     {
         public class ReestablecerContraseñaMetadata
         {
-            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario ")]
-            [Display(Name = "Usuario:")]
-            public string USUARIO { get; set; }
+            [Required(ErrorMessage = "*Debe ingresar el nombre de usuario o correo ")]
+            [Display(Name = "Usuario/Email:")]
+            [NotMapped]
+            public string USUARIO_EMAIL { get; set; }
 
             [Required(ErrorMessage = "*Debe ingresar la contraseña")]
             [DataType(DataType.Password)]
@@ -38,7 +39,8 @@ namespace GuiasOET.Models
         public class LoginMetadata
         {
             [Required(ErrorMessage = "*Debe ingresar el nombre de usuario o correo ")]
-            [Display(Name = "Usuario o correo:")]
+            [Display(Name = "Usuario/Email:")]
+            [NotMapped]
             public string USUARIO_EMAIL { get; set; }
 
             [Required(ErrorMessage = "*Debe ingresar la contraseña")]
@@ -51,7 +53,8 @@ namespace GuiasOET.Models
         public class OlvidarContrasenaMetadata
         {
             [Required(ErrorMessage = "*Debe ingresar el nombre de usuario o correo ")]
-            [Display(Name = "Usuario o correo:")]
+            [Display(Name = "Usuario/Email:")]
+            [NotMapped]
             public string USUARIO_EMAIL { get; set; }
 
         }

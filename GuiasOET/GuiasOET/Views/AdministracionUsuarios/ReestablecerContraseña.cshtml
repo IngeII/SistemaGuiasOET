@@ -6,13 +6,13 @@
 
 <br>
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-sm-9">
         <h2>@ViewBag.Title</h2>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12">
         <hr />
     </div>
 
@@ -29,47 +29,53 @@
 
         @Html.AntiForgeryToken()
 
-        <div class="col-sm-5">
-            @Html.ValidationSummary(true)
+        <div class="col-sm-6">
             <div class="form-group">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <br>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    @Html.LabelFor(m => m.USUARIO_EMAIL, new { @class = "control-label" })
+                                </div>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.USUARIO_EMAIL, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.USUARIO_EMAIL, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    @Html.LabelFor(m => m.CONTRASENA, new { @class = "control-label" })
+                                </div>
+                                <div class="col-sm-8">
+                                    @Html.PasswordFor(m => m.CONTRASENA, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.CONTRASENA, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    @Html.LabelFor(m => m.CONFIRMACIONCONTRASENA, new { @class = "control-label" })
+                                </div>
+                                <div class="col-sm-7 col-sm-pull-1">
+                                    @Html.PasswordFor(m => m.CONFIRMACIONCONTRASENA, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.CONFIRMACIONCONTRASENA, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(m => m.USUARIO, new { @class = "col-sm-2 control-label" })
-                            <div class="col-sm-9 col-sm-push-1">
-                                @Html.TextBoxFor(m => m.USUARIO, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.USUARIO, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-sm-7 col-sm-push-4">
+                                    <input type="submit" value="Aceptar" class="btn btn-default" style="width:28%" />
+                                </div>
                             </div>
                         </div>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.CONTRASENA, new { @class = "col-sm-2 control-label" })
-                            <div class="col-sm-9 col-sm-push-1">
-                                @Html.PasswordFor(m => m.CONTRASENA, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.CONTRASENA, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.CONFIRMACIONCONTRASENA, new { @class = "col-sm-2 control-label" })
-                            <div class="col-sm-9 col-sm-push-1">
-                                @Html.PasswordFor(m => m.CONFIRMACIONCONTRASENA, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.CONFIRMACIONCONTRASENA, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            <div class="col-sm-9 col-sm-push-3">
-                                <input type="submit" value="Aceptar" class="btn btn-default" style="width:28%" />
-                            </div>
-                        </div>
-                        <br>
-                        <br>
                     </div>
                 </div>
             </div>

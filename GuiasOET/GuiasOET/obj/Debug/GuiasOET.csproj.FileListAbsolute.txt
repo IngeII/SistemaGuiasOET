@@ -826,3 +826,8 @@ C:\Users\isaiassalas\Source\Repos\SistemaGuiasOET2\GuiasOET\GuiasOET\bin\es\Syst
 C:\Users\isaiassalas\Source\Repos\SistemaGuiasOET2\GuiasOET\GuiasOET\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Users\isaiassalas\Source\Repos\SistemaGuiasOET2\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache
 C:\Users\Rosaura\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\MvcFlashMessages.dll
+C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\MvcFlashMessages.dll
+C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.dll
+C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.dll
+C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.xml
+C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.xml

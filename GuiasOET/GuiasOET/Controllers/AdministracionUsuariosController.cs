@@ -46,7 +46,7 @@ namespace GuiasOET.Controllers
             //como el usuario es un campo único no habrán problemas. 
             GUIAS_EMPLEADO Guia;
             bool esCorreo = USUARIO_EMAIL.Contains("@");
-            Debug.WriteLine("es Correo: " + esCorreo);
+
             if (esCorreo == true)
             {
                 Guia = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.EMAIL == USUARIO_EMAIL);
@@ -59,15 +59,27 @@ namespace GuiasOET.Controllers
 
             if (Guia != null)
             {
-                //Verifica contra la contraseña encriptada
                 if (Guia.CONTRASENA == CONTRASENA)
                 {
                     ModelState.Clear();
                     Session["IdUsuarioLogueado"] = Guia.CEDULA.ToString();
-                    Session["NombreUsuarioLogueado"] = Guia.NOMBREEMPLEADO.ToString() + " " + Guia.APELLIDO1.ToString() + " " + Guia.APELLIDO2.ToString();
-                    Session["RolUsuarioLogueado"] = Guia.TIPOEMPLEADO.ToString();
-                    // FormsAuthentication.SetAuthCookie(Guia.USUARIO, false);
-                    return RedirectToAction("ListaUsuarios");
+                    if (Guia.NOMBREEMPLEADO == null)
+                    {
+                        Session["NombreUsuarioLogueado"] = null;
+                    }
+                    else if (Guia.APELLIDO1 == null && Guia.APELLIDO2 == null || Guia.APELLIDO1 == null)
+                    {
+                        Session["NombreUsuarioLogueado"] = Guia.NOMBREEMPLEADO.ToString();
+                    }
+                    else if (Guia.APELLIDO2 == null)
+                    {
+                        Session["NombreUsuarioLogueado"] = Guia.NOMBREEMPLEADO.ToString() + " " + Guia.APELLIDO1.ToString();
+                    }
+                    else
+                    {
+                        Session["NombreUsuarioLogueado"] = Guia.NOMBREEMPLEADO.ToString() + " " + Guia.APELLIDO1.ToString() + " " + Guia.APELLIDO2.ToString();
+                    }
+                    return RedirectToAction("Inicio");
                 }
                 else
                 {
@@ -605,7 +617,6 @@ namespace GuiasOET.Controllers
 
             GUIAS_EMPLEADO GuiaActualizar;
             bool esCorreo = USUARIO_EMAIL.Contains("@");
-            Debug.WriteLine("es Correo: " + esCorreo);
             if (esCorreo == true)
             {
                 GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.EMAIL == USUARIO_EMAIL);
@@ -614,27 +625,38 @@ namespace GuiasOET.Controllers
             {
                 GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == USUARIO_EMAIL);
             }
-            Debug.WriteLine("usuario es: " + USUARIO_EMAIL);
 
             if (GuiaActualizar != null)
             {
                 string email = GuiaActualizar.EMAIL;
-                Debug.WriteLine("email es: " + email);
-                //var persona = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == usuario);
+                string nombreUsuario = "";
+                if (GuiaActualizar.NOMBREEMPLEADO != null)
+                {
+                    nombreUsuario = GuiaActualizar.NOMBREEMPLEADO;
+                }
+             
                 GuiaActualizar.CONFIRMACIONCONTRASENA = GuiaActualizar.CONTRASENA;
                 GuiaActualizar.CONFIRMAREMAIL = 1;
-                /// UpdateModel(persona);
-                //baseDatos.SaveChanges();
-                if (TryUpdateModel(GuiaActualizar))
-                {
+
+                    if (TryUpdateModel(GuiaActualizar, new string[] { "CONFIRMAREMAIL" }))
+                    {
                     try
                     {
                         baseDatos.SaveChanges();
                         var message = new MailMessage();
                         message.To.Add(new MailAddress(email));  // replace with valid value 
-                        message.Subject = "Your email subject";
+                        message.Subject = "Restablezca la contraseña solicitada de su cuenta OET/ESINTRO";
                         var callbackUrl = Url.Action("ReestablecerContraseña", "AdministracionUsuarios", null, protocol: Request.Url.Scheme);
-                        string mensaje = "Please reset your password by clicking <a href =\"" + callbackUrl + "\">AQUI</a>";
+                        string mensaje;
+                        if (nombreUsuario != "")
+                        {
+                           mensaje = "Estimado/a" + nombreUsuario+":" + "<br/><br/>" + "Ha solicitado que se restablezca su contraseña. Haga clic en el siguiente vínculo, el cual le llevará a una página web de OET/ESINTRO en la que podrá cambiar la contraseña:" + "<br/><br/>" + "<a href =\"" + callbackUrl + "\">Restablecer contraseña</a> " + "<br/><br/>" + " Gracias, " + "<br/><br/>" + "Equipo administrador OET/ESINTRO";
+                        }
+                        else
+                        {
+                            mensaje = "Ha solicitado que se restablezca su contraseña. Haga clic en el siguiente vínculo, el cual le llevará a una página web de OET/ESINTRO en la que podrá cambiar la contraseña:" + "<br/><br/>" + "<a href =\"" + callbackUrl + "\">Restablecer contraseña</a> " + "<br/><br/>" + " Gracias, " + "<br/><br/>" + "Equipo administrador OET/ESINTRO";
+                        }
+                           
                         message.Body = string.Format(mensaje);
                         message.IsBodyHtml = true;
 
@@ -664,7 +686,7 @@ namespace GuiasOET.Controllers
             else
             {
                 ModelState.Clear();
-                ModelState.AddModelError("", "El usuario o correo no se encuentra en el sistema");
+                ModelState.AddModelError("", "El usuario o correo ingresado no se encuentra en el sistema");
                 return View("OlvidarContrasena");
             }
 
@@ -689,14 +711,19 @@ namespace GuiasOET.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ReestablecerContraseña(string usuario, string contrasena, string confirmacioncontrasena)
+        public ActionResult ReestablecerContraseña(string USUARIO_EMAIL, string contrasena, string confirmacioncontrasena)
         {
 
-            var GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == usuario);
-
-            /*     GUIAS_EMPLEADO Guia  = (GUIAS_EMPLEADO) from empleado in baseDatos.GUIAS_EMPLEADO
-                                       where empleado.USUARIO.Equals(usuario)
-                                       select empleado; */
+            GUIAS_EMPLEADO GuiaActualizar;
+            bool esCorreo = USUARIO_EMAIL.Contains("@");
+            if (esCorreo == true)
+            {
+                GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.EMAIL == USUARIO_EMAIL);
+            }
+            else
+            {
+                GuiaActualizar = baseDatos.GUIAS_EMPLEADO.FirstOrDefault(i => i.USUARIO == USUARIO_EMAIL);
+            }
 
             if (GuiaActualizar != null)
             {
@@ -710,10 +737,8 @@ namespace GuiasOET.Controllers
                         try
                         {
                             baseDatos.SaveChanges();
-                            Session["IdUsuarioLogueado"] = GuiaActualizar.CEDULA.ToString();
-                            Session["NombreUsuarioLogueado"] = GuiaActualizar.NOMBREEMPLEADO.ToString() + " " + GuiaActualizar.APELLIDO1.ToString() + " " + GuiaActualizar.APELLIDO2.ToString();
-                            Session["RolUsuarioLogueado"] = GuiaActualizar.TIPOEMPLEADO.ToString();
-                            return RedirectToAction("ListaUsuarios");
+                            ModelState.Clear();
+                            return RedirectToAction("Login");
                         }
                         catch (RetryLimitExceededException /* dex */)
                         {
@@ -739,14 +764,10 @@ namespace GuiasOET.Controllers
             {
 
                 ModelState.Clear();
-                ModelState.AddModelError("", "El usuario no se encuentra en el sistema");
+                ModelState.AddModelError("", "El usuario o correo ingresado no se encuentra en el sistema");
                 return View();
             }
         }
-
-        //  return View();
-        //  }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -756,19 +777,8 @@ namespace GuiasOET.Controllers
             Session["IdUsuarioLogueado"] = null;
             Session["NombreUsuarioLogueado"] = null;
             Session["RolUsuarioLogueado"] = null;
-            //  FormsAuthentication.SignOut();
-
-            /*     Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                 Response.Cache.SetExpires(DateTime.Now.AddSeconds(-1));
-                 Response.Cache.SetNoStore(); */
-            //    return RedirectToAction("Login");
             return RedirectToActionPermanent("Login");
         }
-
-
-
-
-
 
 
         // GET: Modificar usuario
