@@ -781,7 +781,8 @@ namespace GuiasOET.Controllers
         }
 
 
-        // GET: Modificar usuario
+        // GET: Eliminar usuario
+     
         public ActionResult EliminarUsuario(int? id)
         {
             CargarEstacionesDropDownList();
@@ -792,6 +793,7 @@ namespace GuiasOET.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+       
             identificacion = id.ToString();
 
             string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
@@ -820,43 +822,34 @@ namespace GuiasOET.Controllers
         }
 
         [HttpPost, ActionName("EliminarUsuario")]
-        [ValidateAntiForgeryToken]
-        public ActionResult EliminarUsuarioPost(int? id, ManejoModelos usuario)
+  
+        public ActionResult EliminarUsuarioPost(int? id)
         {
             ManejoModelos modelo;
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             string identificacion = id.ToString();
 
-            string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
+           // string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
 
-            IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
+           // IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
             modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
 
             var employeeToDelete = modelo;
-
             employeeToDelete.modeloEmpleado.CONFIRMAREMAIL = 0;
-
             string estado1 = employeeToDelete.modeloEmpleado.ESTADO.ToString();
-            String estado2 = "0";
+            string estado2 = "0";//INactivo
 
-            if (estado1.Equals("1"))
+            if (estado1.Equals("1")) //Si está activo, hay que cambiarle el estado
             {
-                estado2 = "0";
+                employeeToDelete.modeloEmpleado.ESTADO = Int32.Parse(estado2);
             }
-
             /*Si el modelo es válido se guarda en la base como una tupla*/
             if (TryUpdateModel(employeeToDelete))
             {
                 try
                 {
-                    this.Flash("Éxito", "Usuario eliminado con éxito");
-                    employeeToDelete.modeloEmpleado.ESTADO = Int32.Parse(estado2);
-                    baseDatos.SaveChanges();
-
+                        this.Flash("Éxito", "Usuario eliminado con éxito");
+                        baseDatos.SaveChanges();
                 }
                 catch (RetryLimitExceededException /* dex */)
                 {
@@ -869,4 +862,4 @@ namespace GuiasOET.Controllers
         }
 
     }
-    }
+}
