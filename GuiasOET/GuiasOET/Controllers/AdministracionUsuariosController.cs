@@ -13,6 +13,7 @@ using PagedList;
 using MvcFlashMessages;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace GuiasOET.Controllers
 {
@@ -388,6 +389,8 @@ namespace GuiasOET.Controllers
             return View(modelo);
         }
 
+
+
         // GET: Modificar usuario
         public ActionResult ModificarUsuario(int? id)
         {
@@ -425,17 +428,20 @@ namespace GuiasOET.Controllers
         }
 
 
-        public void borrarTelefonos(IEnumerable<GUIAS_TELEFONO> telefonos)
+        public void borrarTelefonos(string id)
         {
-            String a = telefonos.ElementAt(0).CEDULAEMPLEADO.ToString();
+
             GUIAS_TELEFONO T;
 
-            for (int i = 0; i < telefonos.Count(); ++i) {
-                T = baseDatos.GUIAS_TELEFONO.Find(telefonos.ElementAt(i).CEDULAEMPLEADO.ToString(), telefonos.ElementAt(i).TELEFONO.ToString());
+            T = baseDatos.GUIAS_TELEFONO.FirstOrDefault(i => i.CEDULAEMPLEADO == id);
+            while (T!= null)
+            {
                 baseDatos.GUIAS_TELEFONO.Remove(T);
+                baseDatos.SaveChanges();
+                T = baseDatos.GUIAS_TELEFONO.FirstOrDefault(i => i.CEDULAEMPLEADO == id);
             }
+
             
-            baseDatos.SaveChanges();
         }
 
 
@@ -452,12 +458,7 @@ namespace GuiasOET.Controllers
 
             string identificacion = id.ToString();
 
-            string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
-
-            IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
-
-            
-            borrarTelefonos(telefonos);
+            borrarTelefonos(identificacion);
 
             modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
 
