@@ -617,6 +617,21 @@ namespace GuiasOET.Controllers
         {
 
             GUIAS_EMPLEADO GuiaActualizar;
+            GUIAS_CONFIGURACIONCORREO GuiaConfiguracionCorreo = baseDatos.GUIAS_CONFIGURACIONCORREO.FirstOrDefault();
+            string emailEmisor = GuiaConfiguracionCorreo.EMAIL;
+            Debug.WriteLine(emailEmisor);
+            string contrasenaEmisor = GuiaConfiguracionCorreo.CONTRASENA;
+            Debug.WriteLine(contrasenaEmisor);
+            string puertoStr = GuiaConfiguracionCorreo.PUERTO;
+            Debug.WriteLine(puertoStr);
+            int puerto = Int32.Parse(puertoStr);
+            Debug.WriteLine(puerto);
+
+
+
+            string host = GuiaConfiguracionCorreo.HOST;
+
+
             bool esCorreo = USUARIO_EMAIL.Contains("@");
             if (esCorreo == true)
             {
@@ -639,35 +654,43 @@ namespace GuiasOET.Controllers
                 GuiaActualizar.CONFIRMACIONCONTRASENA = GuiaActualizar.CONTRASENA;
                 GuiaActualizar.CONFIRMAREMAIL = 1;
 
-                    if (TryUpdateModel(GuiaActualizar, new string[] { "CONFIRMAREMAIL" }))
-                    {
+                if (TryUpdateModel(GuiaActualizar, new string[] { "CONFIRMAREMAIL" }))
+                {
                     try
                     {
                         baseDatos.SaveChanges();
                         var message = new MailMessage();
                         message.To.Add(new MailAddress(email));  // replace with valid value 
+                        message.From = new MailAddress(emailEmisor);
                         message.Subject = "Restablezca la contraseña solicitada de su cuenta OET/ESINTRO";
                         var callbackUrl = Url.Action("ReestablecerContraseña", "AdministracionUsuarios", null, protocol: Request.Url.Scheme);
                         string mensaje;
                         if (nombreUsuario != "")
                         {
-                           mensaje = "Estimado/a" + nombreUsuario+":" + "<br/><br/>" + "Ha solicitado que se restablezca su contraseña. Haga clic en el siguiente vínculo, el cual le llevará a una página web de OET/ESINTRO en la que podrá cambiar la contraseña:" + "<br/><br/>" + "<a href =\"" + callbackUrl + "\">Restablecer contraseña</a> " + "<br/><br/>" + " Gracias, " + "<br/><br/>" + "Equipo administrador OET/ESINTRO";
+                            mensaje = "Estimado/a" + nombreUsuario + ":" + "<br/><br/>" + "Ha solicitado que se restablezca su contraseña. Haga clic en el siguiente vínculo, el cual le llevará a una página web de OET/ESINTRO en la que podrá cambiar la contraseña:" + "<br/><br/>" + "<a href =\"" + callbackUrl + "\">Restablecer contraseña</a> " + "<br/><br/>" + " Gracias, " + "<br/><br/>" + "Equipo administrador OET/ESINTRO";
                         }
                         else
                         {
                             mensaje = "Ha solicitado que se restablezca su contraseña. Haga clic en el siguiente vínculo, el cual le llevará a una página web de OET/ESINTRO en la que podrá cambiar la contraseña:" + "<br/><br/>" + "<a href =\"" + callbackUrl + "\">Restablecer contraseña</a> " + "<br/><br/>" + " Gracias, " + "<br/><br/>" + "Equipo administrador OET/ESINTRO";
                         }
-                           
+
                         message.Body = string.Format(mensaje);
                         message.IsBodyHtml = true;
 
                         using (var smtp = new SmtpClient())
                         {
+                            var credential = new NetworkCredential
+                            {
+                                UserName = emailEmisor,  // replace with valid value
+                                Password = contrasenaEmisor  // replace with valid value
+                            };
+                            smtp.Credentials = credential;
+                            smtp.Host = host;
+                            smtp.Port = puerto;
+                            smtp.EnableSsl = true;
                             await smtp.SendMailAsync(message);
                             return RedirectToAction("ConfirmarOlvidoContrasena");
-
                         }
-
                     }
                     catch (RetryLimitExceededException /* dex */)
                     {
