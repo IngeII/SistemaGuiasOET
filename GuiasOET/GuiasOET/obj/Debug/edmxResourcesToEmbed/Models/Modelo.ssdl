@@ -27,6 +27,15 @@
     <Property Name="NOMBRECOMPANIA" Type="varchar2" MaxLength="10" Nullable="false" />
     <Property Name="UBICACION" Type="varchar2" MaxLength="60" />
   </EntityType>
+  <EntityType Name="GUIAS_CONFIGURACIONCORREO">
+    <Key>
+      <PropertyRef Name="EMAIL" />
+    </Key>
+    <Property Name="EMAIL" Type="varchar2" MaxLength="40" Nullable="false" />
+    <Property Name="CONTRASENA" Type="varchar2" MaxLength="100" />
+    <Property Name="PUERTO" Type="varchar2" MaxLength="15" />
+    <Property Name="HOST" Type="varchar2" MaxLength="40" />
+  </EntityType>
   <EntityType Name="GUIAS_EMPLEADO">
     <Key>
       <PropertyRef Name="CEDULA" />
@@ -199,6 +208,7 @@
     <EntitySet Name="GUIAS_ASIGNAINTERNO" EntityType="Self.GUIAS_ASIGNAINTERNO" Schema="SYSTEM" store:Type="Tables" />
     <EntitySet Name="GUIAS_ASOCIAEXTERNO" EntityType="Self.GUIAS_ASOCIAEXTERNO" Schema="SYSTEM" store:Type="Tables" />
     <EntitySet Name="GUIAS_COMPANIA" EntityType="Self.GUIAS_COMPANIA" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_CONFIGURACIONCORREO" EntityType="Self.GUIAS_CONFIGURACIONCORREO" Schema="SYSTEM" store:Type="Tables" />
     <EntitySet Name="GUIAS_EMPLEADO" EntityType="Self.GUIAS_EMPLEADO" Schema="SYSTEM" store:Type="Tables" />
     <EntitySet Name="GUIAS_ESTACION" EntityType="Self.GUIAS_ESTACION" Schema="SYSTEM" store:Type="Tables" />
     <EntitySet Name="GUIAS_HORARIODISPONIBLE" EntityType="Self.GUIAS_HORARIODISPONIBLE" Schema="SYSTEM" store:Type="Tables" />

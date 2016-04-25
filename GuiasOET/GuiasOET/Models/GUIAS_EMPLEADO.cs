@@ -52,7 +52,7 @@ namespace GuiasOET.Models
         public string EMAIL { get; set; }
 
         [Required(ErrorMessage = "El estado es un campo requerido.")]
-        [Range(0,1)]
+        [Range(0, 1)]
         [Display(Name = "Estado:")]
         public decimal ESTADO { get; set; }
 

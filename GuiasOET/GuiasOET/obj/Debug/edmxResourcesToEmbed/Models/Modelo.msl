@@ -29,6 +29,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GUIAS_CONFIGURACIONCORREO">
+      <EntityTypeMapping TypeName="Model.GUIAS_CONFIGURACIONCORREO">
+        <MappingFragment StoreEntitySet="GUIAS_CONFIGURACIONCORREO">
+          <ScalarProperty Name="HOST" ColumnName="HOST" />
+          <ScalarProperty Name="PUERTO" ColumnName="PUERTO" />
+          <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_EMPLEADO">
       <EntityTypeMapping TypeName="Model.GUIAS_EMPLEADO">
         <MappingFragment StoreEntitySet="GUIAS_EMPLEADO">

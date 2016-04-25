@@ -4,6 +4,7 @@
     <EntitySet Name="GUIAS_ASIGNAINTERNO" EntityType="Model.GUIAS_ASIGNAINTERNO" />
     <EntitySet Name="GUIAS_ASOCIAEXTERNO" EntityType="Model.GUIAS_ASOCIAEXTERNO" />
     <EntitySet Name="GUIAS_COMPANIA" EntityType="Model.GUIAS_COMPANIA" />
+    <EntitySet Name="GUIAS_CONFIGURACIONCORREO" EntityType="Model.GUIAS_CONFIGURACIONCORREO" />
     <EntitySet Name="GUIAS_EMPLEADO" EntityType="Model.GUIAS_EMPLEADO" />
     <EntitySet Name="GUIAS_ESTACION" EntityType="Model.GUIAS_ESTACION" />
     <EntitySet Name="GUIAS_HORARIODISPONIBLE" EntityType="Model.GUIAS_HORARIODISPONIBLE" />
@@ -78,6 +79,15 @@
     <Property Name="NOMBRECOMPANIA" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="UBICACION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="GUIAS_ESTACION" Relationship="Model.FK_ESTACION_COMPANIA" FromRole="GUIAS_COMPANIA" ToRole="GUIAS_ESTACION" />
+  </EntityType>
+  <EntityType Name="GUIAS_CONFIGURACIONCORREO">
+    <Key>
+      <PropertyRef Name="EMAIL" />
+    </Key>
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="CONTRASENA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PUERTO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="HOST" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="GUIAS_EMPLEADO">
     <Key>

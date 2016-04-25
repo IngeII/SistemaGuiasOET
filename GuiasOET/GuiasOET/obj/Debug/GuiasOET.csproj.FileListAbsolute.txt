@@ -831,3 +831,8 @@ C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.dll
 C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.dll
 C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.xml
 C:\Users\Lari\Desktop\Inge2\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.xml
+C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\MvcFlashMessages.dll
+C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.dll
+C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.dll
+C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.xml
+C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.xml
