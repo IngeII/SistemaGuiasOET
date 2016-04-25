@@ -601,6 +601,7 @@ namespace GuiasOET.Controllers
             return View();
         }
 
+
         // GET: /Seguridad/ReestablecerContraseña
         [AllowAnonymous]
         public ActionResult ModificarContrasena()
