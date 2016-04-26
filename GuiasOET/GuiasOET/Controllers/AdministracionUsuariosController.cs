@@ -825,19 +825,21 @@ namespace GuiasOET.Controllers
             modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
 
             var employeeToUpdate = modelo;
-
-
+            decimal i = 0;
+            var a=  employeeToUpdate.modeloEmpleado.ESTADO;
+            var b =employeeToUpdate.modeloEmpleado.CEDULA;
             if (employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Guía"))
             {
-                //employeeToUpdate.modeloEmpleado.CONFIRMAREMAIL = 0;
 
-              employeeToUpdate.modeloEmpleado.ESTADO = 0;
+                employeeToUpdate.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+                //employeeToUpdate.modeloEmpleado.ESTADO = 0;
                 if (TryUpdateModel(employeeToUpdate))
                 {
                     try
                     {
                         this.Flash("Éxito", "Usuario desactivado con éxito");
-                        
+                        employeeToUpdate.modeloEmpleado.ESTADO = i;
                         baseDatos.SaveChanges();
 
                     }
@@ -848,10 +850,8 @@ namespace GuiasOET.Controllers
                     }
                 }
             }
-
             else
             {
-
                 if (employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Global"))
                 {
                     employeeToUpdate.modeloEmpleado.NOMBREESTACION = "Ninguna";
@@ -871,17 +871,8 @@ namespace GuiasOET.Controllers
                     }
                 }
                 /*Si el modelo no es válido no se guarda en la base de datos*/
-
             }
-
-
-            bool activo = modelo.modeloEmpleado.ESTADO == 1;
-            bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
-            ViewBag.opciones = new List<SelectListItem> {
-                new SelectListItem { Text = "Activo", Value = "1", Selected = activo},
-                new SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
-            };
-            return View(employeeToUpdate);
+            return RedirectToAction("ListaUsuarios");
         }
     }
 }
