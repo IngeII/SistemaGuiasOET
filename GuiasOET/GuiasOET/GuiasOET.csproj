@@ -360,7 +360,6 @@
     <Content Include="Views\AdministracionUsuarios\ModificarUsuario.cshtml" />
     <Content Include="Views\AdministracionUsuarios\CerrarSesionLogin.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ConsultarUsuario.cshtml" />
-    <Content Include="Views\AdministracionUsuarios\EliminarUsuario.cshtml" />
     <Content Include="Views\AdministracionUsuarios\Inicio.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ConfirmarOlvidoContrasena.cshtml" />
     <Content Include="Views\AdministracionUsuarios\OlvidarContrasena.cshtml" />

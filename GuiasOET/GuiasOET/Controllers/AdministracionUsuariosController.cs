@@ -26,8 +26,8 @@ namespace GuiasOET.Controllers
         private void CargarEstacionesDropDownList(object estacionSeleccionada = null)
         {
             var EstacionesQuery = from d in baseDatos.GUIAS_ESTACION
-                                   orderby d.NOMBREESTACION
-                                   select d;
+                                  orderby d.NOMBREESTACION
+                                  select d;
             ViewBag.NOMBREESTACION = new SelectList(EstacionesQuery, "NOMBREESTACION", "NOMBREESTACION", estacionSeleccionada);
         }
 
@@ -200,7 +200,7 @@ namespace GuiasOET.Controllers
                     {
 
                         /*Validación de los telefonos falta*/
-                        
+
                         nuevoUsuario.modeloEmpleado.CONFIRMAREMAIL = 0;
 
                         /*Si el modelo es válido se guarda en la base como una tupla*/
@@ -217,7 +217,7 @@ namespace GuiasOET.Controllers
                                 this.Flash("Éxito", "Nuevo usuario creado con éxito");
                                 return RedirectToAction("InsertarUsuario");
                             }
-                            else if(usuarios != null)
+                            else if (usuarios != null)
                             {
                                 ModelState.AddModelError("", "Ya existe existe nombre de usuario en el sistema.");
                             }
@@ -234,17 +234,18 @@ namespace GuiasOET.Controllers
                             {
                                 ModelState.AddModelError("", "Debe ingresar una contraseña para este usuario.");
                             }
-                            else {
+                            else
+                            {
                                 if (nuevoUsuario.modeloEmpleado.CONTRASENA.Contains(nuevoUsuario.modeloEmpleado.CONFIRMACIONCONTRASENA))
                                 {
-                                   // ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
+                                    // ModelState.AddModelError("", "Ya existe otro usuario con esta cédula o nombre de usuario en el sistema.");
                                 }
                             }
                             CargarEstacionesDropDownList();
                             ViewBag.tipoUsuario = nuevoUsuario.modeloEmpleado.TIPOEMPLEADO;
                             return View(nuevoUsuario);
                         }
-                    } 
+                    }
                 }
             }
 
@@ -315,12 +316,12 @@ namespace GuiasOET.Controllers
                         var action = Url.Action("Index", "Flash");
                         return View(nuevoUsuario);
                     }
-                } 
+                }
             }
 
             CargarEstacionesDropDownList();
             //service.Invoke(); // Do something awesome.
-            return View();    
+            return View();
         }
 
         public void insertarTelefonos(ManejoModelos telefonos)
@@ -354,7 +355,7 @@ namespace GuiasOET.Controllers
         // GET: Modificar usuario
         public ActionResult ConsultarUsuario(int? id)
         {
-            
+
             string identificacion;
             ManejoModelos modelo;
 
@@ -375,14 +376,15 @@ namespace GuiasOET.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             ViewBag.tipoUsuario = modelo.modeloEmpleado.TIPOEMPLEADO;
 
             if (modelo.modeloEmpleado.ESTADO == 0)
             {
                 ViewBag.estado = "Inactivo";
             }
-            else {
+            else
+            {
                 ViewBag.estado = "Activo";
             }
 
@@ -405,10 +407,10 @@ namespace GuiasOET.Controllers
             identificacion = id.ToString();
 
             string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
-            
+
             IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
 
-            modelo = new ManejoModelos (baseDatos.GUIAS_EMPLEADO.Find(identificacion),telefonos);
+            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion), telefonos);
 
             // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
             modelo.modeloEmpleado.CONFIRMACIONCONTRASENA = modelo.modeloEmpleado.CONTRASENA;
@@ -434,23 +436,23 @@ namespace GuiasOET.Controllers
             GUIAS_TELEFONO T;
 
             T = baseDatos.GUIAS_TELEFONO.FirstOrDefault(i => i.CEDULAEMPLEADO == id);
-            while (T!= null)
+            while (T != null)
             {
                 baseDatos.GUIAS_TELEFONO.Remove(T);
                 baseDatos.SaveChanges();
                 T = baseDatos.GUIAS_TELEFONO.FirstOrDefault(i => i.CEDULAEMPLEADO == id);
             }
 
-            
+
         }
 
 
         [HttpPost, ActionName("ModificarUsuario")]
         [ValidateAntiForgeryToken]
-        public ActionResult ModificarPost(int? id, string estado,ManejoModelos usuario)
+        public ActionResult ModificarPost(int? id, string estado, ManejoModelos usuario)
         {
             ManejoModelos modelo;
-            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -496,7 +498,7 @@ namespace GuiasOET.Controllers
                                 employeeToUpdate.modeloEmpleado.ESTADO = Int32.Parse(estado);
                                 baseDatos.SaveChanges();
                                 insertarTelefonos(usuario);
-    
+
                             }
                             catch (RetryLimitExceededException /* dex */)
                             {
@@ -585,7 +587,7 @@ namespace GuiasOET.Controllers
 
             }
 
-            
+
             bool activo = modelo.modeloEmpleado.ESTADO == 1;
             bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
             ViewBag.opciones = new List<SelectListItem> {
@@ -651,7 +653,7 @@ namespace GuiasOET.Controllers
                 {
                     nombreUsuario = GuiaActualizar.NOMBREEMPLEADO;
                 }
-             
+
                 GuiaActualizar.CONFIRMACIONCONTRASENA = GuiaActualizar.CONTRASENA;
                 GuiaActualizar.CONFIRMAREMAIL = 1;
 
@@ -807,84 +809,79 @@ namespace GuiasOET.Controllers
 
 
         // GET: Eliminar usuario
-     
-        public ActionResult EliminarUsuario(int? id)
+
+        public ActionResult DesactivarUsuario(int? id)
         {
             CargarEstacionesDropDownList();
-            string identificacion;
             ManejoModelos modelo;
 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-       
-            identificacion = id.ToString();
-
-            string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
-
-            IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
-
-            modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion), telefonos);
-
-            // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
-            if (modelo == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewBag.tipoUsuario = modelo.modeloEmpleado.TIPOEMPLEADO;
-
-            if (modelo.modeloEmpleado.ESTADO == 0)
-            {
-                ViewBag.estado = "Inactivo";
-            }
-            else {
-                ViewBag.estado = "Activo";
-            }
-
-            return View(modelo);
-        }
-
-        [HttpPost, ActionName("EliminarUsuario")]
-  
-        public ActionResult EliminarUsuarioPost(int? id)
-        {
-            ManejoModelos modelo;
 
             string identificacion = id.ToString();
 
-           // string consulta = "SELECT * FROM GUIAS_TELEFONO WHERE CedulaEmpleado ='" + identificacion + "'";
-
-           // IEnumerable<GUIAS_TELEFONO> telefonos = baseDatos.Database.SqlQuery<GUIAS_TELEFONO>(consulta);
             modelo = new ManejoModelos(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
 
-            var employeeToDelete = modelo;
-            employeeToDelete.modeloEmpleado.CONFIRMAREMAIL = 0;
-            string estado1 = employeeToDelete.modeloEmpleado.ESTADO.ToString();
-            string estado2 = "0";//INactivo
+            var employeeToUpdate = modelo;
 
-            if (estado1.Equals("1")) //Si está activo, hay que cambiarle el estado
+
+            if (employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Guía"))
             {
-                employeeToDelete.modeloEmpleado.ESTADO = Int32.Parse(estado2);
-            }
-            /*Si el modelo es válido se guarda en la base como una tupla*/
-            if (TryUpdateModel(employeeToDelete))
-            {
-                try
+                //employeeToUpdate.modeloEmpleado.CONFIRMAREMAIL = 0;
+
+              employeeToUpdate.modeloEmpleado.ESTADO = 0;
+                if (TryUpdateModel(employeeToUpdate))
                 {
-                        this.Flash("Éxito", "Usuario eliminado con éxito");
+                    try
+                    {
+                        this.Flash("Éxito", "Usuario desactivado con éxito");
+                        
                         baseDatos.SaveChanges();
-                }
-                catch (RetryLimitExceededException /* dex */)
-                {
-                    //Log the error (uncomment dex variable name and add a line here to write a log.
-                    ModelState.AddModelError("", "No es posible eliminar en este momento, intente más tarde");
+
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "No es posible desactivar el usuario en este momento, intente más tarde");
+                    }
                 }
             }
-            return View(employeeToDelete);
 
+            else
+            {
+
+                if (employeeToUpdate.modeloEmpleado.TIPOEMPLEADO.Contains("Global"))
+                {
+                    employeeToUpdate.modeloEmpleado.NOMBREESTACION = "Ninguna";
+                }
+
+                if (TryUpdateModel(employeeToUpdate))
+                {
+                    try
+                    {
+                        this.Flash("Éxito", "Usuario desactivado con éxito");
+                        employeeToUpdate.modeloEmpleado.ESTADO = 0;
+                        baseDatos.SaveChanges();
+                    }
+                    catch (RetryLimitExceededException /* dex */)
+                    {
+                        ModelState.AddModelError("", "No es posible desactivar el usuario en este momento, intente más tarde");
+                    }
+                }
+                /*Si el modelo no es válido no se guarda en la base de datos*/
+
+            }
+
+
+            bool activo = modelo.modeloEmpleado.ESTADO == 1;
+            bool inactivo = modelo.modeloEmpleado.ESTADO == 0;
+            ViewBag.opciones = new List<SelectListItem> {
+                new SelectListItem { Text = "Activo", Value = "1", Selected = activo},
+                new SelectListItem { Text = "Inactivo", Value = "0", Selected = inactivo }
+            };
+            return View(employeeToUpdate);
         }
-
     }
 }
