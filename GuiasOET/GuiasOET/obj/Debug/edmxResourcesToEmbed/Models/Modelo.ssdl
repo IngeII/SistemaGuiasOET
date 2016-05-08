@@ -205,16 +205,16 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="ModelStoreContainer">
-    <EntitySet Name="GUIAS_ASIGNAINTERNO" EntityType="Self.GUIAS_ASIGNAINTERNO" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_ASOCIAEXTERNO" EntityType="Self.GUIAS_ASOCIAEXTERNO" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_COMPANIA" EntityType="Self.GUIAS_COMPANIA" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_CONFIGURACIONCORREO" EntityType="Self.GUIAS_CONFIGURACIONCORREO" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_EMPLEADO" EntityType="Self.GUIAS_EMPLEADO" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_ESTACION" EntityType="Self.GUIAS_ESTACION" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_HORARIODISPONIBLE" EntityType="Self.GUIAS_HORARIODISPONIBLE" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_RESERVACION" EntityType="Self.GUIAS_RESERVACION" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_ROLDIASLIBRES" EntityType="Self.GUIAS_ROLDIASLIBRES" Schema="SYSTEM" store:Type="Tables" />
-    <EntitySet Name="GUIAS_TELEFONO" EntityType="Self.GUIAS_TELEFONO" Schema="SYSTEM" store:Type="Tables" />
+    <EntitySet Name="GUIAS_ASIGNAINTERNO" EntityType="Self.GUIAS_ASIGNAINTERNO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_ASOCIAEXTERNO" EntityType="Self.GUIAS_ASOCIAEXTERNO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_COMPANIA" EntityType="Self.GUIAS_COMPANIA" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_CONFIGURACIONCORREO" EntityType="Self.GUIAS_CONFIGURACIONCORREO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_EMPLEADO" EntityType="Self.GUIAS_EMPLEADO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_ESTACION" EntityType="Self.GUIAS_ESTACION" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_HORARIODISPONIBLE" EntityType="Self.GUIAS_HORARIODISPONIBLE" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_RESERVACION" EntityType="Self.GUIAS_RESERVACION" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_ROLDIASLIBRES" EntityType="Self.GUIAS_ROLDIASLIBRES" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+    <EntitySet Name="GUIAS_TELEFONO" EntityType="Self.GUIAS_TELEFONO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
     <AssociationSet Name="FK_ASIGNA_INTERNO" Association="Self.FK_ASIGNA_INTERNO">
       <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
       <End Role="GUIAS_ASIGNAINTERNO" EntitySet="GUIAS_ASIGNAINTERNO" />

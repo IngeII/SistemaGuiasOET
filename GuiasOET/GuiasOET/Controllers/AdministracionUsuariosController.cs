@@ -20,7 +20,7 @@ namespace GuiasOET.Controllers
     public class AdministracionUsuariosController : Controller
     {
 
-        private Entities baseDatos = new Entities();
+        private Entities1 baseDatos = new Entities1();
 
         /*Método para cargar el combobox de estación*/
         private void CargarEstacionesDropDownList(object estacionSeleccionada = null)

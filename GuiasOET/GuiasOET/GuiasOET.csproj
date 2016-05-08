@@ -220,10 +220,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\GUIAS_CONFIGURACIONCORREO.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ManejoModelos.cs" />
     <Compile Include="Models\GUIAS_ASIGNAINTERNO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -231,6 +227,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GUIAS_COMPANIA.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GUIAS_CONFIGURACIONCORREO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GUIAS_EMPLEADO.cs">
@@ -251,6 +250,7 @@
     <Compile Include="Models\GUIAS_TELEFONO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ManejoModelos.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MetaData.cs" />

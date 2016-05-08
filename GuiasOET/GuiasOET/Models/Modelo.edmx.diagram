@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="48ac5e74834b4f6f9f3b0fdb365eb917" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="Model.GUIAS_ASIGNAINTERNO" Width="1.5" PointX="10.5" PointY="7" />
-        <EntityTypeShape EntityType="Model.GUIAS_ASOCIAEXTERNO" Width="1.5" PointX="10.5" PointY="4" />
-        <EntityTypeShape EntityType="Model.GUIAS_COMPANIA" Width="1.5" PointX="0.75" PointY="7.375" />
-        <EntityTypeShape EntityType="Model.GUIAS_CONFIGURACIONCORREO" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="Model.GUIAS_EMPLEADO" Width="1.5" PointX="5.25" PointY="5.875" />
-        <EntityTypeShape EntityType="Model.GUIAS_ESTACION" Width="1.5" PointX="3" PointY="7.125" />
-        <EntityTypeShape EntityType="Model.GUIAS_HORARIODISPONIBLE" Width="1.5" PointX="7.5" PointY="10.125" />
-        <EntityTypeShape EntityType="Model.GUIAS_RESERVACION" Width="1.5" PointX="8.25" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.GUIAS_ROLDIASLIBRES" Width="1.5" PointX="7.5" PointY="15.625" />
-        <EntityTypeShape EntityType="Model.GUIAS_TELEFONO" Width="1.5" PointX="7.5" PointY="4.875" />
-        <AssociationConnector Association="Model.FK_ASIGNA_INTERNO" />
-        <AssociationConnector Association="Model.FK_ASIGNA_RESERVACION" />
-        <AssociationConnector Association="Model.FK_ASOCIA_EXTERNO" />
-        <AssociationConnector Association="Model.FK_ASOCIA_RESERVACION" />
-        <AssociationConnector Association="Model.FK_ESTACION_COMPANIA" />
-        <AssociationConnector Association="Model.FK_EMPLEADO_ESTACION" />
-        <AssociationConnector Association="Model.FK_HD_EXTERNO" />
-        <AssociationConnector Association="Model.FK_ROL_INTERNO" />
-        <AssociationConnector Association="Model.FK_TELEFONO_EMPLEADO" />
+      <Diagram DiagramId="e4e41db8058e48a18a8e8524ed16dce8" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.GUIAS_ASIGNAINTERNO" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_ASOCIAEXTERNO" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_COMPANIA" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_CONFIGURACIONCORREO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_EMPLEADO" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_ESTACION" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_HORARIODISPONIBLE" Width="1.5" PointX="7.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_RESERVACION" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_ROLDIASLIBRES" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GUIAS_TELEFONO" Width="1.5" PointX="7.5" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_ASIGNA_INTERNO" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ASIGNA_RESERVACION" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ASOCIA_EXTERNO" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ASOCIA_RESERVACION" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ESTACION_COMPANIA" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_EMPLEADO_ESTACION" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_HD_EXTERNO" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ROL_INTERNO" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TELEFONO_EMPLEADO" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
