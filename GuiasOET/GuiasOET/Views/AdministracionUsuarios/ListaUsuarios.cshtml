@@ -36,9 +36,10 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <table class="table">
+<table class="table">
+
+    <div class="row">
+        <div class="col-lg-12">
             <tr>
                 <th>
                     @Html.ActionLink("Nombre", "ListaUsuarios", new { sortOrder = ViewBag.NombreSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -90,9 +91,12 @@
                     </td>
                 </tr>
             }
-        </table>
+        </div>
     </div>
-</div>
+</table>
+
+
+
 <br />
 
         Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
