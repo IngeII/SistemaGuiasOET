@@ -213,6 +213,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministracionUsuariosController.cs" />
+    <Compile Include="Controllers\AsignacionReservacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
@@ -362,6 +363,7 @@
     <Content Include="Views\AdministracionUsuarios\Inicio.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ConfirmarOlvidoContrasena.cshtml" />
     <Content Include="Views\AdministracionUsuarios\OlvidarContrasena.cshtml" />
+    <Content Include="Views\AsignacionReservaciones\ConsultarAsignacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

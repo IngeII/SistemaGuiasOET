@@ -39,6 +39,8 @@
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Inicio", "Inicio", "AdministracionUsuarios")</li>
                             <li>@Html.ActionLink("Administración Guías", "ListaUsuarios", "AdministracionUsuarios")</li>
+							 <li class="item">@Html.ActionLink("Cerrar sesión", "CerrarSesionLogin", "AdministracionUsuarios", null, new { style = "color:white" }) </li>  ////////////////////Esta linea es lo diferente de cualquier layout
+
                         </ul>
                         @Html.Partial("_LoginPartial")
                     </div>
