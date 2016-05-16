@@ -22,12 +22,11 @@ namespace GuiasOET.Controllers
 
         private Entities1 baseDatos = new Entities1();
 
+
         public ActionResult ConsultarAsignacion()
         {
             return View();
         }
-
-
         //mostrar la lista de reservaciones del usuario correspondiente
         public ActionResult ConsultarAsignacionDetallada(int? id, string fecha)
         {
