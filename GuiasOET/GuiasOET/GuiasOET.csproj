@@ -271,6 +271,7 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PartialClasses.cs" />
+    <Compile Include="Models\ReservacionesModelos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -363,6 +364,7 @@
     <Content Include="Views\AdministracionUsuarios\Inicio.cshtml" />
     <Content Include="Views\AdministracionUsuarios\ConfirmarOlvidoContrasena.cshtml" />
     <Content Include="Views\AdministracionUsuarios\OlvidarContrasena.cshtml" />
+    <Content Include="Views\AsignacionReservaciones\ConsultarAsignacionDetallada.cshtml" />
     <Content Include="Views\AsignacionReservaciones\ConsultarAsignacion.cshtml" />
   </ItemGroup>
   <ItemGroup>

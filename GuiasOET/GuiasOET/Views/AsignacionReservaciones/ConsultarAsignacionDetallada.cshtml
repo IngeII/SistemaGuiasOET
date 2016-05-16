@@ -1,0 +1,92 @@
+﻿@model GuiasOET.Models.ReservacionesModelos
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+    ViewBag.Title = "Consultar Asignación detallada";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("ConsultarAsignacionDetallada", "AsignacionReservaciones", FormMethod.Get))
+        {
+            <p>
+                 @Html.TextBox("SearchString", new { @Value = (Model.ListReservaciones==null) ? "Ingrese un filtro para buscar" : ViewBag.CurrentFilter as string })
+                <input type="submit" value="Buscar" class="btn btn-default" style="background-color: #7BC143; color:white;" />
+            </p>
+        }
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Reservación", "ConsultarAsignacion", new { sortOrder = ViewBag.ReservacionSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Nombre", "ConsultarAsignacion", new { sortOrder = ViewBag.NombreSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Estación", "ConsultarAsignacion", new { sortOrder = ViewBag.EstacionSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Personas", "ConsultarAsignacion", new { sortOrder = ViewBag.PersonasSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Hora", "ConsultarAsignacion", new { sortOrder = ViewBag.HoraSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Turno", "ConsultarAsignacion", new { sortOrder = ViewBag.TurnoSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                </tr>
+
+
+               
+                @if (Model.ListReservaciones != null) {
+                   foreach (var subItem in Model.ListReservaciones) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => subItem.NUMERORESERVACION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => subItem.NUMERORESERVACION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.modeloEmpleado.NOMBREESTACION)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => subItem.NUMEROPERSONAS)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => subItem.HORA)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => subItem.TURNO)
+                        </td>
+                    </tr>
+                   }
+                }
+
+            </div>
+        </div>
+    </table>
+</div>
+
+
+
+<br />
+
+
