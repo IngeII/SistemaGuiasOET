@@ -1,52 +1,69 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Sistema de Guías</title>
+    <title>@ViewBag.Title - Control de activos</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/site.css" rel="stylesheet" />
-
 </head>
-<body style="background: #FFFFFF;">
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background: #7BC143; border: hidden">
-
-        <div class="navbar-collapse collapse" style="background: #7BC143">
-            <div class="row col-sm-12">
-                <div class="col-sm-4">
-                    <div class="containerTwo">
-                        <img src="~/images/logo.png" width="200" height="60" />
+<body>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="barra-logo">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="pull-left">
+                                <img src="~/images/logo.png" alt="Logo OET" class="img-responsive logo-oet" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="navbar navbar-default navbar-fixed-top" style="margin-top:80px;">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-    </div>
-
-    <footer>
-        <div class="panel-footer" style="position:fixed; width:100%; bottom: 0; background: #7BC143; text-align: center">
-            <p>&copy; @DateTime.Now.Year - Organización de Estudios Tropicales</p>
+    <div class="wrapper">
+        <div class="container body-content">
+            @RenderBody()
         </div>
-    </footer>
-
-
+        <div class="push"></div>
+    </div>
+    <div class="footer">
+        <div class="cuerpo-footer">
+            <div class="container">
+                <footer>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h6 class="text-center"><a href="#">Contáctenos</a> | OET &copy; Copyright @DateTime.Now.Year - Todos los derechos reservados. </h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h6 class="text-center"> Por favor reporte cualquier problema o solicite asistencia a <a href="mailto:contacts.admin@oet.ac.cr">contacts.admin@oet.ac.cr</a></h6>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -796,8 +796,8 @@ namespace GuiasOET.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+
+        [HttpGet, ActionName("CerrarSesionLogin")]
         public ActionResult CerrarSesionLogin()
         {
             Debug.WriteLine("entre a cerrar sesion");

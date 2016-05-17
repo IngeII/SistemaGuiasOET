@@ -1216,3 +1216,10 @@ C:\Users\B23618\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.WebP
 C:\Users\B23618\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache
 C:\Users\B23618\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.dll
 C:\Users\B23618\Desktop\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.pdb
+C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\MvcFlashMessages.dll
+C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Oracle.ManagedDataAccess.dll
+C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.dll
+C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.dll
+C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.xml
+C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\PagedList.Mvc.xml
