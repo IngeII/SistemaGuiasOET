@@ -366,6 +366,7 @@
     <Content Include="Views\AdministracionUsuarios\OlvidarContrasena.cshtml" />
     <Content Include="Views\AsignacionReservaciones\ConsultarAsignacionDetallada.cshtml" />
     <Content Include="Views\AsignacionReservaciones\ConsultarAsignacion.cshtml" />
+    <Content Include="Views\AsignacionReservaciones\AsignarReservacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
