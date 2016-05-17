@@ -36,7 +36,8 @@ namespace GuiasOET.Controllers
             //IQueryable<GUIAS_ASIGNAINTERNO> listaPersonasUno;
             //IQueryable<GUIAS_ASOCIAEXTERNO> listaPersonasDos;
             GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
-
+            GUIAS_RESERVACION reservacion;
+            DateTime date = Convert.ToDateTime(fecha);
             if (empleado.TIPOEMPLEADO.Contains("Guía Interno")==true)
             {
 
@@ -48,7 +49,11 @@ namespace GuiasOET.Controllers
                     {
                         foreach (GUIAS_ASIGNAINTERNO guia in listaPersonasUno)
                         {
-                            lista.Add(baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION));
+                            reservacion = baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION);
+                            if (reservacion != null && reservacion.FECHA == date)
+                            {
+                                lista.Add(reservacion);
+                            }
                         }
 
                     }
@@ -66,7 +71,11 @@ namespace GuiasOET.Controllers
                     {
                         foreach (GUIAS_ASOCIAEXTERNO guia in listaPersonasDos)
                         {
-                            lista.Add(baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION));
+                            reservacion = baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION);
+                            if (reservacion != null && reservacion.FECHA == date)
+                            {
+                                lista.Add(reservacion);
+                            }
                         }
 
                     }
