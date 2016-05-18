@@ -23,12 +23,14 @@
 
     <div class="row">
         <div class="col-lg-5">
-            @using (Html.BeginForm("ListaUsuarios", "AdministracionUsuarios", FormMethod.Get))
+           @using (Html.BeginForm("ConsultarAsignacion", "AdministracionReservaciones", FormMethod.Get))
             {
-                <p>
-                    Semana: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-                </p>
-            }
+            <p>
+                Semana: <input type="date" name="semanaABuscar">
+                <input type="submit" value="Buscar" class="btn btn-default" style="background-color: #7BC143; color:white;" />
+            </p>
+           }
+
         </div>
     </div>
     <br>
@@ -80,5 +82,3 @@
             <textarea rows="1" cols="23" align="center" style="color: white; background-color: darkgray">Día libre</textarea>
 
         </div>
-}
-
