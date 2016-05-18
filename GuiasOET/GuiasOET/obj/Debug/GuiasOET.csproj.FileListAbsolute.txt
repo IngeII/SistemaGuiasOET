@@ -344,7 +344,6 @@ C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System
 C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache
 C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.dll
 C:\Users\b30675\Documents\GitHub\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.pdb
-C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Oracle.ManagedDataAccess.dll
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Oracle.ManagedDataAccess.EntityFramework.dll
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.Helpers.resources.dll
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\es\System.Web.Mvc.resources.dll
