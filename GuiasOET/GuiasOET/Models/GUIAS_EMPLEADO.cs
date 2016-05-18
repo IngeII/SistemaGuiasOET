@@ -19,8 +19,7 @@ namespace GuiasOET.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GUIAS_EMPLEADO()
         {
-            this.GUIAS_ASIGNAINTERNO = new HashSet<GUIAS_ASIGNAINTERNO>();
-            this.GUIAS_ASOCIAEXTERNO = new HashSet<GUIAS_ASOCIAEXTERNO>();
+            this.GUIAS_ASIGNACION = new HashSet<GUIAS_ASIGNACION>();
             this.GUIAS_TELEFONO = new HashSet<GUIAS_TELEFONO>();
         }
 
@@ -92,9 +91,7 @@ namespace GuiasOET.Models
         public string CONFIRMACIONCONTRASENA { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUIAS_ASIGNAINTERNO> GUIAS_ASIGNAINTERNO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUIAS_ASOCIAEXTERNO> GUIAS_ASOCIAEXTERNO { get; set; }
+        public virtual ICollection<GUIAS_ASIGNACION> GUIAS_ASIGNACION  { get; set; }
         public virtual GUIAS_ESTACION GUIAS_ESTACION { get; set; }
         public virtual GUIAS_HORARIODISPONIBLE GUIAS_HORARIODISPONIBLE { get; set; }
         public virtual GUIAS_ROLDIASLIBRES GUIAS_ROLDIASLIBRES { get; set; }

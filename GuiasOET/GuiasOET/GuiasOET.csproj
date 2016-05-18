@@ -221,10 +221,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\GUIAS_ASIGNAINTERNO.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GUIAS_ASOCIAEXTERNO.cs">
+    <Compile Include="Models\GUIAS_ASIGNACION.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GUIAS_COMPANIA.cs">

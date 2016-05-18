@@ -1,106 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
-    <EntitySetMapping Name="GUIAS_ASIGNAINTERNO">
-      <EntityTypeMapping TypeName="Model.GUIAS_ASIGNAINTERNO">
-        <MappingFragment StoreEntitySet="GUIAS_ASIGNAINTERNO">
-          <ScalarProperty Name="NOTASASIGNA" ColumnName="NOTASASIGNA" />
-          <ScalarProperty Name="CONFIRMACIONASIGNA" ColumnName="CONFIRMACIONASIGNA" />
+    <EntitySetMapping Name="GUIAS_ASIGNACION">
+      <EntityTypeMapping TypeName="Model.GUIAS_ASIGNACION">
+        <MappingFragment StoreEntitySet="GUIAS_ASIGNACION">
+          <ScalarProperty Name="CEDULAGUIA" ColumnName="CEDULAGUIA" />
           <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
-          <ScalarProperty Name="CEDULAINTERNO" ColumnName="CEDULAINTERNO" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GUIAS_ASOCIAEXTERNO">
-      <EntityTypeMapping TypeName="Model.GUIAS_ASOCIAEXTERNO">
-        <MappingFragment StoreEntitySet="GUIAS_ASOCIAEXTERNO">
-          <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
           <ScalarProperty Name="CONFIRMACIONASOCIA" ColumnName="CONFIRMACIONASOCIA" />
-          <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
-          <ScalarProperty Name="CEDULAEXTERNO" ColumnName="CEDULAEXTERNO" />
+          <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_COMPANIA">
       <EntityTypeMapping TypeName="Model.GUIAS_COMPANIA">
         <MappingFragment StoreEntitySet="GUIAS_COMPANIA">
-          <ScalarProperty Name="NOMBRECOMPANIA" ColumnName="NOMBRECOMPANIA" />
           <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+          <ScalarProperty Name="NOMBRECOMPANIA" ColumnName="NOMBRECOMPANIA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_CONFIGURACIONCORREO">
       <EntityTypeMapping TypeName="Model.GUIAS_CONFIGURACIONCORREO">
         <MappingFragment StoreEntitySet="GUIAS_CONFIGURACIONCORREO">
-          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-          <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
-          <ScalarProperty Name="PUERTO" ColumnName="PUERTO" />
           <ScalarProperty Name="HOST" ColumnName="HOST" />
+          <ScalarProperty Name="PUERTO" ColumnName="PUERTO" />
+          <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_EMPLEADO">
       <EntityTypeMapping TypeName="Model.GUIAS_EMPLEADO">
         <MappingFragment StoreEntitySet="GUIAS_EMPLEADO">
-          <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
-          <ScalarProperty Name="NOMBREEMPLEADO" ColumnName="NOMBREEMPLEADO" />
-          <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
-          <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
-          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
-          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
-          <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
-          <ScalarProperty Name="TIPOEMPLEADO" ColumnName="TIPOEMPLEADO" />
-          <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
           <ScalarProperty Name="CONFIRMAREMAIL" ColumnName="CONFIRMAREMAIL" />
+          <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
+          <ScalarProperty Name="TIPOEMPLEADO" ColumnName="TIPOEMPLEADO" />
+          <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+          <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+          <ScalarProperty Name="NOMBREEMPLEADO" ColumnName="NOMBREEMPLEADO" />
+          <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_ESTACION">
       <EntityTypeMapping TypeName="Model.GUIAS_ESTACION">
         <MappingFragment StoreEntitySet="GUIAS_ESTACION">
-          <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
-          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
           <ScalarProperty Name="NOMBRECOMPANIA" ColumnName="NOMBRECOMPANIA" />
+          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+          <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_HORARIODISPONIBLE">
       <EntityTypeMapping TypeName="Model.GUIAS_HORARIODISPONIBLE">
         <MappingFragment StoreEntitySet="GUIAS_HORARIODISPONIBLE">
-          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-          <ScalarProperty Name="HORA" ColumnName="HORA" />
           <ScalarProperty Name="CEDULAEXTERNO" ColumnName="CEDULAEXTERNO" />
+          <ScalarProperty Name="HORA" ColumnName="HORA" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_RESERVACION">
       <EntityTypeMapping TypeName="Model.GUIAS_RESERVACION">
         <MappingFragment StoreEntitySet="GUIAS_RESERVACION">
-          <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
-          <ScalarProperty Name="NUMEROPERSONAS" ColumnName="NUMEROPERSONAS" />
-          <ScalarProperty Name="HORAMODIFICACION" ColumnName="HORAMODIFICACION" />
-          <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />
-          <ScalarProperty Name="TURNO" ColumnName="TURNO" />
-          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
           <ScalarProperty Name="HORA" ColumnName="HORA" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="TURNO" ColumnName="TURNO" />
+          <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />
+          <ScalarProperty Name="HORAMODIFICACION" ColumnName="HORAMODIFICACION" />
+          <ScalarProperty Name="NUMEROPERSONAS" ColumnName="NUMEROPERSONAS" />
+          <ScalarProperty Name="NOMBRERESERVACION" ColumnName="NOMBRERESERVACION" />
+          <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_ROLDIASLIBRES">
       <EntityTypeMapping TypeName="Model.GUIAS_ROLDIASLIBRES">
         <MappingFragment StoreEntitySet="GUIAS_ROLDIASLIBRES">
-          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
           <ScalarProperty Name="CEDULAINTERNO" ColumnName="CEDULAINTERNO" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_TELEFONO">
       <EntityTypeMapping TypeName="Model.GUIAS_TELEFONO">
         <MappingFragment StoreEntitySet="GUIAS_TELEFONO">
-          <ScalarProperty Name="CEDULAEMPLEADO" ColumnName="CEDULAEMPLEADO" />
           <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="CEDULAEMPLEADO" ColumnName="CEDULAEMPLEADO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -17,11 +17,11 @@ namespace GuiasOET.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GUIAS_RESERVACION()
         {
-            this.GUIAS_ASIGNAINTERNO = new HashSet<GUIAS_ASIGNAINTERNO>();
-            this.GUIAS_ASOCIAEXTERNO = new HashSet<GUIAS_ASOCIAEXTERNO>();
+            this.GUIAS_ASIGNACION = new HashSet<GUIAS_ASIGNACION>();
         }
     
         public string NUMERORESERVACION { get; set; }
+        public string NOMBRERESERVACION { get; set; }
         public Nullable<decimal> NUMEROPERSONAS { get; set; }
         public string HORAMODIFICACION { get; set; }
         public Nullable<System.DateTime> FECHAMODIFICACION { get; set; }
@@ -30,8 +30,6 @@ namespace GuiasOET.Models
         public string HORA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUIAS_ASIGNAINTERNO> GUIAS_ASIGNAINTERNO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUIAS_ASOCIAEXTERNO> GUIAS_ASOCIAEXTERNO { get; set; }
+        public virtual ICollection<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }
     }
 }

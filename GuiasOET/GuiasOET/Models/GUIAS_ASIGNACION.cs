@@ -12,12 +12,12 @@ namespace GuiasOET.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GUIAS_ASIGNAINTERNO
+    public partial class GUIAS_ASIGNACION
     {
-        public string NOTASASIGNA { get; set; }
-        public string CONFIRMACIONASIGNA { get; set; }
+        public string NOTASASOCIA { get; set; }
+        public string CONFIRMACIONASOCIA { get; set; }
         public string NUMERORESERVACION { get; set; }
-        public string CEDULAINTERNO { get; set; }
+        public string CEDULAGUIA { get; set; }
     
         public virtual GUIAS_EMPLEADO GUIAS_EMPLEADO { get; set; }
         public virtual GUIAS_RESERVACION GUIAS_RESERVACION { get; set; }
