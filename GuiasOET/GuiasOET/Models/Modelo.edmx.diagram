@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e4e41db8058e48a18a8e8524ed16dce8" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.GUIAS_ASIGNACION" Width="1.5" PointX="10.5" PointY="4.875" />
-        <EntityTypeShape EntityType="Model.GUIAS_COMPANIA" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="Model.GUIAS_CONFIGURACIONCORREO" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Model.GUIAS_EMPLEADO" Width="1.5" PointX="5.25" PointY="3.875" />
-        <EntityTypeShape EntityType="Model.GUIAS_ESTACION" Width="1.5" PointX="3" PointY="5" />
-        <EntityTypeShape EntityType="Model.GUIAS_HORARIODISPONIBLE" Width="1.5" PointX="7.5" PointY="8" />
-        <EntityTypeShape EntityType="Model.GUIAS_RESERVACION" Width="1.5" PointX="8.25" PointY="13.625" />
-        <EntityTypeShape EntityType="Model.GUIAS_ROLDIASLIBRES" Width="1.5" PointX="7.5" PointY="2.75" />
-        <EntityTypeShape EntityType="Model.GUIAS_TELEFONO" Width="1.5" PointX="7.5" PointY="10.625" />
+        <EntityTypeShape EntityType="Model.GUIAS_ASIGNACION" Width="1.5" PointX="10.5" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.GUIAS_COMPANIA" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="Model.GUIAS_CONFIGURACIONCORREO" Width="1.5" PointX="0.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Model.GUIAS_EMPLEADO" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="Model.GUIAS_ESTACION" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="Model.GUIAS_HORARIODISPONIBLE" Width="1.5" PointX="7.5" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.GUIAS_RESERVACION" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.GUIAS_ROLDIASLIBRES" Width="1.5" PointX="7.5" PointY="10.5" />
+        <EntityTypeShape EntityType="Model.GUIAS_TELEFONO" Width="1.5" PointX="7.5" PointY="12.75" />
         <AssociationConnector Association="Model.FK_ASIGNACION_GUIA" />
         <AssociationConnector Association="Model.FK_ASIGNACION_RESERVACION" />
         <AssociationConnector Association="Model.FK_ESTACION_COMPANIA" />

@@ -17,6 +17,7 @@ namespace GuiasOET.Models
         public string NOTASASOCIA { get; set; }
         public string CONFIRMACIONASOCIA { get; set; }
         public string NUMERORESERVACION { get; set; }
+        public string TURNO { get; set; }
         public string CEDULAGUIA { get; set; }
     
         public virtual GUIAS_EMPLEADO GUIAS_EMPLEADO { get; set; }
