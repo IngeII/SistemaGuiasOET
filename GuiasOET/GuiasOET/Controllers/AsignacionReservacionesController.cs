@@ -90,12 +90,56 @@ namespace GuiasOET.Controllers
 
             int pageSize = 8;
             int pageNumber = (page ?? 1);
+
             return View(empleados.ToPagedList(pageNumber, pageSize));
         }
-
+        /**
+         * 
+         * */
         [HttpGet]
         public ActionResult ConsultarAsignacion()
         {
+            var semana = DateTime.Now.ToString("dd/MM/yyyy");
+            ViewBag.fechaLunes = DateTime.Now.DayOfWeek.ToString();
+            switch (DateTime.Now.DayOfWeek)
+            {
+               
+                case System.DayOfWeek.Monday:
+                    ViewBag.fechaLunes = DateTime.Now.ToString("dd/MM/yyyy");
+                    break;
+
+                case System.DayOfWeek.Tuesday:
+                    ViewBag.fechaLunes = DateTime.Now.ToString("dd/MM/yyyy");
+                    break;
+
+                case System.DayOfWeek.Wednesday:
+                    ViewBag.fechaLunes = DateTime.Now.ToString("dd/MM/yyyy");
+                    break;
+
+                case System.DayOfWeek.Thursday:
+                    ViewBag.fechaLunes = DateTime.Now.ToString("dd/MM/yyyy");
+                    break;
+
+                case System.DayOfWeek.Friday:
+                    ViewBag.fechaLunes = DateTime.Now.Subtract(new TimeSpan(4, 0, 0, 0)).ToString("dd/MM/yyyy");
+                    ViewBag.fechaMartes = DateTime.Now.Subtract(new TimeSpan(3, 0, 0, 0)).ToString("dd/MM/yyyy");
+                    ViewBag.fechaMiercoles = DateTime.Now.Subtract(new TimeSpan(2, 0, 0, 0)).ToString("dd/MM/yyyy");
+                    ViewBag.fechaJueves = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0)).ToString("dd/MM/yyyy");
+                    ViewBag.fechaViernes = DateTime.Now.ToString("dd/MM/yyyy");
+                    ViewBag.fechaSabado= DateTime.Now.AddDays(1).ToString("dd/MM/yyyy");
+                    ViewBag.fechaDomingo = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy");
+
+                    break;
+
+                case System.DayOfWeek.Saturday:
+                    ViewBag.fechaLunes = DateTime.Now.ToString("dd/MM/yyyy");
+                    break;
+
+                case System.DayOfWeek.Sunday:
+                    ViewBag.fechaLunes = DateTime.Now.ToString("dd/MM/yyyy");
+                    break;
+
+            }
             return View();
         }
 
@@ -110,6 +154,18 @@ namespace GuiasOET.Controllers
                     break;
                 case System.DayOfWeek.Wednesday:
                     semanaABuscar.Subtract(new TimeSpan(2, 0, 0, 0));
+                    break;
+                case System.DayOfWeek.Thursday:
+                    semanaABuscar.Subtract(new TimeSpan(3, 0, 0, 0));
+                    break;
+                case System.DayOfWeek.Friday:
+                    semanaABuscar.Subtract(new TimeSpan(4, 0, 0, 0));
+                    break;
+                case System.DayOfWeek.Saturday:
+                    semanaABuscar.Subtract(new TimeSpan(5, 0, 0, 0));
+                    break;
+                case System.DayOfWeek.Sunday:
+                    semanaABuscar.Subtract(new TimeSpan(6, 0, 0, 0));
                     break;
             }
             GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"]);
