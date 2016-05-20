@@ -5,6 +5,7 @@
       <EntityTypeMapping TypeName="Model.GUIAS_ASIGNACION">
         <MappingFragment StoreEntitySet="GUIAS_ASIGNACION">
           <ScalarProperty Name="CEDULAGUIA" ColumnName="CEDULAGUIA" />
+          <ScalarProperty Name="TURNO" ColumnName="TURNO" />
           <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
           <ScalarProperty Name="CONFIRMACIONASOCIA" ColumnName="CONFIRMACIONASOCIA" />
           <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
@@ -70,7 +71,6 @@
         <MappingFragment StoreEntitySet="GUIAS_RESERVACION">
           <ScalarProperty Name="HORA" ColumnName="HORA" />
           <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-          <ScalarProperty Name="TURNO" ColumnName="TURNO" />
           <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />
           <ScalarProperty Name="HORAMODIFICACION" ColumnName="HORAMODIFICACION" />
           <ScalarProperty Name="NUMEROPERSONAS" ColumnName="NUMEROPERSONAS" />

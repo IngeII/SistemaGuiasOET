@@ -13,6 +13,7 @@
           <Property Name="NOTASASOCIA" Type="varchar2" MaxLength="100" />
           <Property Name="CONFIRMACIONASOCIA" Type="varchar2" MaxLength="10" />
           <Property Name="NUMERORESERVACION" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="TURNO" Type="varchar2" MaxLength="20" />
           <Property Name="CEDULAGUIA" Type="varchar2" MaxLength="9" Nullable="false" />
         </EntityType>
         <EntityType Name="GUIAS_COMPANIA">
@@ -73,9 +74,8 @@
           <Property Name="NUMEROPERSONAS" Type="number" Precision="38" Scale="0" />
           <Property Name="HORAMODIFICACION" Type="varchar2" MaxLength="10" />
           <Property Name="FECHAMODIFICACION" Type="date" />
-          <Property Name="TURNO" Type="varchar2" MaxLength="20" />
           <Property Name="FECHA" Type="date" />
-          <Property Name="HORA" Type="varchar2" MaxLength="13" />
+          <Property Name="HORA" Type="varchar2" MaxLength="10" />
         </EntityType>
         <EntityType Name="GUIAS_ROLDIASLIBRES">
           <Key>
@@ -266,6 +266,7 @@
           <Property Name="NOTASASOCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CONFIRMACIONASOCIA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NUMERORESERVACION" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TURNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CEDULAGUIA" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Model.FK_ASIGNACION_GUIA" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_EMPLEADO" />
           <NavigationProperty Name="GUIAS_RESERVACION" Relationship="Model.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_RESERVACION" />
@@ -337,9 +338,8 @@
           <Property Name="NUMEROPERSONAS" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="HORAMODIFICACION" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="FECHAMODIFICACION" Type="DateTime" />
-          <Property Name="TURNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="FECHA" Type="DateTime" />
-          <Property Name="HORA" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="HORA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Model.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_RESERVACION" ToRole="GUIAS_ASIGNACION" />
         </EntityType>
         <EntityType Name="GUIAS_ROLDIASLIBRES">
@@ -453,6 +453,7 @@
             <EntityTypeMapping TypeName="Model.GUIAS_ASIGNACION">
               <MappingFragment StoreEntitySet="GUIAS_ASIGNACION">
                 <ScalarProperty Name="CEDULAGUIA" ColumnName="CEDULAGUIA" />
+                <ScalarProperty Name="TURNO" ColumnName="TURNO" />
                 <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
                 <ScalarProperty Name="CONFIRMACIONASOCIA" ColumnName="CONFIRMACIONASOCIA" />
                 <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
@@ -518,7 +519,6 @@
               <MappingFragment StoreEntitySet="GUIAS_RESERVACION">
                 <ScalarProperty Name="HORA" ColumnName="HORA" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="TURNO" ColumnName="TURNO" />
                 <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />
                 <ScalarProperty Name="HORAMODIFICACION" ColumnName="HORAMODIFICACION" />
                 <ScalarProperty Name="NUMEROPERSONAS" ColumnName="NUMEROPERSONAS" />

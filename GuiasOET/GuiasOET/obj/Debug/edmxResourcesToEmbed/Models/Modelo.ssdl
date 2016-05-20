@@ -8,6 +8,7 @@
     <Property Name="NOTASASOCIA" Type="varchar2" MaxLength="100" />
     <Property Name="CONFIRMACIONASOCIA" Type="varchar2" MaxLength="10" />
     <Property Name="NUMERORESERVACION" Type="varchar2" MaxLength="15" Nullable="false" />
+    <Property Name="TURNO" Type="varchar2" MaxLength="20" />
     <Property Name="CEDULAGUIA" Type="varchar2" MaxLength="9" Nullable="false" />
   </EntityType>
   <EntityType Name="GUIAS_COMPANIA">
@@ -68,9 +69,8 @@
     <Property Name="NUMEROPERSONAS" Type="number" Precision="38" Scale="0" />
     <Property Name="HORAMODIFICACION" Type="varchar2" MaxLength="10" />
     <Property Name="FECHAMODIFICACION" Type="date" />
-    <Property Name="TURNO" Type="varchar2" MaxLength="20" />
     <Property Name="FECHA" Type="date" />
-    <Property Name="HORA" Type="varchar2" MaxLength="13" />
+    <Property Name="HORA" Type="varchar2" MaxLength="10" />
   </EntityType>
   <EntityType Name="GUIAS_ROLDIASLIBRES">
     <Key>
