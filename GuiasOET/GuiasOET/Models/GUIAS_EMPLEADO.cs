@@ -91,7 +91,7 @@ namespace GuiasOET.Models
         public string CONFIRMACIONCONTRASENA { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUIAS_ASIGNACION> GUIAS_ASIGNACION  { get; set; }
+        public virtual ICollection<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }
         public virtual GUIAS_ESTACION GUIAS_ESTACION { get; set; }
         public virtual GUIAS_HORARIODISPONIBLE GUIAS_HORARIODISPONIBLE { get; set; }
         public virtual GUIAS_ROLDIASLIBRES GUIAS_ROLDIASLIBRES { get; set; }

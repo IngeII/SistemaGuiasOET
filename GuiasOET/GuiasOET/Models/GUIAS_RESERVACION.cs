@@ -25,7 +25,6 @@ namespace GuiasOET.Models
         public Nullable<decimal> NUMEROPERSONAS { get; set; }
         public string HORAMODIFICACION { get; set; }
         public Nullable<System.DateTime> FECHAMODIFICACION { get; set; }
-        public string TURNO { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
         public string HORA { get; set; }
     
