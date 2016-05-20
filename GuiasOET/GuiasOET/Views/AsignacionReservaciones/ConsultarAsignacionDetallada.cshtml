@@ -15,78 +15,116 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        @using (Html.BeginForm("ConsultarAsignacionDetallada", "AsignacionReservaciones", FormMethod.Get))
-        {
-            <p>
-                 @Html.TextBox("SearchString", new { @Value = (Model.ListReservaciones==null) ? "Ingrese un filtro para buscar" : ViewBag.CurrentFilter as string })
-                <input type="submit" value="Buscar" class="btn btn-default" style="background-color: #7BC143; color:white;" />
-            </p>
-        }
-    </div>
-</div>
+@using (Html.BeginForm())
+{
 
-<div class="table-responsive">
-    <table class="table">
+    @Html.AntiForgeryToken()
 
-        <div class="row">
-            <div class="col-lg-12">
-                <tr>
-                    <th>
-                        @Html.ActionLink("Reservación", "ConsultarAsignacion", new { sortOrder = ViewBag.ReservacionSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Nombre", "ConsultarAsignacion", new { sortOrder = ViewBag.NombreSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Estación", "ConsultarAsignacion", new { sortOrder = ViewBag.EstacionSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Personas", "ConsultarAsignacion", new { sortOrder = ViewBag.PersonasSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Hora", "ConsultarAsignacion", new { sortOrder = ViewBag.HoraSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
-                    <th>
-                        @Html.ActionLink("Turno", "ConsultarAsignacion", new { sortOrder = ViewBag.TurnoSortParm, currentFilter = ViewBag.CurrentFilter })
-                    </th>
-                </tr>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <!--DATOS DE LA RESERVACION-->
+    <div class="row" style="width:auto">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body" style="height: 55%; width:auto">
+                    <div class="row">
+                        <div class="col-md-6" col-sm-offset-1>
+                            <label for="titulo">Reservación para el:</label>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+                            @Html.LabelFor(m => m.reservacion.NUMERORESERVACION, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(model => model.reservacion.NUMERORESERVACION, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.reservacion.NUMERORESERVACION, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+
+                            @Html.LabelFor(model => model.reservacion.NOMBRERESERVACION, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(model => model.reservacion.NOMBRERESERVACION, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.reservacion.NOMBRERESERVACION, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+                            @Html.LabelFor(model => model.reservacion.NUMEROPERSONAS, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(model => model.reservacion.NUMEROPERSONAS, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.reservacion.NUMEROPERSONAS, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+                            @Html.LabelFor(model => model.reservacion.FECHA, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(model => model.reservacion.FECHA, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.reservacion.FECHA, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+                            @Html.LabelFor(model => model.reservacion.HORA, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(model => model.reservacion.HORA, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.reservacion.HORA, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3" col-sm-offset-1>
+                            @Html.LabelFor(model => model.reservacion.TURNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(model => model.reservacion.TURNO, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.reservacion.TURNO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3" col-sm-offset-1>
+                            <label for="Guia" class="control-label col-md-2" >Guías</label>
+                        </div>
+
+                            @if (Model != null && Model.compañeros != null) {
+                                foreach (var item in Model.compañeros)
+                                {
+                                     @Html.DisplayFor(modelItem => item.NOMBREEMPLEADO + " " + item.APELLIDO1 + " " + item.APELLIDO2)
+                                     <br/>
+                                 }
+                            }
+
+                   </div>
 
 
-               
-                @if (Model.ListReservaciones != null) {
-                   foreach (var subItem in Model.ListReservaciones) {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => subItem.NUMERORESERVACION)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => subItem.NUMERORESERVACION)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => Model.modeloEmpleado.NOMBREESTACION)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => subItem.NUMEROPERSONAS)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => subItem.HORA)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => subItem.TURNO)
-                        </td>
-                    </tr>
-                   }
-                }
-
+                </div>
             </div>
         </div>
-    </table>
-</div>
 
-
-
-<br />
-
-
+    </div>
+}

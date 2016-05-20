@@ -121,9 +121,9 @@ namespace GuiasOET.Controllers
         }
 
         //mostrar la lista de reservaciones del usuario correspondiente
-        /*public ActionResult ConsultarAsignacionDetallada(int? id, string fecha)
+        public ActionResult ConsultarAsignacionDetallada(int? id, string fecha)
         {
-             
+
             ReservacionesModelos modelo;
             List<GUIAS_RESERVACION> lista = null;
             //IQueryable<GUIAS_ASIGNAINTERNO> listaPersonasUno;
@@ -131,16 +131,13 @@ namespace GuiasOET.Controllers
             GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
             GUIAS_RESERVACION reservacion;
             DateTime date = Convert.ToDateTime(fecha);
-            if (empleado.TIPOEMPLEADO.Contains("Guía Interno")==true)
-            {
-
                 try
                 {
-                    IEnumerable<GUIAS_ASIGNAINTERNO> listaPersonasUno = baseDatos.GUIAS_ASIGNAINTERNO.Where(i => i.CEDULAINTERNO == id.ToString());
+                    IEnumerable<GUIAS_ASIGNACION> listaPersonasUno = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA == id.ToString());
 
                     if (listaPersonasUno != null && listaPersonasUno.Count() != 0)
                     {
-                        foreach (GUIAS_ASIGNAINTERNO guia in listaPersonasUno)
+                        foreach (GUIAS_ASIGNACION guia in listaPersonasUno)
                         {
                             reservacion = baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION);
                             if (reservacion != null && reservacion.FECHA == date)
@@ -154,29 +151,6 @@ namespace GuiasOET.Controllers
                 {
                     Console.Write(e);
                 }
-            }else if (empleado.TIPOEMPLEADO.Contains("Guía Externo") == true)
-            {
-                try
-                {
-                    IEnumerable<GUIAS_ASOCIAEXTERNO> listaPersonasDos = baseDatos.GUIAS_ASOCIAEXTERNO.Where(i => i.CEDULAEXTERNO == id.ToString());
-                    // string a = listaPersonasDos.ElementAt(0).CEDULAEXTERNO.ToString();
-                    if (listaPersonasDos != null && listaPersonasDos.Count() != 0)
-                    {
-                        foreach (GUIAS_ASOCIAEXTERNO guia in listaPersonasDos)
-                        {
-                            reservacion = baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION);
-                            if (reservacion != null && reservacion.FECHA == date)
-                            {
-                                lista.Add(reservacion);
-                            }
-                        }
-
-                    }
-                }catch (Exception e)
-                {
-                    Console.Write(e);
-                }
-            }
 
             modelo = new ReservacionesModelos
             {
@@ -185,7 +159,9 @@ namespace GuiasOET.Controllers
             };
 
             return View(modelo);
-        }*/
+           
+            //return View();
+        }
 
 
 
