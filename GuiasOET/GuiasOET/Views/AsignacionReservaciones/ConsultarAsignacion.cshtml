@@ -6,48 +6,48 @@
 @{
     Layout = "~/Views/Shared/_GeneralLayout.cshtml";
     ViewBag.Title = "Consultar Asignación de Reservaciones";
-    }
+}
 
 @Html.ActionLink("Consultar", "ConsultarAsignacionDetallada", new { id = "156478521", fecha = "2016-05-15" }, new { @class = "btn btn-default", @style = "background-color: #7BC143; color:white;" })
 
-    <div class="row">
-        <div class="col-md-9">
-            <h2>@ViewBag.Title</h2>
-        </div>
-        <div class="col-lg-3">
-        </div>
+<div class="row">
+    <div class="col-md-9">
+        <h2>@ViewBag.Title</h2>
     </div>
+    <div class="col-lg-3">
+    </div>
+</div>
 
-    <br>
-    <br>
+<br>
+<br>
 
-    <div class="row">
-        <div class="col-lg-5">
-           @using (Html.BeginForm("ConsultarAsignacion", "AdministracionReservaciones", FormMethod.Get))
+<div class="row">
+    <div class="col-lg-5">
+        @using (Html.BeginForm("ConsultarAsignacion", "AdministracionReservaciones"))
             {
             <p>
                 Semana: <input type="date" name="semanaABuscar">
                 <input type="submit" value="Buscar" class="btn btn-default" style="background-color: #7BC143; color:white;" />
             </p>
-           }
+        }
 
-        </div>
     </div>
-    <br>
+</div>
+<br>
 
-    <div class="container">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Mon, 16 may 2016</th>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mon, 16 may 2016</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @if(Model != null)
-                {
-                 foreach (var item in Model)
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
             {
+                foreach (var item in Model)
+                {
                     <tr>
                         <td colspan="3">
                             @Html.DisplayFor(modelItem => item.NOMBREEMPLEADO)
@@ -57,28 +57,28 @@
                     <tr colspan="3"></tr>
                     </tr>
                 }
-                }
-            </tbody>
-        </table>
+            }
+        </tbody>
+    </table>
+</div>
+
+    </br>
+    </br>
+    </br>
+<div class="row">
+    <div class="col-md-8" col-sm-offset-1>
+        <label for="simbol">Simbología: </label>
     </div>
+    </br>
+    <div class="col-md-7">
+        <textarea rows="1" cols="23" style="color: white; background-color: rgb(255,0,0)">Fines de semana o feriados</textarea>
+        <textarea rows="1" cols="23" style="color: white; background-color: rgb(0,0,255)">Tour privado</textarea>
+        </br>
+        </br>
+        <textarea rows="1" cols="23" style="color: white; background-color: rgb(0,0,0)">Tour regular</textarea>
+        <textarea rows="1" cols="23" style="color: white; background-color: #F2BF8E">Tour nocturno y pajareos</textarea>
+        </br>
+        </br>
+        <textarea rows="1" cols="23" align="center" style="color: white; background-color: darkgray">Día libre</textarea>
 
-    </br>
-    </br>
-    </br>
-    <div class="row">
-        <div class="col-md-8" col-sm-offset-1>
-            <label for="simbol">Simbología: </label>
-        </div>
-        </br>
-        <div class="col-md-7">
-            <textarea rows="1" cols="23" style="color: white; background-color: rgb(255,0,0)">Fines de semana o feriados</textarea>
-            <textarea rows="1" cols="23" style="color: white; background-color: rgb(0,0,255)">Tour privado</textarea>
-            </br>
-        </br>
-            <textarea rows="1" cols="23" style="color: white; background-color: rgb(0,0,0)">Tour regular</textarea>
-            <textarea rows="1" cols="23" style="color: white; background-color: rgb(250,191,191)">Tour nocturno y pajareos</textarea>
-        </br>
-        </br>
-            <textarea rows="1" cols="23" align="center" style="color: white; background-color: darkgray">Día libre</textarea>
-
-        </div>
+    </div>

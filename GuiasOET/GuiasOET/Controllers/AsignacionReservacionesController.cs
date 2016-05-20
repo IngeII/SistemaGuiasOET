@@ -93,10 +93,33 @@ namespace GuiasOET.Controllers
             return View(empleados.ToPagedList(pageNumber, pageSize));
         }
 
+        [HttpGet]
         public ActionResult ConsultarAsignacion()
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ConsultarAsignacion(DateTime semanaABuscar)
+        {
+            System.DayOfWeek diaDeLaSemana = semanaABuscar.DayOfWeek;
+            switch (diaDeLaSemana)
+            {
+                case System.DayOfWeek.Tuesday:
+                    semanaABuscar.Subtract(new TimeSpan(1, 0, 0, 0));
+                    break;
+                case System.DayOfWeek.Wednesday:
+                    semanaABuscar.Subtract(new TimeSpan(2, 0, 0, 0));
+                    break;
+            }
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"]);
+            switch (empleado.TIPOEMPLEADO)
+            {
+
+            }
+            return View();
+        }
+
         //mostrar la lista de reservaciones del usuario correspondiente
         /*public ActionResult ConsultarAsignacionDetallada(int? id, string fecha)
         {
@@ -163,8 +186,8 @@ namespace GuiasOET.Controllers
 
             return View(modelo);
         }*/
-        
-        
+
+
 
 
 
