@@ -176,7 +176,13 @@ namespace GuiasOET.Controllers
                     break;
 
             }
-            return View();
+
+
+            var empleados = from e in baseDatos.GUIAS_EMPLEADO select e;
+            empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+            int pageSize = 8;
+            int pageNumber = 1;
+            return View(empleados.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpPost]
@@ -239,13 +245,13 @@ namespace GuiasOET.Controllers
             return View(modelo);
         }
 
-        //mostrar la lista de reservaciones del usuario correspondiente
+        //mostrar la reservacion del usuario correspondiente
         public ActionResult ConsultarAsignacionDetallada(int? id, string fecha, string turno)
         {
-            /*
+            
             //string numReservacion = "";
             ReservacionesModelos modelo;
-            List<GUIAS_RESERVACION> lista = null;
+            //List<GUIAS_RESERVACION> lista = null;
             List<string> acompañantes = null; 
             //IQueryable<GUIAS_ASIGNACION> asignacionAxuliar;
             //IQueryable<GUIAS_ASOCIAEXTERNO> listaPersonasDos;
@@ -284,8 +290,7 @@ namespace GuiasOET.Controllers
                 modeloEmpleado = empleado
             };
             return View(modelo);
-            */
-            return View();
+            
 
         }
 
