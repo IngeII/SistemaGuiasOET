@@ -240,74 +240,54 @@ namespace GuiasOET.Controllers
         }
 
         //mostrar la lista de reservaciones del usuario correspondiente
-        /*public ActionResult ConsultarAsignacionDetallada(int? id, string fecha)
+        public ActionResult ConsultarAsignacionDetallada(int? id, string fecha, string turno)
         {
-             
+            /*
+            //string numReservacion = "";
             ReservacionesModelos modelo;
             List<GUIAS_RESERVACION> lista = null;
-            //IQueryable<GUIAS_ASIGNAINTERNO> listaPersonasUno;
+            List<string> acompañantes = null; 
+            //IQueryable<GUIAS_ASIGNACION> asignacionAxuliar;
             //IQueryable<GUIAS_ASOCIAEXTERNO> listaPersonasDos;
             GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
-            GUIAS_RESERVACION reservacion;
+            GUIAS_RESERVACION reservacionAsignada = null;
+           // GUIAS_ASIGNACION asignacion;
             DateTime date = Convert.ToDateTime(fecha);
-            if (empleado.TIPOEMPLEADO.Contains("Guía Interno")==true)
+            string nombreGuias = "";
+           
+            try
             {
-
-                try
+                IQueryable<string> numReservacion = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA == id.ToString() && i.TURNO == turno).Select(a=> a.NUMERORESERVACION);
+                if (numReservacion != null && numReservacion.Count() != 0)
                 {
-                    IEnumerable<GUIAS_ASIGNAINTERNO> listaPersonasUno = baseDatos.GUIAS_ASIGNAINTERNO.Where(i => i.CEDULAINTERNO == id.ToString());
-
-                    if (listaPersonasUno != null && listaPersonasUno.Count() != 0)
-                    {
-                        foreach (GUIAS_ASIGNAINTERNO guia in listaPersonasUno)
+                    reservacionAsignada = baseDatos.GUIAS_RESERVACION.Find(numReservacion.ElementAt(0));
+                    IEnumerable<string> cedEmpleados = baseDatos.GUIAS_ASIGNACION.Where(i => i.NUMERORESERVACION == numReservacion.ElementAt(0)).Select(i=> i.CEDULAGUIA) ;
+                    if (cedEmpleados != null && cedEmpleados.Count() != 0) {
+                        foreach (var ced in cedEmpleados)
                         {
-                            reservacion = baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION);
-                            if (reservacion != null && reservacion.FECHA == date)
+                            IEnumerable<string> estructuraAuxiliar = baseDatos.GUIAS_EMPLEADO.Where(i => i.CEDULA == ced).Select(i=> i.NOMBREEMPLEADO + " " +i.APELLIDO1 + " "+i.APELLIDO2 );
+                            if (estructuraAuxiliar != null)
                             {
-                                lista.Add(reservacion);
+                                nombreGuias = estructuraAuxiliar.ElementAt(0);
                             }
                         }
-
+                        acompañantes.Add(nombreGuias);   
                     }
-                }catch(Exception e)
-                {
-                    Console.Write(e);
-                }
-            }else if (empleado.TIPOEMPLEADO.Contains("Guía Externo") == true)
-            {
-                try
-                {
-                    IEnumerable<GUIAS_ASOCIAEXTERNO> listaPersonasDos = baseDatos.GUIAS_ASOCIAEXTERNO.Where(i => i.CEDULAEXTERNO == id.ToString());
-                    // string a = listaPersonasDos.ElementAt(0).CEDULAEXTERNO.ToString();
-                    if (listaPersonasDos != null && listaPersonasDos.Count() != 0)
-                    {
-                        foreach (GUIAS_ASOCIAEXTERNO guia in listaPersonasDos)
-                        {
-                            reservacion = baseDatos.GUIAS_RESERVACION.Find(guia.NUMERORESERVACION);
-                            if (reservacion != null && reservacion.FECHA == date)
-                            {
-                                lista.Add(reservacion);
-                            }
-                        }
-
-                    }
-                }catch (Exception e)
-                {
-                    Console.Write(e);
                 }
             }
-
+            catch(Exception e){
+            }
             modelo = new ReservacionesModelos
             {
-                ListReservaciones = lista,
+                reservacion = reservacionAsignada,
+                compañeros = acompañantes,
                 modeloEmpleado = empleado
             };
-
             return View(modelo);
-        }*/
+            */
+            return View();
 
-
-
+        }
 
 
 
