@@ -11,7 +11,9 @@ namespace GuiasOET.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class GUIAS_RESERVACION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +21,19 @@ namespace GuiasOET.Models
         {
             this.GUIAS_ASIGNACION = new HashSet<GUIAS_ASIGNACION>();
         }
-    
+
+        [Display(Name = "Número:")]
         public string NUMERORESERVACION { get; set; }
+        [Display(Name = "Nombre:")]
         public string NOMBRERESERVACION { get; set; }
+        [Display(Name = "Pack:")]
         public Nullable<decimal> NUMEROPERSONAS { get; set; }
+        
         public string HORAMODIFICACION { get; set; }
         public Nullable<System.DateTime> FECHAMODIFICACION { get; set; }
+        [Display(Name = "Fecha:")]
         public Nullable<System.DateTime> FECHA { get; set; }
+        [Display(Name = "Hora:")]
         public string HORA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

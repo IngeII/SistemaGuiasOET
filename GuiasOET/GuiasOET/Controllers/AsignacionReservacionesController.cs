@@ -212,6 +212,33 @@ namespace GuiasOET.Controllers
             return View();
         }
 
+        public ActionResult AsignarReservacionDetallada()
+        {
+            int id = 1;
+            string identificacion = id.ToString();
+
+            AsignacionModelos modelo;
+
+            modelo = new AsignacionModelos(baseDatos.GUIAS_RESERVACION.Find(identificacion));
+            ViewBag.fecha = String.Format("{0:M/d/yyyy}", modelo.modeloReservacion.FECHA).Trim();
+
+            ViewBag.cambios = "Ninguno";
+
+            List<string> guias = baseDatos.GUIAS_ASIGNACION.Where(p => p.NUMERORESERVACION.Equals(identificacion)).Select(s => s.CEDULAGUIA).ToList();
+            List<GUIAS_EMPLEADO> guiasLibres = baseDatos.GUIAS_EMPLEADO.Where(p => !guias.Contains(p.CEDULA) && p.TIPOEMPLEADO.Contains("Guía") ).ToList();
+            List<GUIAS_EMPLEADO> guiasAsociados = baseDatos.GUIAS_EMPLEADO.Where(p => guias.Contains(p.CEDULA) && p.TIPOEMPLEADO.Contains("Guía")).ToList();
+
+            modelo.guiasDisponibles = guiasLibres;
+            modelo.guiasAsignados = guiasAsociados;
+
+            if (modelo == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(modelo);
+        }
+
         //mostrar la lista de reservaciones del usuario correspondiente
         /*public ActionResult ConsultarAsignacionDetallada(int? id, string fecha)
         {

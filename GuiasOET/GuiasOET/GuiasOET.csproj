@@ -221,6 +221,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AsignacionModelos.cs" />
     <Compile Include="Models\GUIAS_ASIGNACION.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -364,6 +365,7 @@
     <Content Include="Views\AsignacionReservaciones\ConsultarAsignacionDetallada.cshtml" />
     <Content Include="Views\AsignacionReservaciones\ConsultarAsignacion.cshtml" />
     <Content Include="Views\AsignacionReservaciones\AsignarReservacion.cshtml" />
+    <Content Include="Views\AsignacionReservaciones\AsignarReservacionDetallada.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
