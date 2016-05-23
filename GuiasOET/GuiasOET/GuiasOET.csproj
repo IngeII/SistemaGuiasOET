@@ -366,6 +366,7 @@
     <Content Include="Views\AsignacionReservaciones\ConsultarAsignacion.cshtml" />
     <Content Include="Views\AsignacionReservaciones\AsignarReservacion.cshtml" />
     <Content Include="Views\AsignacionReservaciones\AsignarReservacionDetallada.cshtml" />
+    <Content Include="Views\AsignacionReservaciones\Notificaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

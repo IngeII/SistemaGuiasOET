@@ -222,9 +222,10 @@ namespace GuiasOET.Controllers
             ViewBag.cambios = "Ninguno";
 
             List<string> guias = baseDatos.GUIAS_ASIGNACION.Where(p => p.NUMERORESERVACION.Equals(identificacion)).Select(s => s.CEDULAGUIA).ToList();
-            List<GUIAS_EMPLEADO> guiasLibres = baseDatos.GUIAS_EMPLEADO.Where(p => !guias.Contains(p.CEDULA) && p.TIPOEMPLEADO.Contains("Guía") ).ToList();
+            List<GUIAS_EMPLEADO> guiasLibres = baseDatos.GUIAS_EMPLEADO.Where(p => !guias.Contains(p.CEDULA) && p.TIPOEMPLEADO.Contains("Guía") && p.NOMBREESTACION.Equals(modelo.modeloReservacion.NOMBREESTACION) ).ToList();
             List<GUIAS_EMPLEADO> guiasAsociados = baseDatos.GUIAS_EMPLEADO.Where(p => guias.Contains(p.CEDULA) && p.TIPOEMPLEADO.Contains("Guía")).ToList();
 
+            /*Hay que filtrar el maximo de asignaciones para ese día del guía disponible, ya que no pueden ser mas de 4 y que sea un rol de día libre se ponga de otro color*/
             modelo.guiasDisponibles = guiasLibres;
             modelo.guiasAsignados = guiasAsociados;
 
@@ -234,6 +235,76 @@ namespace GuiasOET.Controllers
             }
 
             return View(modelo);
+        }
+
+        public ActionResult Notificaciones(string sortOrder, string currentFilter, string fechaDesde, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.ReservacionSortParm = String.IsNullOrEmpty(sortOrder) ? "Reservacion" : "";
+            ViewBag.NombreSortParm = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
+            ViewBag.EstacionSortParm = String.IsNullOrEmpty(sortOrder) ? "Estacion" : "";
+            ViewBag.PersonasSortParm = String.IsNullOrEmpty(sortOrder) ? "Personas" : "";
+            ViewBag.FechaSortParm = String.IsNullOrEmpty(sortOrder) ? "Fecha" : "";
+            ViewBag.HoraSortParm = String.IsNullOrEmpty(sortOrder) ? "Hora" : "";
+            ViewBag.GuiasAsignadosSortParm = String.IsNullOrEmpty(sortOrder) ? "Guías Asignados" : "";
+
+            if (fechaDesde != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                fechaDesde = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = fechaDesde;
+
+            var empleados = from e in baseDatos.GUIAS_EMPLEADO select e;
+
+            if (!String.IsNullOrEmpty(fechaDesde))
+            {
+                empleados = empleados.Where(e => e.APELLIDO1.Contains(fechaDesde)
+                                       || e.NOMBREEMPLEADO.Contains(fechaDesde) || e.APELLIDO2.Contains(fechaDesde)
+                                       || e.NOMBREESTACION.Contains(fechaDesde) || e.TIPOEMPLEADO.Contains(fechaDesde)
+                                       || e.USUARIO.Contains(fechaDesde) || e.EMAIL.Contains(fechaDesde));
+            }
+
+
+            switch (sortOrder)
+            {
+                case "Reservacion":
+                    empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+                    break;
+                case "Nombre":
+                    empleados = empleados.OrderBy(e => e.APELLIDO1);
+                    break;
+                case "Estacion":
+                    empleados = empleados.OrderBy(e => e.APELLIDO2);
+                    break;
+                case "Personas":
+                    empleados = empleados.OrderBy(e => e.NOMBREESTACION);
+                    break;
+                case "Fecha":
+                    empleados = empleados.OrderBy(e => e.TIPOEMPLEADO);
+                    break;
+                case "Hora":
+                    empleados = empleados.OrderBy(e => e.APELLIDO2);
+                    break;
+                case "Turno":
+                    empleados = empleados.OrderBy(e => e.NOMBREESTACION);
+                    break;
+                case "Guías Asignados":
+                    empleados = empleados.OrderBy(e => e.TIPOEMPLEADO);
+                    break;
+                default:
+                    empleados = empleados.OrderBy(e => e.NOMBREESTACION);
+                    break;
+            }
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+
+            return View(empleados.ToPagedList(pageNumber, pageSize));
         }
 
         //mostrar la reservacion del usuario correspondiente
