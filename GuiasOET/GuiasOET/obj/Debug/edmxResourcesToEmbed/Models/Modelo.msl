@@ -69,6 +69,7 @@
     <EntitySetMapping Name="GUIAS_RESERVACION">
       <EntityTypeMapping TypeName="Model.GUIAS_RESERVACION">
         <MappingFragment StoreEntitySet="GUIAS_RESERVACION">
+          <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
           <ScalarProperty Name="HORA" ColumnName="HORA" />
           <ScalarProperty Name="FECHA" ColumnName="FECHA" />
           <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />

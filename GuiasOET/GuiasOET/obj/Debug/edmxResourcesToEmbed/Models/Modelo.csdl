@@ -121,6 +121,7 @@
     <Property Name="FECHAMODIFICACION" Type="DateTime" />
     <Property Name="FECHA" Type="DateTime" />
     <Property Name="HORA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBREESTACION" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Model.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_RESERVACION" ToRole="GUIAS_ASIGNACION" />
   </EntityType>
   <EntityType Name="GUIAS_ROLDIASLIBRES">

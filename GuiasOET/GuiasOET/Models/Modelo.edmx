@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="GUIAS_ASIGNACION">
           <Key>
             <PropertyRef Name="NUMERORESERVACION" />
@@ -76,6 +76,7 @@
           <Property Name="FECHAMODIFICACION" Type="date" />
           <Property Name="FECHA" Type="date" />
           <Property Name="HORA" Type="varchar2" MaxLength="10" />
+          <Property Name="NOMBREESTACION" Type="varchar2" MaxLength="55" />
         </EntityType>
         <EntityType Name="GUIAS_ROLDIASLIBRES">
           <Key>
@@ -340,6 +341,7 @@
           <Property Name="FECHAMODIFICACION" Type="DateTime" />
           <Property Name="FECHA" Type="DateTime" />
           <Property Name="HORA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBREESTACION" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Model.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_RESERVACION" ToRole="GUIAS_ASIGNACION" />
         </EntityType>
         <EntityType Name="GUIAS_ROLDIASLIBRES">
@@ -517,6 +519,7 @@
           <EntitySetMapping Name="GUIAS_RESERVACION">
             <EntityTypeMapping TypeName="Model.GUIAS_RESERVACION">
               <MappingFragment StoreEntitySet="GUIAS_RESERVACION">
+                <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
                 <ScalarProperty Name="HORA" ColumnName="HORA" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />
