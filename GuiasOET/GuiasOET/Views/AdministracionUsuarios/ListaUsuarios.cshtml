@@ -82,8 +82,7 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.EMAIL)
-                        </td>
-
+                        </td>                     
                         <td>
                             @Html.ActionLink("Consultar", "ConsultarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default", @style = "background-color: #7BC143; color:white;" })
                             @Html.ActionLink("Modificar", "ModificarUsuario", new { id = item.CEDULA }, new { @class = "btn btn-default", @style = "background-color: #7BC143; color:white;" })

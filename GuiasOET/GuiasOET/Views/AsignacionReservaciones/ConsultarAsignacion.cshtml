@@ -23,10 +23,10 @@
 
 <div class="row">
     <div class="col-lg-5">
-        @using (Html.BeginForm("ConsultarAsignacion", "AdministracionReservaciones"))
+        @using (Html.BeginForm("ConsultarAsignacion", "AsignacionReservaciones", FormMethod.Post))
             {
             <p>
-                Semana: <input type="date" name="semanaABuscar">
+                Semana: <input type="date" step="7" min=2016-01-04 name="semanaABuscar"> @ViewBag.semanaABuscar
                 <input type="submit" value="Buscar" class="btn btn-default" style="background-color: #7BC143; color:white;" />
             </p>
         }
@@ -35,21 +35,21 @@
 </div>
 <br>
 
-<div class="container">
+<div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Guia interno
+                    Guias Internos & Externos
                 </th>
                 <th>
-                    <label for="LUNES">Lunes @ViewBag.fechaLunes</label>
+                    <label for="LUNES">Lunes   . @ViewBag.fechaLunes</label>
                 </th>
                 <th>
-                    <label for="MARTES">Martes @ViewBag.fechaMartes</label>
+                    <label for="MARTES">Martes  .@ViewBag.fechaMartes</label>
                 </th>
                 <th>
-                    <label for="MIERCOLES">Miercoles @ViewBag.fechaMiercoles</label>
+                    <label for="MIERCOLES">Miercoles  @ViewBag.fechaMiercoles</label>
                 </th>
                 <th>
                     <label for="JUEVES">Jueves @ViewBag.fechaJueves</label>
@@ -72,14 +72,53 @@
                 {
                     <tr>
                         <td>
-                            
-                                @Html.DisplayFor(modelItem => item.NOMBREEMPLEADO)
-                                @Html.DisplayFor(modelItem => item.APELLIDO1)
-                                @Html.DisplayFor(modelItem => item.APELLIDO2)
-                                
-                         </td>
-                    <tr colspan="3"></tr>
-                    </tr>
+                            @Html.DisplayFor(modelItem => item.NOMBREEMPLEADO)
+                            @Html.DisplayFor(modelItem => item.APELLIDO1)
+                            @Html.DisplayFor(modelItem => item.APELLIDO2)
+                        </td>
+                        <td>
+                            @Html.ActionLink("                   ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:darkgray;" })
+                            @Html.ActionLink("                   ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                   ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                   ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:darkgray;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:darkgray;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:darkgray;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:darkgray;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:darkgray;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:darkgray;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO }, new { @class = "btn btn-default", @style = "background-color: darkgray; color:white;" })
+                        </td>
+                   </tr>
                 }
             }
         </tbody>
@@ -87,9 +126,8 @@
 </div>
 
  Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
- @Html.PagedListPager(Model, page => Url.Action("ConsultarAsignacion",
+@Html.PagedListPager(Model, page => Url.Action("ConsultarAsignacion",
     new { }))
-
 
     </br>
     </br>

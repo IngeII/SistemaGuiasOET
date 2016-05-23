@@ -171,7 +171,7 @@ namespace GuiasOET.Controllers
                     ViewBag.fechaMiercoles = DateTime.Now.Subtract(new TimeSpan(4, 0, 0, 0)).ToString("dd/MM/yyyy");
                     ViewBag.fechaJueves = DateTime.Now.Subtract(new TimeSpan(3, 0, 0, 0)).ToString("dd/MM/yyyy");
                     ViewBag.fechaViernes = DateTime.Now.Subtract(new TimeSpan(2, 0, 0, 0)).ToString("dd/MM/yyyy");
-                    ViewBag.fechaViernes = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0)).ToString("dd/MM/yyyy");
+                    ViewBag.fechaSabado = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0)).ToString("dd/MM/yyyy");
                     ViewBag.fechaDomingo = DateTime.Now.ToString("dd/MM/yyyy");
                     break;
 
@@ -188,34 +188,25 @@ namespace GuiasOET.Controllers
         [HttpPost]
         public ActionResult ConsultarAsignacion(DateTime semanaABuscar)
         {
-            System.DayOfWeek diaDeLaSemana = semanaABuscar.DayOfWeek;
-            switch (diaDeLaSemana)
-            {
-                case System.DayOfWeek.Tuesday:
-                    semanaABuscar.Subtract(new TimeSpan(1, 0, 0, 0));
-                    break;
-                case System.DayOfWeek.Wednesday:
-                    semanaABuscar.Subtract(new TimeSpan(2, 0, 0, 0));
-                    break;
-                case System.DayOfWeek.Thursday:
-                    semanaABuscar.Subtract(new TimeSpan(3, 0, 0, 0));
-                    break;
-                case System.DayOfWeek.Friday:
-                    semanaABuscar.Subtract(new TimeSpan(4, 0, 0, 0));
-                    break;
-                case System.DayOfWeek.Saturday:
-                    semanaABuscar.Subtract(new TimeSpan(5, 0, 0, 0));
-                    break;
-                case System.DayOfWeek.Sunday:
-                    semanaABuscar.Subtract(new TimeSpan(6, 0, 0, 0));
-                    break;
-            }
+            // if (semanaABuscar.)
+            ViewBag.fechaLunes = semanaABuscar.ToString("dd/MM/yyyy");
+            ViewBag.fechaMartes = semanaABuscar.AddDays(1).ToString("dd/MM/yyyy");
+            ViewBag.fechaMiercoles = semanaABuscar.AddDays(2).ToString("dd/MM/yyyy");
+            ViewBag.fechaJueves = semanaABuscar.AddDays(3).ToString("dd/MM/yyyy");
+            ViewBag.fechaViernes = semanaABuscar.AddDays(4).ToString("dd/MM/yyyy");
+            ViewBag.fechaSabado = semanaABuscar.AddDays(5).ToString("dd/MM/yyyy");
+            ViewBag.fechaDomingo = semanaABuscar.AddDays(6).ToString("dd/MM/yyyy");
+
             GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"]);
             switch (empleado.TIPOEMPLEADO)
             {
 
             }
-            return View();
+            var empleados = from e in baseDatos.GUIAS_EMPLEADO select e;
+            empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+            int pageSize = 8;
+            int pageNumber = 1;
+            return View(empleados.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult AsignarReservacionDetallada()
