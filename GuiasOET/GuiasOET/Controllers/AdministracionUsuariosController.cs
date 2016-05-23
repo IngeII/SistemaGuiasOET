@@ -80,6 +80,10 @@ namespace GuiasOET.Controllers
                     {
                         Session["NombreUsuarioLogueado"] = Guia.NOMBREEMPLEADO.ToString() + " " + Guia.APELLIDO1.ToString() + " " + Guia.APELLIDO2.ToString();
                     }
+
+                    Session["RolUsuarioLogueado"] = Guia.TIPOEMPLEADO.ToString();
+                    Session["EstacionUsuarioLogueado"] = Guia.NOMBREESTACION.ToString();
+
                     return RedirectToAction("Inicio");
                 }
                 else
@@ -125,12 +129,44 @@ namespace GuiasOET.Controllers
 
             var empleados = from e in baseDatos.GUIAS_EMPLEADO select e;
 
+            if (Session["RolUsuarioLogueado"].ToString().Contains("Local") || Session["RolUsuarioLogueado"].ToString().Contains("Interno"))
+            {
+                string estacion = Session["EstacionUsuarioLogueado"].ToString();
+                empleados = empleados.Where(e => e.NOMBREESTACION.Equals(estacion));
+            }
+            else if (Session["RolUsuarioLogueado"].ToString().Contains("Externo"))
+            {
+                string cedula = Session["IdUsuarioLogueado"].ToString();
+                empleados = empleados.Where(e => e.CEDULA.Equals(cedula));
+            }
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
+                if(Session["RolUsuarioLogueado"].ToString().Contains("Global"))
+                {
+                    empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
                                        || e.NOMBREEMPLEADO.Contains(searchString) || e.APELLIDO2.Contains(searchString)
                                        || e.NOMBREESTACION.Contains(searchString) || e.TIPOEMPLEADO.Contains(searchString)
                                        || e.USUARIO.Contains(searchString) || e.EMAIL.Contains(searchString));
+                }
+                else if (Session["RolUsuarioLogueado"].ToString().Contains("Local") || Session["RolUsuarioLogueado"].ToString().Contains("Interno"))
+                {
+                    string estacion = Session["EstacionUsuarioLogueado"].ToString();
+
+                    empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
+                                       || e.NOMBREEMPLEADO.Contains(searchString) || e.APELLIDO2.Contains(searchString)
+                                       || e.NOMBREESTACION.Contains(searchString) || e.TIPOEMPLEADO.Contains(searchString)
+                                       || e.USUARIO.Contains(searchString) || e.EMAIL.Contains(searchString) && e.NOMBREESTACION.Equals(estacion));
+                }
+                else if (Session["RolUsuarioLogueado"].ToString().Contains("Externo"))
+                {
+                    string cedula = Session["IdUsuarioLogueado"].ToString();
+                    empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
+                                       || e.NOMBREEMPLEADO.Contains(searchString) || e.APELLIDO2.Contains(searchString)
+                                       || e.NOMBREESTACION.Contains(searchString) || e.TIPOEMPLEADO.Contains(searchString)
+                                       || e.USUARIO.Contains(searchString) || e.EMAIL.Contains(searchString) && e.CEDULA.Equals(cedula));
+                }
+                
             }
 
             switch (sortOrder)
@@ -804,6 +840,7 @@ namespace GuiasOET.Controllers
             Session["IdUsuarioLogueado"] = null;
             Session["NombreUsuarioLogueado"] = null;
             Session["RolUsuarioLogueado"] = null;
+            Session["EstacionUsuarioLogueado"] = null;
             return RedirectToActionPermanent("Login");
         }
 
