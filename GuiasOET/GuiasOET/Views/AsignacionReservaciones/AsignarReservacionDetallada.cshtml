@@ -213,6 +213,11 @@
                                         <tr id="asignacion_@(i)">
                                             <td>
                                                 @Html.DisplayFor(modelItem => Model.guiasDisponibles.ElementAt(i).NOMBREEMPLEADO)
+                                                @Html.Raw(" ")
+                                                @Html.DisplayFor(modelItem => Model.guiasDisponibles.ElementAt(i).APELLIDO1)
+                                                @Html.Raw(" ")
+                                                @Html.DisplayFor(modelItem => Model.guiasDisponibles.ElementAt(i).APELLIDO2)
+                                                
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => Model.guiasDisponibles.ElementAt(i).NOMBREESTACION)
@@ -271,6 +276,10 @@
                                     <tr id="asignado@(i)">
                                         <td>
                                             @Html.DisplayFor(modelItem => Model.guiasAsignados.ElementAt(i).NOMBREEMPLEADO)
+                                            @Html.Raw(" ")
+                                            @Html.DisplayFor(modelItem => Model.guiasAsignados.ElementAt(i).APELLIDO1)
+                                            @Html.Raw(" ")
+                                            @Html.DisplayFor(modelItem => Model.guiasAsignados.ElementAt(i).APELLIDO2)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => Model.guiasAsignados.ElementAt(i).NOMBREESTACION)
