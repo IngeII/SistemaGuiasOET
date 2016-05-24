@@ -177,11 +177,11 @@ namespace GuiasOET.Controllers
 
             }
 
-            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"]);
-
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"].ToString());
+            var id = Session["IdUsuarioLogueado"];
             if (empleado.TIPOEMPLEADO == "Guía Externo")
             {
-                var empleados = baseDatos.GUIAS_EMPLEADO.Where(e=> e.CEDULA == Session["IdUsuarioLogueado"].ToString());
+                var empleados = baseDatos.GUIAS_EMPLEADO.Where(e=> e.CEDULA == id.ToString());
                 empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
                 int pageSize = 8;
                 int pageNumber = 1;
@@ -202,24 +202,32 @@ namespace GuiasOET.Controllers
         public ActionResult ConsultarAsignacion(DateTime semanaABuscar)
         {
             // if (semanaABuscar.)
-            ViewBag.fechaLunes = semanaABuscar.ToString("dd/MM/yyyy");
-            ViewBag.fechaMartes = semanaABuscar.AddDays(1).ToString("dd/MM/yyyy");
-            ViewBag.fechaMiercoles = semanaABuscar.AddDays(2).ToString("dd/MM/yyyy");
-            ViewBag.fechaJueves = semanaABuscar.AddDays(3).ToString("dd/MM/yyyy");
-            ViewBag.fechaViernes = semanaABuscar.AddDays(4).ToString("dd/MM/yyyy");
-            ViewBag.fechaSabado = semanaABuscar.AddDays(5).ToString("dd/MM/yyyy");
-            ViewBag.fechaDomingo = semanaABuscar.AddDays(6).ToString("dd/MM/yyyy");
+            ViewBag.fechaLunes = semanaABuscar.ToString("MM/dd/yyyy");
+            ViewBag.fechaMartes = semanaABuscar.AddDays(1).ToString("MM/dd/yyyy");
+            ViewBag.fechaMiercoles = semanaABuscar.AddDays(2).ToString("MM/dd/yyyy");
+            ViewBag.fechaJueves = semanaABuscar.AddDays(3).ToString("MM/dd/yyyy");
+            ViewBag.fechaViernes = semanaABuscar.AddDays(4).ToString("MM/dd/yyyy");
+            ViewBag.fechaSabado = semanaABuscar.AddDays(5).ToString("MM/dd/yyyy");
+            ViewBag.fechaDomingo = semanaABuscar.AddDays(6).ToString("MM/dd/yyyy");
 
-            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"]);
-            switch (empleado.TIPOEMPLEADO)
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"].ToString());
+            var id = Session["IdUsuarioLogueado"];
+            if (empleado.TIPOEMPLEADO == "Guía Externo")
             {
-
+                var empleados = baseDatos.GUIAS_EMPLEADO.Where(e => e.CEDULA == id.ToString());
+                empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+                int pageSize = 8;
+                int pageNumber = 1;
+                return View(empleados.ToPagedList(pageNumber, pageSize));
             }
-            var empleados = from e in baseDatos.GUIAS_EMPLEADO select e;
-            empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
-            int pageSize = 8;
-            int pageNumber = 1;
-            return View(empleados.ToPagedList(pageNumber, pageSize));
+            else
+            {
+                var empleados = baseDatos.GUIAS_EMPLEADO.Where(e => e.TIPOEMPLEADO == "Guía Interno" || e.TIPOEMPLEADO == "Guía Externo" || e.TIPOEMPLEADO == "Administrador Local/Guía Interno");
+                empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+                int pageSize = 8;
+                int pageNumber = 1;
+                return View(empleados.ToPagedList(pageNumber, pageSize));
+            }
         }
 
         public ActionResult AsignarReservacionDetallada()
@@ -381,7 +389,7 @@ namespace GuiasOET.Controllers
                 IQueryable<string> numReservacion = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA == id.ToString() && i.TURNO == turno).Select(a=> a.NUMERORESERVACION);
                 if (numReservacion != null && numReservacion.Count() != 0)
                 {
-                    reservacionAsignada = baseDatos.GUIAS_RESERVACION.Find(numReservacion.ElementAt(0));
+                    reservacionAsignada = baseDatos.GUIAS_RESERVACION.Find(numReservacion.ElementAt(0)); // PREGUNTAR POR FECHA
                     IEnumerable<string> cedEmpleados = baseDatos.GUIAS_ASIGNACION.Where(i => i.NUMERORESERVACION == numReservacion.ElementAt(0)).Select(i=> i.CEDULAGUIA) ;
                     if (cedEmpleados != null && cedEmpleados.Count() != 0) {
                         foreach (var ced in cedEmpleados)
