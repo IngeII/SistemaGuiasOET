@@ -251,6 +251,7 @@ namespace GuiasOET.Controllers
             modelo.guiasDisponibles = guiasLibres;
             modelo.guiasAsignados = guiasAsociados;
 
+
             if (modelo == null)
             {
                 return HttpNotFound();
@@ -264,38 +265,43 @@ namespace GuiasOET.Controllers
             if (id != null)
             {
                 GUIAS_ASIGNACION modelo = new GUIAS_ASIGNACION();
-
-                modelo.CEDULAGUIA = id.ToString();
+                string iden = id.ToString();
+                modelo.CEDULAGUIA = iden;
                 modelo.NUMERORESERVACION = reservacion;
 
                 baseDatos.GUIAS_ASIGNACION.Add(modelo);
                 baseDatos.SaveChanges();
             }
-          
-            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
 
+            string cedula = id.ToString();
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(cedula);
+            AsignacionModelos mod = new AsignacionModelos();
+            mod.guiasDisponibles.Add(empleado);
+            
             ViewBag.rowCount = rowCount + 1;
-            return View(empleado);
+            return View(mod);
         }
 
         public ActionResult eliminarGuia(int? id, string reservacion, int rowCount)
         {
             if (id != null)
             {
-
-                IQueryable<GUIAS_ASIGNACION> asignacion = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA.Equals(id.ToString()) && i.NUMERORESERVACION.Equals(reservacion));
-                
-                if (asignacion != null && asignacion.Count() != 0)
+                string identificacion = id.ToString();
+                List<GUIAS_ASIGNACION> asignacion = baseDatos.GUIAS_ASIGNACION.Where(p =>  p.CEDULAGUIA.Equals(identificacion) && p.NUMERORESERVACION.Equals(reservacion)).ToList();
+                if (asignacion != null && asignacion.Count() == 1)
                 {
                     baseDatos.GUIAS_ASIGNACION.Remove(asignacion.ElementAt(0));
                     baseDatos.SaveChanges();
                 }
             }
 
-            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
+            string cedula = id.ToString();
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(cedula);
+            AsignacionModelos mod = new AsignacionModelos();
+            mod.guiasAsignados.Add(empleado);
 
             ViewBag.rowCount = rowCount + 1;
-            return View(empleado);
+            return View(mod);
         }
 
         public ActionResult Notificaciones(string sortOrder, string currentFilter, string fechaDesde, int? page)
