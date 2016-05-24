@@ -33,7 +33,7 @@ namespace GuiasOET.Models
         public Nullable<System.DateTime> FECHAMODIFICACION { get; set; }
         [Display(Name = "Fecha:")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString ="(0:yyyy-MM-dd)")]
+        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString = "{0:M/d/yyyy}")]
         public Nullable<System.DateTime> FECHA { get; set; }
         [Display(Name = "Hora:")]
         public string HORA { get; set; }
