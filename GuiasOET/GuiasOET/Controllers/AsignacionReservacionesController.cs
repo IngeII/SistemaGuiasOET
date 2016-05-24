@@ -177,12 +177,25 @@ namespace GuiasOET.Controllers
 
             }
 
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"]);
 
-            var empleados = from e in baseDatos.GUIAS_EMPLEADO select e;
-            empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
-            int pageSize = 8;
-            int pageNumber = 1;
-            return View(empleados.ToPagedList(pageNumber, pageSize));
+            if (empleado.TIPOEMPLEADO == "Guía Externo")
+            {
+                var empleados = baseDatos.GUIAS_EMPLEADO.Where(e=> e.CEDULA == Session["IdUsuarioLogueado"].ToString());
+                empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+                int pageSize = 8;
+                int pageNumber = 1;
+                return View(empleados.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                var empleados = baseDatos.GUIAS_EMPLEADO.Where(e=> e.TIPOEMPLEADO == "Guía Interno" || e.TIPOEMPLEADO == "Guía Externo" || e.TIPOEMPLEADO == "Administrador Local/Guía Interno");
+                empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
+                int pageSize = 8;
+                int pageNumber = 1;
+                return View(empleados.ToPagedList(pageNumber, pageSize));
+            }
+           
         }
 
         [HttpPost]
