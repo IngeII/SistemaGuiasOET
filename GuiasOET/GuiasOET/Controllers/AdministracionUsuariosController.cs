@@ -142,7 +142,7 @@ namespace GuiasOET.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                if(Session["RolUsuarioLogueado"].ToString().Contains("Global"))
+                if (Session["RolUsuarioLogueado"].ToString().Contains("Global"))
                 {
                     empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
                                        || e.NOMBREEMPLEADO.Contains(searchString) || e.APELLIDO2.Contains(searchString)
@@ -166,7 +166,7 @@ namespace GuiasOET.Controllers
                                        || e.NOMBREESTACION.Contains(searchString) || e.TIPOEMPLEADO.Contains(searchString)
                                        || e.USUARIO.Contains(searchString) || e.EMAIL.Contains(searchString) && e.CEDULA.Equals(cedula));
                 }
-                
+
             }
 
             switch (sortOrder)
