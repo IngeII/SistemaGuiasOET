@@ -573,9 +573,9 @@ namespace GuiasOET.Controllers
             }
         }
 
-        public ActionResult AsignarReservacionDetallada()
+        public ActionResult AsignarReservacionDetallada(int? id)
         {
-            int id = 1;
+            
             ViewBag.reserva = id;
             string identificacion = id.ToString();
 

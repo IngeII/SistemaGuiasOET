@@ -46,7 +46,7 @@
     <br />
     <div class="col-md-9">
         <div style="float: left">
-            @Html.ActionLink("Ir a lista de reservaciones", "AsignacionReservaciones", null, new { @class = "btn btn-default", @style = "background-color: #7BC143; color:white;" })
+            @Html.ActionLink("Ir a lista de reservaciones", "AsignarReservacion", null, new { @class = "btn btn-default", @style = "background-color: #7BC143; color:white;" })
             <br />
         </div>
     </div>
@@ -233,9 +233,6 @@
 
                     <br />
 
-                    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-                    @Html.PagedListPager(Model, page => Url.Action("ListaUsuarios",
-                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
                 </div>
      
