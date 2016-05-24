@@ -1,0 +1,20 @@
+﻿@model GuiasOET.Models.GUIA_EMPLEADO
+
+@{
+    Layout = null;
+}
+
+<tr id="asignados@(ViewBag.rowCount)">
+    <td>
+        @Html.DisplayFor(modelItem => Model.GUIA_EMPLEADO.NOMBREEMPLEADO)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.GUIA_EMPLEADO.NOMBREESTACION)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.GUIA_EMPLEADO.TIPOEMPLEADO)
+    </td>
+    <td>
+        @Html.ActionLink("Eliminar", "AsignarReservacionDetallada", null, new { @class = "btn btn-default", @onclick = "eliminarGuia(" + Model.guiasAsignados.ElementAt(i).CEDULA + "," + ViewBag.reserva + ",$('#asignados" + i + "'))", @style = "background-color: #F26631; color:white;" })
+    </td>
+</tr>

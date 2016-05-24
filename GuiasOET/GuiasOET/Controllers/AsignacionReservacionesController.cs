@@ -225,6 +225,7 @@ namespace GuiasOET.Controllers
         public ActionResult AsignarReservacionDetallada()
         {
             int id = 1;
+            ViewBag.reserva = id;
             string identificacion = id.ToString();
 
             AsignacionModelos modelo;
@@ -248,6 +249,45 @@ namespace GuiasOET.Controllers
             }
 
             return View(modelo);
+        }
+
+        public ActionResult agregarGuia(int? id, string reservacion, int rowCount)
+        {
+            if (id != null)
+            {
+                GUIAS_ASIGNACION modelo = new GUIAS_ASIGNACION();
+
+                modelo.CEDULAGUIA = id.ToString();
+                modelo.NUMERORESERVACION = reservacion;
+
+                baseDatos.GUIAS_ASIGNACION.Add(modelo);
+                baseDatos.SaveChanges();
+            }
+          
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
+
+            ViewBag.rowCount = rowCount + 1;
+            return View(empleado);
+        }
+
+        public ActionResult eliminarGuia(int? id, string reservacion, int rowCount)
+        {
+            if (id != null)
+            {
+
+                IQueryable<GUIAS_ASIGNACION> asignacion = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA.Equals(id.ToString()) && i.NUMERORESERVACION.Equals(reservacion));
+                
+                if (asignacion != null && asignacion.Count() != 0)
+                {
+                    baseDatos.GUIAS_ASIGNACION.Remove(asignacion.ElementAt(0));
+                    baseDatos.SaveChanges();
+                }
+            }
+
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
+
+            ViewBag.rowCount = rowCount + 1;
+            return View(empleado);
         }
 
         public ActionResult Notificaciones(string sortOrder, string currentFilter, string fechaDesde, int? page)

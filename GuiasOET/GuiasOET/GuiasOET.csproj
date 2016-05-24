@@ -367,6 +367,8 @@
     <Content Include="Views\AsignacionReservaciones\AsignarReservacion.cshtml" />
     <Content Include="Views\AsignacionReservaciones\AsignarReservacionDetallada.cshtml" />
     <Content Include="Views\AsignacionReservaciones\Notificaciones.cshtml" />
+    <Content Include="Views\AsignacionReservaciones\agregarGuia.cshtml" />
+    <Content Include="Views\AsignacionReservaciones\eliminarGuia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,5 +22,9 @@ namespace GuiasOET.Models
     
         public virtual GUIAS_EMPLEADO GUIAS_EMPLEADO { get; set; }
         public virtual GUIAS_RESERVACION GUIAS_RESERVACION { get; set; }
+
+        public GUIAS_ASIGNACION()
+        {
+        }
     }
 }

@@ -32,6 +32,8 @@ namespace GuiasOET.Models
         public string HORAMODIFICACION { get; set; }
         public Nullable<System.DateTime> FECHAMODIFICACION { get; set; }
         [Display(Name = "Fecha:")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode =true, DataFormatString ="(0:yyyy-MM-dd)")]
         public Nullable<System.DateTime> FECHA { get; set; }
         [Display(Name = "Hora:")]
         public string HORA { get; set; }
