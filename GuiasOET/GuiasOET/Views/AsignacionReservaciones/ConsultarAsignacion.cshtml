@@ -71,7 +71,7 @@
         <tbody>
             @if (Model != null)
             {
-                string fecha = DateTime.Now.ToString("MM/dd/yyyy");
+                string fecha = DateTime.Now.ToString("dd/MM/yyyy");
                 foreach (var item in Model)
                 {
                     <tr>
@@ -114,19 +114,21 @@
 
                                 @foreach (var asignacion in item.GUIAS_ASIGNACION)
                                 {
+                                    
                                     string f = fecha + " 0:00:00";
-                                    if (asignacion.GUIAS_RESERVACION.FECHA.ToString() == f)
+                                    string prueba = asignacion.GUIAS_RESERVACION.FECHA.ToString();
+                                    if (asignacion.GUIAS_RESERVACION.FECHA.ToString() == f && asignacion.CEDULAGUIA == item.CEDULA)
                                     {
                                         /**
                                         @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO, fecha = fecha, turno = "PM" }, new { @class = "btn btn-default", @style = "background-color:  rgb(0,0,255); color:white;" })
                                         **/
                                         if (asignacion.TURNO == "AM")
                                         {
-                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO, fecha = fecha, turno = "AM" }, new { @class = "btn btn-default", @style = "background-color: rgb(0,0,0); color:white;" })
+                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = f, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: rgb(0,0,0); color:white;" })
                                         }
                                         if (asignacion.TURNO == "PM")
                                         {
-                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.NOMBREEMPLEADO, fecha = fecha, turno = "PM" }, new { @class = "btn btn-default", @style = "background-color: #F2BF8E; color:white;" })
+                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = f, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: #F2BF8E; color:white;" })
                                         }
                                     }
 

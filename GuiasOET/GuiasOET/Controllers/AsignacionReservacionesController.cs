@@ -552,13 +552,13 @@ namespace GuiasOET.Controllers
         public ActionResult ConsultarAsignacion(DateTime semanaABuscar)
         {
             // if (semanaABuscar.)
-            ViewBag.fechaLunes = semanaABuscar.ToString("MM/dd/yyyy");
-            ViewBag.fechaMartes = semanaABuscar.AddDays(1).ToString("MM/dd/yyyy");
-            ViewBag.fechaMiercoles = semanaABuscar.AddDays(2).ToString("MM/dd/yyyy");
-            ViewBag.fechaJueves = semanaABuscar.AddDays(3).ToString("MM/dd/yyyy");
-            ViewBag.fechaViernes = semanaABuscar.AddDays(4).ToString("MM/dd/yyyy");
-            ViewBag.fechaSabado = semanaABuscar.AddDays(5).ToString("MM/dd/yyyy");
-            ViewBag.fechaDomingo = semanaABuscar.AddDays(6).ToString("MM/dd/yyyy");
+            ViewBag.fechaLunes = semanaABuscar.ToString("dd/MM/yyyy");
+            ViewBag.fechaMartes = semanaABuscar.AddDays(1).ToString("dd/MM/yyyy");
+            ViewBag.fechaMiercoles = semanaABuscar.AddDays(2).ToString("dd/MM/yyyy");
+            ViewBag.fechaJueves = semanaABuscar.AddDays(3).ToString("dd/MM/yyyy");
+            ViewBag.fechaViernes = semanaABuscar.AddDays(4).ToString("dd/MM/yyyy");
+            ViewBag.fechaSabado = semanaABuscar.AddDays(5).ToString("dd/MM/yyyy");
+            ViewBag.fechaDomingo = semanaABuscar.AddDays(6).ToString("dd/MM/yyyy");
 
             GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(Session["IdUsuarioLogueado"].ToString());
             var id = Session["IdUsuarioLogueado"];
@@ -731,49 +731,63 @@ namespace GuiasOET.Controllers
             //string numReservacion = "";
             ReservacionesModelos modelo;
             //List<GUIAS_RESERVACION> lista = null;
-            List<string> acompañantes = null; 
-            //IQueryable<GUIAS_ASIGNACION> asignacionAxuliar;
-            //IQueryable<GUIAS_ASOCIAEXTERNO> listaPersonasDos;
-            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(id.ToString());
+            List<string> acompañantes = new List<string>();
+            string identificacion = id.ToString();
+            GUIAS_ASIGNACION asignacion;
+            string reserv;
+            GUIAS_EMPLEADO empleado = baseDatos.GUIAS_EMPLEADO.Find(identificacion);
             GUIAS_RESERVACION reservacionAsignada = null;
-           // GUIAS_ASIGNACION asignacion;
             DateTime date = Convert.ToDateTime(fecha);
             string nombreGuias = "";
             Boolean indicador = true;
             int indice = 0;
-           
+
             try
             {
-                IQueryable<string> numReservacion = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA == id.ToString() && i.TURNO == turno).Select(a=> a.NUMERORESERVACION);
-                if (numReservacion != null && numReservacion.Count() != 0)
-                {
 
+                List<string> numReservacion = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA.Equals(identificacion) && i.TURNO.Equals(turno)).Select(a => a.NUMERORESERVACION).ToList();
+                
+
+         
                     while (numReservacion != null && indicador == true && indice < numReservacion.Count())
                     {
-                        IQueryable<GUIAS_RESERVACION> reservacionAuxiliar = baseDatos.GUIAS_RESERVACION.Where(i => i.NUMERORESERVACION == numReservacion.ElementAt(indice) && i.FECHA == date);
-
+                        reserv = numReservacion.ElementAt(indice);
+                        List<GUIAS_RESERVACION> reservacionAuxiliar = baseDatos.GUIAS_RESERVACION.Where(i => i.NUMERORESERVACION == reserv).ToList();       
                         if (reservacionAuxiliar != null && reservacionAuxiliar.Count() != 0)
                         {
-                            indicador = false;
-                            reservacionAsignada = reservacionAuxiliar.ElementAt(0);
-                            IEnumerable<string> cedEmpleados = baseDatos.GUIAS_ASIGNACION.Where(i => i.NUMERORESERVACION == reservacionAsignada.NUMERORESERVACION).Select(i => i.CEDULAGUIA);
-                            if (cedEmpleados != null && cedEmpleados.Count() != 0)
+                           
+                            if (reservacionAuxiliar.ElementAt(0).FECHA.ToString() == date.ToString())
                             {
-                                foreach (var ced in cedEmpleados)
+                                indicador = false;
+                                string cedula = "";
+                                reservacionAsignada = reservacionAuxiliar.ElementAt(0);
+                                List<GUIAS_ASIGNACION> cedEmpleados = baseDatos.GUIAS_ASIGNACION.Where(i => i.NUMERORESERVACION == reservacionAsignada.NUMERORESERVACION).ToList();
+                                if (cedEmpleados != null && cedEmpleados.Count() != 0)
                                 {
-                                    IEnumerable<string> estructuraAuxiliar = baseDatos.GUIAS_EMPLEADO.Where(i => i.CEDULA == ced).Select(i => i.NOMBREEMPLEADO + " " + i.APELLIDO1 + " " + i.APELLIDO2);
-                                    if (estructuraAuxiliar != null)
+                                    foreach (var ced in cedEmpleados)
                                     {
-                                        nombreGuias = estructuraAuxiliar.ElementAt(0);
+                                        cedula = ced.CEDULAGUIA.ToString();
+                                        List<GUIAS_EMPLEADO> estructuraAuxiliar = baseDatos.GUIAS_EMPLEADO.Where(i => i.CEDULA == cedula).ToList();
+                                        if (estructuraAuxiliar != null)
+                                        {
+                                            nombreGuias = estructuraAuxiliar.ElementAt(0).NOMBREEMPLEADO.ToString() + " " + estructuraAuxiliar.ElementAt(0).APELLIDO1.ToString();
+                                        }
+
+                                        acompañantes.Add(nombreGuias);
                                     }
+
                                 }
-                                acompañantes.Add(nombreGuias);
-                            }
+
                         }else
                         {
                             ++indice;
                         }
-                    }
+
+                                            
+                        }else
+                        {
+                            ++indice;
+                        }
                 }
             }
             catch(Exception e){
@@ -782,6 +796,7 @@ namespace GuiasOET.Controllers
             {
                 reservacion = reservacionAsignada,
                 compañeros = acompañantes,
+                TURNO = turno,
                 modeloEmpleado = empleado
             };
             return View(modelo);
