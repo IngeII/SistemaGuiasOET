@@ -732,24 +732,40 @@ namespace GuiasOET.Controllers
            // GUIAS_ASIGNACION asignacion;
             DateTime date = Convert.ToDateTime(fecha);
             string nombreGuias = "";
+            Boolean indicador = true;
+            int indice = 0;
            
             try
             {
                 IQueryable<string> numReservacion = baseDatos.GUIAS_ASIGNACION.Where(i => i.CEDULAGUIA == id.ToString() && i.TURNO == turno).Select(a=> a.NUMERORESERVACION);
                 if (numReservacion != null && numReservacion.Count() != 0)
                 {
-                    reservacionAsignada = baseDatos.GUIAS_RESERVACION.Find(numReservacion.ElementAt(0)); // PREGUNTAR POR FECHA
-                    IEnumerable<string> cedEmpleados = baseDatos.GUIAS_ASIGNACION.Where(i => i.NUMERORESERVACION == numReservacion.ElementAt(0)).Select(i=> i.CEDULAGUIA) ;
-                    if (cedEmpleados != null && cedEmpleados.Count() != 0) {
-                        foreach (var ced in cedEmpleados)
+
+                    while (numReservacion != null && indicador == true && indice < numReservacion.Count())
+                    {
+                        IQueryable<GUIAS_RESERVACION> reservacionAuxiliar = baseDatos.GUIAS_RESERVACION.Where(i => i.NUMERORESERVACION == numReservacion.ElementAt(indice) && i.FECHA == date);
+
+                        if (reservacionAuxiliar != null && reservacionAuxiliar.Count() != 0)
                         {
-                            IEnumerable<string> estructuraAuxiliar = baseDatos.GUIAS_EMPLEADO.Where(i => i.CEDULA == ced).Select(i=> i.NOMBREEMPLEADO + " " +i.APELLIDO1 + " "+i.APELLIDO2 );
-                            if (estructuraAuxiliar != null)
+                            indicador = false;
+                            reservacionAsignada = reservacionAuxiliar.ElementAt(0);
+                            IEnumerable<string> cedEmpleados = baseDatos.GUIAS_ASIGNACION.Where(i => i.NUMERORESERVACION == reservacionAsignada.NUMERORESERVACION).Select(i => i.CEDULAGUIA);
+                            if (cedEmpleados != null && cedEmpleados.Count() != 0)
                             {
-                                nombreGuias = estructuraAuxiliar.ElementAt(0);
+                                foreach (var ced in cedEmpleados)
+                                {
+                                    IEnumerable<string> estructuraAuxiliar = baseDatos.GUIAS_EMPLEADO.Where(i => i.CEDULA == ced).Select(i => i.NOMBREEMPLEADO + " " + i.APELLIDO1 + " " + i.APELLIDO2);
+                                    if (estructuraAuxiliar != null)
+                                    {
+                                        nombreGuias = estructuraAuxiliar.ElementAt(0);
+                                    }
+                                }
+                                acompañantes.Add(nombreGuias);
                             }
+                        }else
+                        {
+                            ++indice;
                         }
-                        acompañantes.Add(nombreGuias);   
                     }
                 }
             }
