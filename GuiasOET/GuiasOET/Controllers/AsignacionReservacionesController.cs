@@ -440,7 +440,7 @@ namespace GuiasOET.Controllers
          * 
          * */
         [HttpGet]
-        public ActionResult ConsultarAsignacion()
+        public ActionResult ConsultarAsignacion(int? page)
         {
             var semana = DateTime.Now.ToString("dd/MM/yyyy");
             ViewBag.fechaLunes = DateTime.Now.DayOfWeek.ToString();
@@ -527,7 +527,7 @@ namespace GuiasOET.Controllers
                 var empleados = baseDatos.GUIAS_EMPLEADO.Where(e=> e.CEDULA == id.ToString());
                 empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
                 int pageSize = 8;
-                int pageNumber = 1;
+                int pageNumber = (page ?? 1);
                 return View(empleados.ToPagedList(pageNumber, pageSize));
             }
             else
@@ -535,10 +535,17 @@ namespace GuiasOET.Controllers
                 var empleados = baseDatos.GUIAS_EMPLEADO.Where(e=> e.TIPOEMPLEADO == "Guía Interno" || e.TIPOEMPLEADO == "Guía Externo" || e.TIPOEMPLEADO == "Administrador Local/Guía Interno");
                 empleados = empleados.OrderBy(e => e.NOMBREEMPLEADO);
                 int pageSize = 8;
-                int pageNumber = 1;
+                int pageNumber = (page ?? 1);
                 return View(empleados.ToPagedList(pageNumber, pageSize));
             }
-           
+
+
+        }
+        // GET: Inicio
+        /*Método GET de la pantalla ListaUsuarios*/
+        public ActionResult Inicio(int? page)
+        {
+            return View();
         }
 
         [HttpPost]
