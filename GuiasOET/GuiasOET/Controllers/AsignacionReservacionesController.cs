@@ -550,6 +550,7 @@ namespace GuiasOET.Controllers
             mod.guiasDisponibles.Add(empleado);
             
             ViewBag.rowCount = rowCount + 1;
+            ViewBag.reserva = reservacion;
             return View(mod);
         }
 
@@ -572,6 +573,7 @@ namespace GuiasOET.Controllers
             mod.guiasAsignados.Add(empleado);
 
             ViewBag.rowCount = rowCount + 1;
+            ViewBag.reserva = reservacion;
             return View(mod);
         }
 

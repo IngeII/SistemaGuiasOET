@@ -27,8 +27,8 @@ namespace GuiasOET.Models
         [Display(Name = "Nombre:")]
         public string NOMBRERESERVACION { get; set; }
         [Display(Name = "Pack:")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:###}")]
         public Nullable<decimal> NUMEROPERSONAS { get; set; }
-
         public string HORAMODIFICACION { get; set; }
         public Nullable<System.DateTime> FECHAMODIFICACION { get; set; }
         [Display(Name = "Fecha:")]

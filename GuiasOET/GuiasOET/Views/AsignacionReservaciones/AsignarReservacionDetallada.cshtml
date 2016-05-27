@@ -11,15 +11,20 @@
     {
         var rowCount = $('#asignados tr').length;
 
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("agregarGuia")',
-            data: 'id=' + id + '&reservacion=' + reservacion + '&rowCount=' + rowCount,
-            success: function (data) {
-                asignacion.remove();
-                $('#asignados tr:last').after(data);
-            },
-        });
+        if (Math.ceil(pack/12) >= rowCount ) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("agregarGuia")',
+                data: 'id=' + id + '&reservacion=' + reservacion + '&rowCount=' + rowCount,
+                success: function (data) {
+                    asignacion.remove();
+                    $('#asignados tr:last').after(data);
+                },
+            });
+        }
+        else {
+            alert("Ya superó el número máximo de asignados.");
+        }
 
     }
 
@@ -85,8 +90,6 @@
                         </div>
                     </div>
 
-                    <br />
-
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
                             @Html.LabelFor(model => model.modeloReservacion.NOMBREESTACION, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -96,8 +99,6 @@
                             @Html.ValidationMessageFor(model => model.modeloReservacion.NOMBREESTACION, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
-                    <br />
 
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
@@ -110,8 +111,6 @@
                         </div>
                     </div>
 
-                    <br />
-
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
                             @Html.LabelFor(model => model.modeloReservacion.NUMEROPERSONAS, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -119,21 +118,18 @@
                         <div class="col-md-7">
                             @Html.DisplayFor(model => model.modeloReservacion.NUMEROPERSONAS, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                             @Html.ValidationMessageFor(model => model.modeloReservacion.NUMEROPERSONAS, "", new { @class = "text-danger" })
+                            <script>var pack=@(Model.modeloReservacion.NUMEROPERSONAS);</script>
                         </div>
                     </div>
-
-                    <br />
 
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
                             <span class="control-label col-md-2" style="font-weight:bold">Fecha:</span>
                         </div>
                         <div class="col-md-7">
-                            <span class="control-label col-md-2">@ViewBag.fecha</span>
+                            @ViewBag.fecha
                         </div>
                     </div>
-
-                    <br />
 
                     <div class="row">
                         <div class="col-md-3" col-sm-offset-1>
@@ -144,8 +140,6 @@
                             @Html.ValidationMessageFor(model => model.modeloReservacion.HORA, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
-                    <br />
                 </div>
             </div>
         </div>
