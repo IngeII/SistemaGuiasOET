@@ -694,9 +694,10 @@ namespace GuiasOET.Controllers
                                         if (estructuraAuxiliar != null)
                                         {
                                             nombreGuias = estructuraAuxiliar.ElementAt(0).NOMBREEMPLEADO.ToString() + " " + estructuraAuxiliar.ElementAt(0).APELLIDO1.ToString();
+                                            acompañantes.Add(nombreGuias);
                                         }
 
-                                        acompañantes.Add(nombreGuias);
+                                       
                                     }
 
                                 }
