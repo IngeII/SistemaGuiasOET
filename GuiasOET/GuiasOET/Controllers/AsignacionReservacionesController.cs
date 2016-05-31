@@ -81,26 +81,81 @@ namespace GuiasOET.Controllers
 
             string rol = Session["RolUsuarioLogueado"].ToString();
 
+            //Ninguna fecha es vacía
+            if (!(String.IsNullOrEmpty(fechaDesde)) && !(String.IsNullOrEmpty(fechaHasta)))
+            {
+
+                ViewBag.CurrentFilter1 = fechaDesde;
+                ViewBag.CurrentFilter2 = fechaHasta;
+            }
 
             //Solo la fecha inicial es vacía
-            if (String.IsNullOrEmpty(fechaDesde) && !(String.IsNullOrEmpty(fechaHasta)))
+            else if (String.IsNullOrEmpty(fechaDesde) && !(String.IsNullOrEmpty(fechaHasta)))
             {
-                fechaDesde = currentFilter1;
+
+                ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now).Trim();
+                ViewBag.CurrentFilter2 = fechaHasta;
+
+                fechaDesde = Convert.ToString(DateTime.Now);
+                fechaHasta = currentFilter2;
+
             }
             //Solo la fecha final es vacía
             else if (!(String.IsNullOrEmpty(fechaDesde)) && String.IsNullOrEmpty(fechaHasta))
             {
-                fechaHasta = currentFilter2;
+
+                ViewBag.CurrentFilter1 = fechaDesde;
+                ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
+
+                fechaDesde = currentFilter1;
+                fechaHasta = Convert.ToString(DateTime.Now.AddDays(7));
+
+
             }
             //Las fechas son vacias
             else if ((String.IsNullOrEmpty(fechaDesde)) && String.IsNullOrEmpty(fechaHasta))
             {
-                fechaDesde = currentFilter1;
-                fechaHasta = currentFilter2;
-            }
+                string v1 = ViewBag.CurrentFilter1;
+                string v2 = ViewBag.CurrentFilter2;
 
-            ViewBag.CurrentFilter1 = fechaDesde;
-            ViewBag.CurrentFilter2 = fechaHasta;
+                if ((String.IsNullOrEmpty(currentFilter1) && (String.IsNullOrEmpty(currentFilter2))))
+                {
+                    ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now).Trim();
+                    ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
+
+                    fechaDesde = Convert.ToString(DateTime.Now);
+                    fechaHasta = Convert.ToString(DateTime.Now.AddDays(7));
+                }
+                else if ((String.IsNullOrEmpty(currentFilter1)))
+                {
+                    ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+                    ViewBag.CurrentFilter2 = fechaHasta;
+
+                    fechaDesde = String.Format("{0:dd/MM/yyyy}", DateTime.Now);
+                    fechaHasta = currentFilter2;
+                }
+                else if ((String.IsNullOrEmpty(currentFilter2)))
+                {
+
+                    ViewBag.CurrentFilter1 = fechaDesde;
+                    ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
+
+                    fechaDesde = currentFilter1;
+                    fechaHasta = String.Format("{0:dd/MM/yyyy}", DateTime.Now.AddDays(7)).Trim();
+
+                }
+                else
+                {
+                    fechaDesde = currentFilter1;
+                    fechaHasta = currentFilter2;
+
+                    ViewBag.CurrentFilter1 = fechaDesde;
+                    ViewBag.CurrentFilter2 = fechaHasta;
+
+                }
+
+
+            }
 
             if (rol.Contains("Local") || rol.Contains("Interno") || rol.Contains("Global"))
             {
@@ -151,6 +206,7 @@ namespace GuiasOET.Controllers
                 else if (!(String.IsNullOrEmpty(fechaDesde)) && String.IsNullOrEmpty(fechaHasta))
                 {
                     fechaInicio = Convert.ToDateTime(fechaDesde);
+
                     if (rol.Contains("Local") || rol.Contains("Interno"))
                     {
                         reservacion = (reservacion.Where(e => e.FECHA >= fechaInicio && e.NOMBREESTACION.Equals(estacion)));
@@ -201,9 +257,17 @@ namespace GuiasOET.Controllers
                 }
 
                 //Se asigna la cantidad de paginas
-                var count = reservacion.Count();
-                decimal totalPages = count / (decimal)pageSize;
-                ViewBag.TotalPages = Math.Ceiling(totalPages);
+                if (reservacion.Count() == 0)
+                {
+                    ViewBag.TotalPages = 1;
+                }
+                else
+                {
+                    var count = reservacion.Count();
+                    decimal totalPages = count / (decimal)pageSize;
+                    ViewBag.TotalPages = Math.Ceiling(totalPages);
+                }
+
 
                 //Todos los guias asociados a las reservaciones
                 table.empleados = totalGuiasAsignados.ToPagedList(pageNumber, pageSize);
@@ -302,9 +366,16 @@ namespace GuiasOET.Controllers
 
 
                 //Se asigna la cantidad de paginas
-                var count = listaReservaciones.Count();
-                decimal totalPages = count / (decimal)pageSize;
-                ViewBag.TotalPages = Math.Ceiling(totalPages);
+                if (reservacion.Count() == 0)
+                {
+                    ViewBag.TotalPages = 1;
+                }
+                else
+                {
+                    var count = reservacion.Count();
+                    decimal totalPages = count / (decimal)pageSize;
+                    ViewBag.TotalPages = Math.Ceiling(totalPages);
+                }
 
 
                 //Los guias asociados a las reservaciones a las cuales está asignado el guía externo
@@ -343,6 +414,7 @@ namespace GuiasOET.Controllers
                     datos = listaTotalReservaciones.OrderBy(e => e.NUMEROPERSONAS);
                     break;
                 case "Fecha":
+                    Debug.WriteLine("entre a ordenar fecha");
                     datos = listaTotalReservaciones.OrderBy(e => e.FECHA);
                     break;
                 default:
