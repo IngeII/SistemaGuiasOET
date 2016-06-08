@@ -676,11 +676,11 @@ namespace GuiasOET.Controllers
             foreach (var row in reservacion)
             {
 
-                if (row.NumeroPersonas ==  || row.FECHAMODIFICACION )
+             /*   if (row.NumeroPersonas ==  || row.FECHAMODIFICACION )
                 {
 
                 }
-
+                */
 
             }
 
