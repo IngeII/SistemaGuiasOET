@@ -20,6 +20,7 @@ namespace GuiasOET.Models
 
         public AsignacionModelos()
         {
+
         }
 
         public AsignacionModelos(GuiasOET.Models.GUIAS_RESERVACION reservacion)

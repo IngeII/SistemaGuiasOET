@@ -660,7 +660,34 @@ namespace GuiasOET.Controllers
             ViewBag.HoraSortParm = String.IsNullOrEmpty(sortOrder) ? "Hora" : "";
             ViewBag.GuiasAsignadosSortParm = String.IsNullOrEmpty(sortOrder) ? "Guías Asignados" : "";
 
-            if (fechaDesde != null)
+            //cambios
+
+            AsignacionModelos table = new AsignacionModelos();
+
+            //Todas las reservaciones del sistema
+            var reservacion = from r in baseDatos.GUIAS_RESERVACION select r;
+
+            //Todas las reservaciones con guias
+            var reservacionAsignada = from p in baseDatos.GUIAS_ASIGNACION select p;
+
+            //Lista que contiene todas las reservaciones sin guias 
+            List<GUIAS_ASIGNACION> reservacionesConAsignacion = new List<GUIAS_ASIGNACION>();
+
+            foreach (var row in reservacion)
+            {
+
+                if (row.NumeroPersonas ==  || row.FECHAMODIFICACION )
+                {
+
+                }
+
+
+            }
+
+
+
+
+                if (fechaDesde != null)
             {
                 page = 1;
             }
