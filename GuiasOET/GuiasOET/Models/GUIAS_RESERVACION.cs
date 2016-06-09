@@ -21,8 +21,8 @@ namespace GuiasOET.Models
         {
             this.GUIAS_ASIGNACION = new HashSet<GUIAS_ASIGNACION>();
         }
-
-        [Display(Name = "Número:")]
+    
+        [Display(Name = "NÃºmero:")]
         public string NUMERORESERVACION { get; set; }
         [Display(Name = "Nombre:")]
         public string NOMBRERESERVACION { get; set; }
@@ -37,8 +37,9 @@ namespace GuiasOET.Models
         public Nullable<System.DateTime> FECHA { get; set; }
         [Display(Name = "Hora:")]
         public string HORA { get; set; }
-        [Display(Name = "Estación:")]
+        [Display(Name = "EstaciÃ³n")]
         public string NOMBREESTACION { get; set; }
+        public Nullable<decimal> CONFIRMACION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }

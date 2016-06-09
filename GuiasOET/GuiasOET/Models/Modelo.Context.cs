@@ -25,14 +25,14 @@ namespace GuiasOET.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }
         public virtual DbSet<GUIAS_COMPANIA> GUIAS_COMPANIA { get; set; }
         public virtual DbSet<GUIAS_CONFIGURACIONCORREO> GUIAS_CONFIGURACIONCORREO { get; set; }
         public virtual DbSet<GUIAS_EMPLEADO> GUIAS_EMPLEADO { get; set; }
         public virtual DbSet<GUIAS_ESTACION> GUIAS_ESTACION { get; set; }
-        public virtual DbSet<GUIAS_HORARIODISPONIBLE> GUIAS_HORARIODISPONIBLE { get; set; }
         public virtual DbSet<GUIAS_RESERVACION> GUIAS_RESERVACION { get; set; }
         public virtual DbSet<GUIAS_ROLDIASLIBRES> GUIAS_ROLDIASLIBRES { get; set; }
         public virtual DbSet<GUIAS_TELEFONO> GUIAS_TELEFONO { get; set; }
+        public virtual DbSet<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }
+        public virtual DbSet<GUIAS_TURNO> GUIAS_TURNO { get; set; }
     }
 }

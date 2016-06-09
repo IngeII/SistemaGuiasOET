@@ -12,23 +12,21 @@ namespace GuiasOET.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GUIAS_ESTACION
+    public partial class GUIAS_TURNO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GUIAS_ESTACION()
+        public GUIAS_TURNO()
         {
-            this.GUIAS_EMPLEADO = new HashSet<GUIAS_EMPLEADO>();
-            this.GUIAS_TURNO = new HashSet<GUIAS_TURNO>();
+            this.GUIAS_ASIGNACION = new HashSet<GUIAS_ASIGNACION>();
         }
     
+        public string NOMBRETURNO { get; set; }
         public string NOMBREESTACION { get; set; }
-        public string UBICACION { get; set; }
-        public string NOMBRECOMPANIA { get; set; }
+        public string HORAINICIO { get; set; }
+        public string HORAFIN { get; set; }
     
-        public virtual GUIAS_COMPANIA GUIAS_COMPANIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUIAS_EMPLEADO> GUIAS_EMPLEADO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUIAS_TURNO> GUIAS_TURNO { get; set; }
+        public virtual ICollection<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }
+        public virtual GUIAS_ESTACION GUIAS_ESTACION { get; set; }
     }
 }
