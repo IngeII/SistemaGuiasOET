@@ -128,7 +128,7 @@
                                         **/
                                         if (asignacion.TURNO == "AM")
                                         {
-                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = fecha, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: rgb(0,0,0); color:white;" })
+                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = fecha, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: rgb(76, 255, 0); color:white;" })
                                             if (i == 5)
                                             {
                                                 indicadorS = true;
@@ -140,7 +140,7 @@
                                         }
                                         if (asignacion.TURNO == "PM")
                                         {
-                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = fecha, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: #F2BF8E; color:white;" })
+                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = fecha, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: rgb(0, 148, 255); color:white;" })
                                             if (i == 5)
                                             {
                                                 indicadorS = true;
@@ -150,21 +150,34 @@
                                                 indicadorD = true;
                                             }
                                         }
+                                        if (asignacion.TURNO == "Pajareo")
+                                        {
+                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = fecha, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: rgb(0,0,255); color:white;" })
+                                            if (i == 5)
+                                            {
+                                                indicadorS = true;
+                                            }
+                                            else if (i == 6)
+                                            {
+                                                indicadorD = true;
+                                            }
+
+                                        }
+                                        if (asignacion.TURNO == "Nocturno")
+                                        {
+                                            @Html.ActionLink("                    ", "ConsultarAsignacionDetallada", new { id = item.CEDULA, fecha = fecha, turno = asignacion.TURNO }, new { @class = "btn btn-default", @style = "background-color: #F2BF8E; color:white;" })
+                                            if (i == 5)
+                                            {
+                                                indicadorS = true;
+                                            }
+                                            else if (i == 6)
+                                            {
+                                                indicadorD = true;
+                                            }
+
+                                        }
                                     }
                                 }
-                                @if (i == 5 || i == 6)
-                                {
-
-                                    if (i == 5 && indicadorS == false)
-                                    {
-                                        @Html.ActionLink("                    ", null, new { id = item.NOMBREEMPLEADO, fecha = fecha }, new { @class = "btn btn-default", @style = "background-color: rgb(255,0,0); color:darkgray;" })
-                                    }
-                                    else if (i == 6 && indicadorD == false)
-                                    {
-                                        @Html.ActionLink("                    ", null, new { id = item.NOMBREEMPLEADO, fecha = fecha }, new { @class = "btn btn-default", @style = "background-color: rgb(255,0,0); color:darkgray;" })
-                                    }
-                                }
-
                             </td>
                         }
                     </tr>
@@ -191,15 +204,15 @@
     </div>
     </br>
     <div class="col-md-7">
-        <textarea rows="1" cols="23" style="color: white; background-color: rgb(255,0,0)">Fines de semana o feriados</textarea>
-        <textarea rows="1" cols="23" style="color: white; background-color: rgb(0,0,255)">Tour privado</textarea>
-        </br>
-        </br>
-        <textarea rows="1" cols="23" style="color: white; background-color: rgb(0,0,0)">Tour regular</textarea>
-        <textarea rows="1" cols="23" style="color: white; background-color: #F2BF8E">Tour nocturno y pajareos</textarea>
-        </br>
-        </br>
         <textarea rows="1" cols="23" align="center" style="color: white; background-color: darkgray">Día libre</textarea>
+        <textarea rows="1" cols="23" style="color: white; background-color: rgb(0,0,255)">Tour pajareo</textarea>
+        </br>
+        </br>
+        <textarea rows="1" cols="23" style="color: white; background-color: rgb(76, 255, 0)">Tour AM</textarea>
+        <textarea rows="1" cols="23" style="color: white; background-color: #F2BF8E">Tour nocturno</textarea>
+        </br>
+        </br>
+        <textarea rows="1" cols="23" style="color: white; background-color: rgb(0, 148, 255)">Tour PM</textarea>
 
     </div>
 
