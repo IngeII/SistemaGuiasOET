@@ -28,8 +28,8 @@
             <div class="panel panel-default">
                 <div class="panel-body" style="height: 55%; width:auto">
                     <div class="row">
-                        <div class="col-md-6" col-sm-offset-1>
-                            <label for="titulo">Reservación para el:</label>
+                        <div class="col-md-12" col-sm-offset-1>
+                            <label for="titulo">Reservación para el:    @Html.DisplayFor(model => model.reservacion.FECHA) para el guía @Html.DisplayFor(model => model.modeloEmpleado.NOMBREEMPLEADO)  @Html.DisplayFor(model => model.modeloEmpleado.APELLIDO1)     </label>
                         </div>
                     </div>
                     <br />
