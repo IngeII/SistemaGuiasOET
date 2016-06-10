@@ -77,7 +77,6 @@ C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGu
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.csprojResolveAssemblyReference.cache
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.dll
 C:\Users\Gaudy-PC\UCR\2016 I Ciclo\Ingeniería de Software II\Proyecto\SistemaGuiasOET\GuiasOET\GuiasOET\obj\Debug\GuiasOET.pdb
 C:\Users\Luis\Desktop\ProyectoInge\SistemaGuiasOET\GuiasOET\GuiasOET\bin\ApplicationInsights.config

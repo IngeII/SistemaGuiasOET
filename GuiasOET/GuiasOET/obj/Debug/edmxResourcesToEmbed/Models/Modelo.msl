@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
-    <EntitySetMapping Name="GUIAS_ASIGNACION">
-      <EntityTypeMapping TypeName="Model.GUIAS_ASIGNACION">
-        <MappingFragment StoreEntitySet="GUIAS_ASIGNACION">
-          <ScalarProperty Name="CEDULAGUIA" ColumnName="CEDULAGUIA" />
-          <ScalarProperty Name="TURNO" ColumnName="TURNO" />
-          <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
-          <ScalarProperty Name="CONFIRMACIONASOCIA" ColumnName="CONFIRMACIONASOCIA" />
-          <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_COMPANIA">
       <EntityTypeMapping TypeName="Model.GUIAS_COMPANIA">
         <MappingFragment StoreEntitySet="GUIAS_COMPANIA">
@@ -57,18 +46,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="GUIAS_HORARIODISPONIBLE">
-      <EntityTypeMapping TypeName="Model.GUIAS_HORARIODISPONIBLE">
-        <MappingFragment StoreEntitySet="GUIAS_HORARIODISPONIBLE">
-          <ScalarProperty Name="CEDULAEXTERNO" ColumnName="CEDULAEXTERNO" />
-          <ScalarProperty Name="HORA" ColumnName="HORA" />
-          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="GUIAS_RESERVACION">
       <EntityTypeMapping TypeName="Model.GUIAS_RESERVACION">
         <MappingFragment StoreEntitySet="GUIAS_RESERVACION">
+          <ScalarProperty Name="CONFIRMACION" ColumnName="CONFIRMACION" />
           <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
           <ScalarProperty Name="HORA" ColumnName="HORA" />
           <ScalarProperty Name="FECHA" ColumnName="FECHA" />
@@ -93,6 +74,26 @@
         <MappingFragment StoreEntitySet="GUIAS_TELEFONO">
           <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
           <ScalarProperty Name="CEDULAEMPLEADO" ColumnName="CEDULAEMPLEADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GUIAS_ASIGNACION">
+      <EntityTypeMapping TypeName="Model.GUIAS_ASIGNACION">
+        <MappingFragment StoreEntitySet="GUIAS_ASIGNACION">
+          <ScalarProperty Name="CEDULAGUIA" ColumnName="CEDULAGUIA" />
+          <ScalarProperty Name="TURNO" ColumnName="TURNO" />
+          <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
+          <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GUIAS_TURNO">
+      <EntityTypeMapping TypeName="Model.GUIAS_TURNO">
+        <MappingFragment StoreEntitySet="GUIAS_TURNO">
+          <ScalarProperty Name="HORAFIN" ColumnName="HORAFIN" />
+          <ScalarProperty Name="HORAINICIO" ColumnName="HORAINICIO" />
+          <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
+          <ScalarProperty Name="NOMBRETURNO" ColumnName="NOMBRETURNO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

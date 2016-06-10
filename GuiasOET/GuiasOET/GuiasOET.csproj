@@ -238,9 +238,6 @@
     <Compile Include="Models\GUIAS_ESTACION.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GUIAS_HORARIODISPONIBLE.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GUIAS_RESERVACION.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -248,6 +245,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GUIAS_TELEFONO.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GUIAS_TURNO.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManejoModelos.cs" />
