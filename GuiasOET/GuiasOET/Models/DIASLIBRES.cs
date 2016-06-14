@@ -1,34 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using PagedList;
 
 namespace GuiasOET.Models
 {
-    public class DIASLIBRES : IHttpModule
+    public class DIASLIBRES
     {
-        /// <summary>
-        /// You will need to configure this module in the Web.config file of your
-        /// web and register it with IIS before being able to use it. For more information
-        /// see the following link: http://go.microsoft.com/?linkid=8101007
-        /// </summary>
-        #region IHttpModule Members
+        public List<GuiasOET.Models.GUIAS_EMPLEADO> guias = new List<GuiasOET.Models.GUIAS_EMPLEADO>();
+        public GuiasOET.Models.GUIAS_EMPLEADO guias1 { get; set; }
 
-        public void Dispose()
+        public IPagedList<GUIAS_ROLDIASLIBRES> totalReservaciones { get; set; }
+
+        public DIASLIBRES(GuiasOET.Models.GUIAS_EMPLEADO empleado)
         {
-            //clean-up code here.
-        }
-
-        public void Init(HttpApplication context)
-        {
-            // Below is an example of how you can handle LogRequest event and provide 
-            // custom logging implementation for it
-            context.LogRequest += new EventHandler(OnLogRequest);
-        }
-
-        #endregion
-
-        public void OnLogRequest(Object source, EventArgs e)
-        {
-            //custom logging logic can go here
+            guias1 = empleado;
         }
     }
 }

@@ -674,8 +674,10 @@ namespace GuiasOET.Controllers
             return View(mod);
         }
 
-        public ActionResult Notificaciones(string sortOrder, string currentFilter, string fechaDesde, int? page)
+        public ActionResult Notificaciones(string sortOrder, string currentFilter1, string currentFilter2, string fechaDesde, string fechaHasta, int? page)  //**  string currentFilter2, string fechaHasta
         {
+
+
             ViewBag.CurrentSort = sortOrder;
             ViewBag.ReservacionSortParm = String.IsNullOrEmpty(sortOrder) ? "Reservacion" : "";
             ViewBag.NombreSortParm = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
@@ -685,34 +687,157 @@ namespace GuiasOET.Controllers
             ViewBag.HoraSortParm = String.IsNullOrEmpty(sortOrder) ? "Hora" : "";
             ViewBag.GuiasAsignadosSortParm = String.IsNullOrEmpty(sortOrder) ? "Guías Asignados" : "";
 
-            //cambios
+
+            /* Se define tamaño de la pagina */
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            ViewBag.pageNumber = pageNumber;
+
+            //cambios raquel 
+            // *****
 
             AsignacionModelos table = new AsignacionModelos();
 
             //Todas las reservaciones del sistema
             var reservacion = from r in baseDatos.GUIAS_RESERVACION select r;
 
+            //Lista reservaciones guia externo
+            List<IQueryable<GUIAS_RESERVACION>> reserv = new List<IQueryable<GUIAS_RESERVACION>>();
+
             //Todas las reservaciones con guias
             var reservacionAsignada = from p in baseDatos.GUIAS_ASIGNACION select p;
+
+            //Todos los guias del sistema
+            var guias = from p in baseDatos.GUIAS_EMPLEADO select p;
 
             //Lista que contiene todas las reservaciones sin guias 
             List<GUIAS_ASIGNACION> reservacionesConAsignacion = new List<GUIAS_ASIGNACION>();
 
-            foreach (var row in reservacion)
+            //Lista que contiene los guias
+            List<IEnumerable<GUIAS_EMPLEADO>> guiasAsignados = new List<IEnumerable<GUIAS_EMPLEADO>>();
+
+            //Lista que contiene los guias de todas las reservaciones
+            List<IEnumerable<GUIAS_EMPLEADO>> totalGuiasAsignados = new List<IEnumerable<GUIAS_EMPLEADO>>();
+
+            //Lista que contiene el total de guias para cada reservacion
+            IEnumerable<GUIAS_EMPLEADO> totalGuias;
+
+            List<GUIAS_RESERVACION> listaReservaciones = new List<GUIAS_RESERVACION>();
+
+            DateTime fechaInicio;
+            DateTime fechaFin;
+
+            string estacion = "";
+
+            //Lista que contiene los guias de todas las reservaciones
+            List<IEnumerable<GUIAS_RESERVACION>> totalReservas = new List<IEnumerable<GUIAS_RESERVACION>>();
+
+            //Reserva que tiene algún guía asignado
+            GUIAS_ASIGNACION reserva;
+
+            string rol = Session["RolUsuarioLogueado"].ToString();
+
+            //Ninguna fecha es vacía
+            if (!(String.IsNullOrEmpty(fechaDesde)) && !(String.IsNullOrEmpty(fechaHasta)))
             {
 
-             /*   if (row.NumeroPersonas ==  || row.FECHAMODIFICACION )
-                {
-
-                }
-                */
-
+                ViewBag.CurrentFilter1 = fechaDesde;
+                ViewBag.CurrentFilter2 = fechaHasta;
             }
 
+            //Solo la fecha inicial es vacía
+            else if (String.IsNullOrEmpty(fechaDesde) && !(String.IsNullOrEmpty(fechaHasta)))
+            {
+
+                ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now).Trim();
+                ViewBag.CurrentFilter2 = fechaHasta;
+
+                fechaDesde = Convert.ToString(DateTime.Now);
+                fechaHasta = currentFilter2;
+
+            }
+            //Solo la fecha final es vacía
+            else if (!(String.IsNullOrEmpty(fechaDesde)) && String.IsNullOrEmpty(fechaHasta))
+            {
+
+                ViewBag.CurrentFilter1 = fechaDesde;
+                ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
+
+                fechaDesde = currentFilter1;
+                fechaHasta = Convert.ToString(DateTime.Now.AddDays(7));
 
 
+            }
+            //Las fechas son vacias
+            else if ((String.IsNullOrEmpty(fechaDesde)) && String.IsNullOrEmpty(fechaHasta))
+            {
+                string v1 = ViewBag.CurrentFilter1;
+                string v2 = ViewBag.CurrentFilter2;
 
-                if (fechaDesde != null)
+                if ((String.IsNullOrEmpty(currentFilter1) && (String.IsNullOrEmpty(currentFilter2))))
+                {
+                    ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now).Trim();
+                    ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
+
+                    fechaDesde = Convert.ToString(DateTime.Now);
+                    fechaHasta = Convert.ToString(DateTime.Now.AddDays(7));
+                }
+                else if ((String.IsNullOrEmpty(currentFilter1)))
+                {
+                    ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now);
+                    ViewBag.CurrentFilter2 = fechaHasta;
+
+                    fechaDesde = String.Format("{0:dd/MM/yyyy}", DateTime.Now);
+                    fechaHasta = currentFilter2;
+                }
+                else if ((String.IsNullOrEmpty(currentFilter2)))
+                {
+
+                    ViewBag.CurrentFilter1 = fechaDesde;
+                    ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
+
+                    fechaDesde = currentFilter1;
+                    fechaHasta = String.Format("{0:dd/MM/yyyy}", DateTime.Now.AddDays(7)).Trim();
+
+                }
+                else
+                {
+                    fechaDesde = currentFilter1;
+                    fechaHasta = currentFilter2;
+
+                    ViewBag.CurrentFilter1 = fechaDesde;
+                    ViewBag.CurrentFilter2 = fechaHasta;
+
+                }
+            }
+            //****
+
+            if(rol.Contains("Global")) // puede ver todo
+            {
+                foreach (var row in reservacion)
+                {
+
+                    /*   if (row.NumeroPersonas ==  || row.FECHAMODIFICACION )
+                    {
+
+                    }
+                    */
+                }
+
+            }
+            else
+            {
+                if (rol.Contains("Local")) // solo ve lo de su estacion 
+                {
+                    estacion = Session["EstacionUsuarioLogueado"].ToString();
+                    reservacion = reservacion.Where(e => e.NOMBREESTACION.Equals(estacion));
+                }
+
+            }
+ 
+
+            /* 
+            if (fechaDesde != null)
             {
                 page = 1;
             }
@@ -720,6 +845,7 @@ namespace GuiasOET.Controllers
             {
                 fechaDesde = currentFilter;
             }
+            */
 
             ViewBag.CurrentFilter = fechaDesde;
 
@@ -765,8 +891,8 @@ namespace GuiasOET.Controllers
                     break;
             }
 
-            int pageSize = 8;
-            int pageNumber = (page ?? 1);
+            //int pageSize = 8;
+            //int pageNumber = (page ?? 1);
 
             return View(empleados.ToPagedList(pageNumber, pageSize));
         }

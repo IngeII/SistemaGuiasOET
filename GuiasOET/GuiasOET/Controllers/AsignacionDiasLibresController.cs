@@ -97,9 +97,32 @@ namespace GuiasOET.Controllers
         }
 
 
-        public ActionResult AsignarDiasLibresDetallada(int? page) {
+        public ActionResult AsignarDiasLibresDetallada(int? id) {
+
+            string identificacion;
+            DIASLIBRES modelo;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            identificacion = id.ToString();
+
+            modelo = new DIASLIBRES(baseDatos.GUIAS_EMPLEADO.Find(identificacion));
+
+            // modelo.modeloEmpleado.ESTADO = baseDatos.GUIAS_EMPLEADO.Find(identificacion).ESTADO;
+            if (modelo == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(modelo);
+        }
+
+        public ActionResult AsignarRol(string sortOrder, string currentFilter1, string currentFilter2, string fechaDesde, string fechaHasta, int? page) {
 
             return View();
         }
+
     }
 }

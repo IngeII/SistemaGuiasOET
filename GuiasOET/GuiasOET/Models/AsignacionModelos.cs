@@ -18,6 +18,8 @@ namespace GuiasOET.Models
         public IPagedList<IEnumerable<GUIAS_EMPLEADO>> empleados;
         public IPagedList<GUIAS_ASIGNACION> reservacionesAsignadas;
         public IPagedList<GUIAS_RESERVACION> totalReservaciones { get; set; }
+    
+
 
         public AsignacionModelos()
         {
@@ -33,5 +35,7 @@ namespace GuiasOET.Models
         {
             
         }
+
     }
+
 }
