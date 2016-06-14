@@ -573,7 +573,7 @@ namespace GuiasOET.Controllers
             }
         }
 
-        public ActionResult AsignarReservacionDetallada(int? id)
+        public ActionResult AsignarReservacionDetallada(int? page, int? id)
         {
             
             ViewBag.reserva = id;
@@ -590,6 +590,11 @@ namespace GuiasOET.Controllers
             List<GUIAS_EMPLEADO> guiasLibres = baseDatos.GUIAS_EMPLEADO.Where(p => !guias.Contains(p.CEDULA) && p.TIPOEMPLEADO.Contains("Guía") && p.NOMBREESTACION.Equals(modelo.modeloReservacion.NOMBREESTACION) ).ToList();
             List<GUIAS_EMPLEADO> guiasAsociados = baseDatos.GUIAS_EMPLEADO.Where(p => guias.Contains(p.CEDULA) && p.TIPOEMPLEADO.Contains("Guía")).ToList();
 
+            /* Se define tamaño de la pagina para la paginación de guías disponibles */
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            ViewBag.pageNumber = pageNumber;
+
             /*Hay que filtrar el maximo de asignaciones para ese día del guía disponible, ya que no pueden ser mas de 4 y que sea un rol de día libre se ponga de otro color*/
             modelo.guiasDisponibles = guiasLibres;
             modelo.guiasAsignados = guiasAsociados;
@@ -598,6 +603,26 @@ namespace GuiasOET.Controllers
             if (modelo == null)
             {
                 return HttpNotFound();
+            }
+            else
+            {
+                //Se asigna la cantidad de paginas
+                if (modelo.guiasDisponibles.Count() == 0)
+                {
+                    ViewBag.TotalPages = 1;
+                }
+                else
+                {
+                    var count = modelo.guiasDisponibles.Count();
+                    decimal totalPages = count / (decimal)pageSize;
+                    ViewBag.TotalPages = Math.Ceiling(totalPages);
+                    decimal numero = ViewBag.TotalPages;
+                }
+
+                modelo.totalGuiasDisponibles = modelo.guiasDisponibles.ToPagedList(pageNumber, pageSize);
+                ViewBag.MessagesInOnePage = modelo.totalGuiasDisponibles;
+                ViewBag.PageNumber = pageNumber;
+
             }
 
             return View(modelo);
