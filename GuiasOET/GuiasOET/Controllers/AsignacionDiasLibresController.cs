@@ -57,7 +57,7 @@ namespace GuiasOET.Controllers
                 {
                     empleados = empleados.Where(e => e.APELLIDO1.Contains(searchString)
                                        || e.NOMBREEMPLEADO.Contains(searchString) || e.APELLIDO2.Contains(searchString)
-                                       || e.NOMBREESTACION.Contains(searchString) 
+                                       || e.NOMBREESTACION.Contains(searchString)
                                        || e.USUARIO.Contains(searchString) || e.EMAIL.Contains(searchString));
                 }
                 else if (Session["RolUsuarioLogueado"].ToString().Contains("Local"))
@@ -97,7 +97,8 @@ namespace GuiasOET.Controllers
         }
 
 
-        public ActionResult AsignarDiasLibresDetallada(int? id) {
+        public ActionResult AsignarDiasLibresDetallada(int? id)
+        {
 
             string identificacion;
             DIASLIBRES modelo;
@@ -119,10 +120,21 @@ namespace GuiasOET.Controllers
             return View(modelo);
         }
 
-        public ActionResult AsignarRol(string sortOrder, string currentFilter1, string currentFilter2, string fechaDesde, string fechaHasta, int? page) {
+        public ActionResult AsignarRol(string sortOrder, string currentFilter1, string currentFilter2, string fechaDesde, string fechaHasta, int? page)
+        {
 
             return View();
         }
+        public ActionResult ModificarRol()
+        {
+            return View();
 
+        }
+
+        public ActionResult EliminarRol()
+        {
+            return View();
+
+        }
     }
 }
