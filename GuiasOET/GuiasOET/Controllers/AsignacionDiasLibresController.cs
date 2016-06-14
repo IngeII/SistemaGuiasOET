@@ -95,5 +95,11 @@ namespace GuiasOET.Controllers
             int pageNumber = (page ?? 1);
             return View(empleados.ToPagedList(pageNumber, pageSize));
         }
+
+
+        public ActionResult AsignarDiasLibresDetallada(int? page) {
+
+            return View();
+        }
     }
 }

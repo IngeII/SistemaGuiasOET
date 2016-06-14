@@ -223,6 +223,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AsignacionModelos.cs" />
+    <Compile Include="Models\DIASLIBRES.cs" />
     <Compile Include="Models\GUIAS_ASIGNACION.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
