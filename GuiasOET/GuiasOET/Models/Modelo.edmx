@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="GUIAS_ASIGNACION">
           <Key>
             <PropertyRef Name="NUMERORESERVACION" />
@@ -76,6 +76,7 @@
           </Key>
           <Property Name="FECHA" Type="date" />
           <Property Name="CEDULAINTERNO" Type="varchar2" MaxLength="9" Nullable="false" />
+          <Property Name="TIPODIALIBRE" Type="varchar2" MaxLength="20" />
         </EntityType>
         <EntityType Name="GUIAS_TELEFONO">
           <Key>
@@ -351,6 +352,7 @@
           <Property Name="FECHA" Type="DateTime" />
           <Property Name="CEDULAINTERNO" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Model.FK_ROL_INTERNO" FromRole="GUIAS_ROLDIASLIBRES" ToRole="GUIAS_EMPLEADO" />
+          <Property Name="TIPODIALIBRE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="GUIAS_TELEFONO">
           <Key>
@@ -550,6 +552,7 @@
           <EntitySetMapping Name="GUIAS_ROLDIASLIBRES">
             <EntityTypeMapping TypeName="Model.GUIAS_ROLDIASLIBRES">
               <MappingFragment StoreEntitySet="GUIAS_ROLDIASLIBRES">
+                <ScalarProperty Name="TIPODIALIBRE" ColumnName="TIPODIALIBRE" />
                 <ScalarProperty Name="CEDULAINTERNO" ColumnName="CEDULAINTERNO" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
               </MappingFragment>

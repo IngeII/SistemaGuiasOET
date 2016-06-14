@@ -64,6 +64,7 @@
     <EntitySetMapping Name="GUIAS_ROLDIASLIBRES">
       <EntityTypeMapping TypeName="Model.GUIAS_ROLDIASLIBRES">
         <MappingFragment StoreEntitySet="GUIAS_ROLDIASLIBRES">
+          <ScalarProperty Name="TIPODIALIBRE" ColumnName="TIPODIALIBRE" />
           <ScalarProperty Name="CEDULAINTERNO" ColumnName="CEDULAINTERNO" />
           <ScalarProperty Name="FECHA" ColumnName="FECHA" />
         </MappingFragment>
