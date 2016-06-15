@@ -377,6 +377,7 @@
     <Content Include="Views\AsignacionDiasLibres\ListaGuias.cshtml" />
     <Content Include="Views\AsignacionDiasLibres\AsignarDiasLibresDetallada.cshtml" />
     <Content Include="Views\Reportes\ReportesReservaciones.cshtml" />
+    <Content Include="Views\Reportes\PersonasAtendidas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
