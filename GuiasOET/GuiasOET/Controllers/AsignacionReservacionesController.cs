@@ -430,11 +430,10 @@ namespace GuiasOET.Controllers
             return View(table);
         }
 
-
+        /*
 
         public ActionResult Notificaciones(string sortOrder, string currentFilter1, string currentFilter2, string fechaDesde, string fechaHasta, int? page)  //**  string currentFilter2, string fechaHasta
         {
-
             ViewBag.CurrentSort = sortOrder;
             ViewBag.ReservacionSortParm = String.IsNullOrEmpty(sortOrder) ? "Reservacion" : "";
             ViewBag.NombreSortParm = String.IsNullOrEmpty(sortOrder) ? "Nombre" : "";
@@ -444,60 +443,24 @@ namespace GuiasOET.Controllers
             ViewBag.HoraSortParm = String.IsNullOrEmpty(sortOrder) ? "Hora" : "";
             ViewBag.GuiasAsignadosSortParm = String.IsNullOrEmpty(sortOrder) ? "Guías Asignados" : "";
 
-
-            /* Se define tamaño de la pagina */
+         
             int pageSize = 8;
             int pageNumber = (page ?? 1);
             ViewBag.pageNumber = pageNumber;
-
-            //cambios raquel 
-            // *****
 
             AsignacionModelos table = new AsignacionModelos();
 
             //Todas las reservaciones del sistema
             var reservacion = from r in baseDatos.GUIAS_RESERVACION select r;
 
-            //Lista reservaciones guia externo
-            List<IQueryable<GUIAS_RESERVACION>> reserv = new List<IQueryable<GUIAS_RESERVACION>>();
-
-            //Todas las reservaciones con guias
-            var reservacionAsignada = from p in baseDatos.GUIAS_ASIGNACION select p;
-
-            //Todos los guias del sistema
-            var guias = from p in baseDatos.GUIAS_EMPLEADO select p;
-
-            //Lista que contiene todas las reservaciones sin guias 
-            List<GUIAS_ASIGNACION> reservacionesConAsignacion = new List<GUIAS_ASIGNACION>();
-
-            //Lista que contiene los guias
-            List<IEnumerable<GUIAS_EMPLEADO>> guiasAsignados = new List<IEnumerable<GUIAS_EMPLEADO>>();
-
-            //Lista que contiene los guias de todas las reservaciones
-            List<IEnumerable<GUIAS_EMPLEADO>> totalGuiasAsignados = new List<IEnumerable<GUIAS_EMPLEADO>>();
-
-            //Lista que contiene el total de guias para cada reservacion
-            IEnumerable<GUIAS_EMPLEADO> totalGuias;
-
-            List<GUIAS_RESERVACION> listaReservaciones = new List<GUIAS_RESERVACION>();
-
             DateTime fechaInicio;
             DateTime fechaFin;
-
             string estacion = "";
-
-            //Lista que contiene los guias de todas las reservaciones
-            List<IEnumerable<GUIAS_RESERVACION>> totalReservas = new List<IEnumerable<GUIAS_RESERVACION>>();
-
-            //Reserva que tiene algún guía asignado
-            GUIAS_ASIGNACION reserva;
-
             string rol = Session["RolUsuarioLogueado"].ToString();
 
             //Ninguna fecha es vacía
             if (!(String.IsNullOrEmpty(fechaDesde)) && !(String.IsNullOrEmpty(fechaHasta)))
             {
-
                 ViewBag.CurrentFilter1 = fechaDesde;
                 ViewBag.CurrentFilter2 = fechaHasta;
             }
@@ -505,24 +468,18 @@ namespace GuiasOET.Controllers
             //Solo la fecha inicial es vacía
             else if (String.IsNullOrEmpty(fechaDesde) && !(String.IsNullOrEmpty(fechaHasta)))
             {
-
                 ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now).Trim();
                 ViewBag.CurrentFilter2 = fechaHasta;
-
                 fechaDesde = Convert.ToString(DateTime.Now);
                 fechaHasta = currentFilter2;
-
             }
             //Solo la fecha final es vacía
             else if (!(String.IsNullOrEmpty(fechaDesde)) && String.IsNullOrEmpty(fechaHasta))
             {
-
                 ViewBag.CurrentFilter1 = fechaDesde;
                 ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
-
                 fechaDesde = currentFilter1;
                 fechaHasta = Convert.ToString(DateTime.Now.AddDays(7));
-
             }
             //Las fechas son vacias
             else if ((String.IsNullOrEmpty(fechaDesde)) && String.IsNullOrEmpty(fechaHasta))
@@ -534,7 +491,6 @@ namespace GuiasOET.Controllers
                 {
                     ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now).Trim();
                     ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
-
                     fechaDesde = Convert.ToString(DateTime.Now);
                     fechaHasta = Convert.ToString(DateTime.Now.AddDays(7));
                 }
@@ -542,31 +498,24 @@ namespace GuiasOET.Controllers
                 {
                     ViewBag.CurrentFilter1 = String.Format("{0:yyyy-MM-dd}", DateTime.Now);
                     ViewBag.CurrentFilter2 = fechaHasta;
-
                     fechaDesde = String.Format("{0:dd/MM/yyyy}", DateTime.Now);
                     fechaHasta = currentFilter2;
                 }
                 else if ((String.IsNullOrEmpty(currentFilter2)))
                 {
-
                     ViewBag.CurrentFilter1 = fechaDesde;
                     ViewBag.CurrentFilter2 = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(7)).Trim();
-
                     fechaDesde = currentFilter1;
                     fechaHasta = String.Format("{0:dd/MM/yyyy}", DateTime.Now.AddDays(7)).Trim();
-
                 }
                 else
                 {
                     fechaDesde = currentFilter1;
                     fechaHasta = currentFilter2;
-
                     ViewBag.CurrentFilter1 = fechaDesde;
                     ViewBag.CurrentFilter2 = fechaHasta;
-
                 }
             }
-            //****
 
             if (rol.Contains("Global") || rol.Contains("Local"))
             {
@@ -620,34 +569,53 @@ namespace GuiasOET.Controllers
                     page = 1;
                 }
 
-                //AQUI
+                //Todos los guias del sistema
+                var guias = from p in baseDatos.GUIAS_EMPLEADO select p;
+
+                //** ESTO NO SE USA POR EL MOMENTO
+                //Lista que contiene los guias
+                List<IEnumerable<GUIAS_EMPLEADO>> guiasAsignados = new List<IEnumerable<GUIAS_EMPLEADO>>();
+                //Lista que contiene los guias de todas las reservaciones
+                List<IEnumerable<GUIAS_EMPLEADO>> totalGuiasAsignados = new List<IEnumerable<GUIAS_EMPLEADO>>();
+                //Lista que contiene el total de guias para cada reservacion
+                IEnumerable<GUIAS_EMPLEADO> totalGuias;
+                //Lista que contiene los guias de todas las reservaciones
+                List<IEnumerable<GUIAS_RESERVACION>> totalReservas = new List<IEnumerable<GUIAS_RESERVACION>>();
+
+
+                // ****AQUI
+
+                List<GUIAS_RESERVACION> listaReservaciones = new List<GUIAS_RESERVACION>();
+                
+                var datosDeLaVista = from r in baseDeDatos.V_GUIAS_RESERVADOS select r;
+             
+                GUIAS_RESERVACION reserva;
+                V_GUIAS_RESERVADOS vistaReserva;
+
 
                 foreach (var row in reservacion)
                 {
-                    reservacionAsignada = reservacionAsignada.Where(e => e.NUMERORESERVACION.Equals(row.NUMERORESERVACION));
-                    reserva = baseDatos.GUIAS_ASIGNACION.FirstOrDefault(i => i.NUMERORESERVACION.Equals(row.NUMERORESERVACION));
+                    vistaReserva = baseDatos.V_GUIAS_RESERVADOS.FirstOrDefault(e => e.ID.Equals(row.NUMERORESERVACION));
 
-                    if (reserva != null)
+                    //reserva es una variable de tipo GUIA_RESERVACION y aqui se ingresa la reserva que tiene el mismo numeroReservacion q la reservacion q en ese momento esta iterando en el foreach 
+                    //(el cual itera sobre todas las reservaciones q estan dentro del rango de fechas sellecionado por el usuario ( variable reservacion )
+                    reserva = baseDatos.GUIAS_RESERVACION.FirstOrDefault(i => i.NUMERORESERVACION.Equals(row.NUMERORESERVACION));
+
+                    if (reserva != null && vistaReserva != null)
                     {
-                        reservacionesConAsignacion.Add(reserva);
-                        foreach (var row2 in reservacionAsignada)
+                        listaReservaciones.Add(reserva);
+                        foreach (var row2 in vistaReserva)
                         {
-                            guias = guias.Where(x => x.CEDULA.Equals(row2.CEDULAGUIA));
-                            guiasAsignados.Add(guias);
-                            guias = from p in baseDatos.GUIAS_EMPLEADO select p;
+                            if (reserva.FECHAMODIFICACION == vistaReserva.MODIFICADO)
+                            {
+
+                            }
+
 
                         }
-
-                        totalGuias = guiasAsignados.ElementAt(0);
-
-                        for (int y = 1; y < guiasAsignados.Count(); ++y)
-                        {
-                            totalGuias = totalGuias.Concat(guiasAsignados.ElementAt(y));
-                        }
-                        totalGuiasAsignados.Add(totalGuias);
                     }
-                    guiasAsignados.Clear();
-                    reservacionAsignada = from p in baseDatos.GUIAS_ASIGNACION select p;
+          
+                    vistaReserva = from p in baseDatos.V_GUIAS_RESERVADOS select p;
                     guias = from p in baseDatos.GUIAS_EMPLEADO select p;
                 }
 
@@ -663,14 +631,11 @@ namespace GuiasOET.Controllers
                     ViewBag.TotalPages = Math.Ceiling(totalPages);
                 }
 
-
                 //Todos los guias asociados a las reservaciones
                 table.empleados = totalGuiasAsignados.ToPagedList(pageNumber, pageSize);
 
-                //Todas las reservaciones que tienen guias asignados
-                table.reservacionesAsignadas = reservacionesConAsignacion.ToPagedList(pageNumber, pageSize);
-
-
+                //Todas las reservaciones que tienen UN NUMERO DE ID 
+                table.reservaciones = listaReservaciones.ToPagedList(pageNumber, pageSize);
             }
 
             ViewBag.CurrentFilter = fechaDesde;
@@ -720,9 +685,9 @@ namespace GuiasOET.Controllers
             return View(empleados.ToPagedList(pageNumber, pageSize));
         }
 
-        /**
-         * 
-         * */
+        ///
+        **/
+
         [HttpGet]
         public ActionResult ConsultarAsignacion(int? page)
         {
