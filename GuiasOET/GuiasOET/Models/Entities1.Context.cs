@@ -13,10 +13,10 @@ namespace GuiasOET.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities1 : DbContext
+    public partial class Entities : DbContext
     {
-        public Entities1()
-            : base("name=Entities1")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace GuiasOET.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }
         public virtual DbSet<GUIAS_COMPANIA> GUIAS_COMPANIA { get; set; }
         public virtual DbSet<GUIAS_CONFIGURACIONCORREO> GUIAS_CONFIGURACIONCORREO { get; set; }
         public virtual DbSet<GUIAS_EMPLEADO> GUIAS_EMPLEADO { get; set; }
@@ -32,7 +33,7 @@ namespace GuiasOET.Models
         public virtual DbSet<GUIAS_RESERVACION> GUIAS_RESERVACION { get; set; }
         public virtual DbSet<GUIAS_ROLDIASLIBRES> GUIAS_ROLDIASLIBRES { get; set; }
         public virtual DbSet<GUIAS_TELEFONO> GUIAS_TELEFONO { get; set; }
-        public virtual DbSet<GUIAS_ASIGNACION> GUIAS_ASIGNACION { get; set; }
         public virtual DbSet<GUIAS_TURNO> GUIAS_TURNO { get; set; }
+        public virtual DbSet<V_GUIAS_RESERVADOS> V_GUIAS_RESERVADOS { get; set; }
     }
 }
