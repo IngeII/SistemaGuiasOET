@@ -30,6 +30,22 @@
         return asignacion;
 
     }
+
+
+    public int cantidadPersonasAtendidas(List<GuiasOET.Models.GUIAS_RESERVACION> reservaciones)
+    {
+        int contadorPersonas = 0;
+
+        for (int i = 0; i < reservaciones.Count(); ++i)
+        {
+            ++contadorPersonas;
+        }
+
+        return contadorPersonas;
+
+    }
+
+
 }
 
 <div class="table-responsive">
@@ -63,14 +79,16 @@
                 </tr>
 
 
-                @for (int i = 0; i < Model.totalReservaciones.Count; ++i)
+                @for (int i = 0; i < Model.fechasReservaciones.Count; ++i)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => Model.totalReservaciones.ElementAt(i).FECHA )
+                            @Html.DisplayFor(modelItem => Model.fechasReservaciones.ElementAt(i))
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => Model.totalReservaciones.ElementAt(i).NUMEROPERSONAS )
+                            @Html.DisplayFor(cantidadPersonasAtendidas()  )
+
+                            cantidadPersonasAtendidas(Model.)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => Model.totalReservaciones.ElementAt(i).NOMBRERESERVACION )

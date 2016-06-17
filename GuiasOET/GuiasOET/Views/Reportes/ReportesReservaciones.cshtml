@@ -10,17 +10,36 @@
 }
 
 <script>
-    function generarReporte(datosReservaciones) {
+    function Generar()
+    {
+        if
+    }
+
+
+    function PersonasAtendidas() {
 
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("generarReporte")',
+                url: '@Url.Action("PersonasAtendidas")',
                 data: 'datosReservaciones=' + datosReservaciones,
                 success: function (data) {
                 },
             });
         
     }
+
+    function Reservaciones(datosReservaciones) {
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Reservaciones")',
+            data: 'datosReservaciones=' + datosReservaciones,
+            success: function (data) {
+            },
+        });
+
+    }
+
 </script>
 
 

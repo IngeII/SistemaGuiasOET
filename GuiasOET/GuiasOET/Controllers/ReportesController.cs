@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using GuiasOET.Models;
+using System.Collections;
 
 namespace GuiasOET.Controllers
 {
@@ -30,21 +31,38 @@ namespace GuiasOET.Controllers
             //Todas las reservaciones del sistema
             var reservacion = from r in baseDatos.GUIAS_RESERVACION select r;
 
-
-
-
-
-
-
-
-
             return View();
         }
 
-        public ActionResult generarReporte()
+        public ActionResult PersonasAtendidas(string fechaDesde, string fechaHasta)
         {
+            ReportesModelo reportes;
+            DateTime fechaD = Convert.ToDateTime(fechaHasta);
+            DateTime fechaH = Convert.ToDateTime(fechaHasta);
+            List<GUIAS_RESERVACION> reservaciones = baseDatos.GUIAS_RESERVACION.Where(e => e.FECHA < fechaH && e.FECHA > fechaD).ToList();
+
+            reservaciones = reservaciones.OrderBy(r=> r.FECHA).ToList();
+
+            var asignaciones = from r in baseDatos.GUIAS_ASIGNACION select r;
+
+
 
             return View("ReportesReservaciones");
+        }
+
+        public ActionResult Reservaciones()
+        {
+
+
+
+
+            return View("ReportesReservaciones");
+        }
+
+
+        public void calcularSubTotales()
+        {
+
         }
     }
 }
