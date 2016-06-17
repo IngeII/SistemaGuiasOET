@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Entities1.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="GUIAS_ASIGNACION">
           <Key>
             <PropertyRef Name="NUMERORESERVACION" />
@@ -94,6 +94,25 @@
           <Property Name="NOMBREESTACION" Type="varchar2" MaxLength="55" Nullable="false" />
           <Property Name="HORAINICIO" Type="varchar2" MaxLength="10" Nullable="false" />
           <Property Name="HORAFIN" Type="varchar2" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SERVICIOS_RESERVADOS.V_GUIAS_RESERVADOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_GUIAS_RESERVADOS">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="NOMBRE" />
+          </Key>
+          <Property Name="ID" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="SALUDOID" Type="varchar2" MaxLength="4" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="80" Nullable="false" />
+          <Property Name="APELLIDOS" Type="varchar2" MaxLength="80" />
+          <Property Name="PAX" Type="number" Precision="20" Scale="0" />
+          <Property Name="ENTRA" Type="date" />
+          <Property Name="SALE" Type="date" />
+          <Property Name="SOLICITADAEL" Type="date" />
+          <Property Name="MODIFICADO" Type="date" />
+          <Property Name="ULTIMA_MODIFICACION" Type="number" Precision="16" Scale="0" />
+          <Property Name="ESTACION" Type="varchar2" MaxLength="26" />
         </EntityType>
         <Association Name="FK_ASIGNACION_GUIA">
           <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
@@ -191,7 +210,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelStoreContainer">
+        <EntityContainer Name="Entities1StoreContainer">
           <EntitySet Name="GUIAS_ASIGNACION" EntityType="Self.GUIAS_ASIGNACION" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
           <EntitySet Name="GUIAS_COMPANIA" EntityType="Self.GUIAS_COMPANIA" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
           <EntitySet Name="GUIAS_CONFIGURACIONCORREO" EntityType="Self.GUIAS_CONFIGURACIONCORREO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
@@ -201,6 +220,21 @@
           <EntitySet Name="GUIAS_ROLDIASLIBRES" EntityType="Self.GUIAS_ROLDIASLIBRES" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
           <EntitySet Name="GUIAS_TELEFONO" EntityType="Self.GUIAS_TELEFONO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
           <EntitySet Name="GUIAS_TURNO" EntityType="Self.GUIAS_TURNO" Schema="SERVICIOS_RESERVADOS" store:Type="Tables" />
+          <EntitySet Name="V_GUIAS_RESERVADOS" EntityType="Self.V_GUIAS_RESERVADOS" store:Type="Views" store:Schema="SERVICIOS_RESERVADOS">
+            <DefiningQuery>SELECT 
+"V_GUIAS_RESERVADOS"."ID" AS "ID", 
+"V_GUIAS_RESERVADOS"."SALUDOID" AS "SALUDOID", 
+"V_GUIAS_RESERVADOS"."NOMBRE" AS "NOMBRE", 
+"V_GUIAS_RESERVADOS"."APELLIDOS" AS "APELLIDOS", 
+"V_GUIAS_RESERVADOS"."PAX" AS "PAX", 
+"V_GUIAS_RESERVADOS"."ENTRA" AS "ENTRA", 
+"V_GUIAS_RESERVADOS"."SALE" AS "SALE", 
+"V_GUIAS_RESERVADOS"."SOLICITADAEL" AS "SOLICITADAEL", 
+"V_GUIAS_RESERVADOS"."MODIFICADO" AS "MODIFICADO", 
+"V_GUIAS_RESERVADOS"."ULTIMA_MODIFICACION" AS "ULTIMA_MODIFICACION", 
+"V_GUIAS_RESERVADOS"."ESTACION" AS "ESTACION"
+FROM "SERVICIOS_RESERVADOS"."V_GUIAS_RESERVADOS" "V_GUIAS_RESERVADOS"</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_ASIGNACION_GUIA" Association="Self.FK_ASIGNACION_GUIA">
             <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
             <End Role="GUIAS_ASIGNACION" EntitySet="GUIAS_ASIGNACION" />
@@ -234,66 +268,37 @@
             <End Role="GUIAS_TURNO" EntitySet="GUIAS_TURNO" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="GUIAS_COMPANIA" EntityType="Model.GUIAS_COMPANIA" />
-          <EntitySet Name="GUIAS_CONFIGURACIONCORREO" EntityType="Model.GUIAS_CONFIGURACIONCORREO" />
-          <EntitySet Name="GUIAS_EMPLEADO" EntityType="Model.GUIAS_EMPLEADO" />
-          <EntitySet Name="GUIAS_ESTACION" EntityType="Model.GUIAS_ESTACION" />
-          <EntitySet Name="GUIAS_RESERVACION" EntityType="Model.GUIAS_RESERVACION" />
-          <EntitySet Name="GUIAS_ROLDIASLIBRES" EntityType="Model.GUIAS_ROLDIASLIBRES" />
-          <EntitySet Name="GUIAS_TELEFONO" EntityType="Model.GUIAS_TELEFONO" />
-          <AssociationSet Name="FK_ESTACION_COMPANIA" Association="Model.FK_ESTACION_COMPANIA">
-            <End Role="GUIAS_COMPANIA" EntitySet="GUIAS_COMPANIA" />
-            <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EMPLEADO_ESTACION" Association="Model.FK_EMPLEADO_ESTACION">
-            <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
-            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ROL_INTERNO" Association="Model.FK_ROL_INTERNO">
-            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
-            <End Role="GUIAS_ROLDIASLIBRES" EntitySet="GUIAS_ROLDIASLIBRES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TELEFONO_EMPLEADO" Association="Model.FK_TELEFONO_EMPLEADO">
-            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
-            <End Role="GUIAS_TELEFONO" EntitySet="GUIAS_TELEFONO" />
-          </AssociationSet>
-          <EntitySet Name="GUIAS_ASIGNACION" EntityType="Model.GUIAS_ASIGNACION" />
-          <EntitySet Name="GUIAS_TURNO" EntityType="Model.GUIAS_TURNO" />
-          <AssociationSet Name="FK_ASIGNACION_GUIA" Association="Model.FK_ASIGNACION_GUIA">
-            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
-            <End Role="GUIAS_ASIGNACION" EntitySet="GUIAS_ASIGNACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ASIGNACION_RESERVACION" Association="Model.FK_ASIGNACION_RESERVACION">
-            <End Role="GUIAS_RESERVACION" EntitySet="GUIAS_RESERVACION" />
-            <End Role="GUIAS_ASIGNACION" EntitySet="GUIAS_ASIGNACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TURNO" Association="Model.FK_TURNO">
-            <End Role="GUIAS_TURNO" EntitySet="GUIAS_TURNO" />
-            <End Role="GUIAS_ASIGNACION" EntitySet="GUIAS_ASIGNACION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TURNO_ESTACION" Association="Model.FK_TURNO_ESTACION">
-            <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
-            <End Role="GUIAS_TURNO" EntitySet="GUIAS_TURNO" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="Entities1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GUIAS_ASIGNACION">
+          <Key>
+            <PropertyRef Name="NUMERORESERVACION" />
+            <PropertyRef Name="CEDULAGUIA" />
+          </Key>
+          <Property Name="NOTASASOCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERORESERVACION" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TURNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CEDULAGUIA" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Self.FK_ASIGNACION_GUIA" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_EMPLEADO" />
+          <NavigationProperty Name="GUIAS_RESERVACION" Relationship="Self.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_RESERVACION" />
+          <NavigationProperty Name="GUIAS_TURNO" Relationship="Self.FK_TURNO" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_TURNO" />
+        </EntityType>
         <EntityType Name="GUIAS_COMPANIA">
           <Key>
             <PropertyRef Name="NOMBRECOMPANIA" />
           </Key>
-          <Property Name="NOMBRECOMPANIA" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRECOMPANIA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UBICACION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GUIAS_ESTACION" Relationship="Model.FK_ESTACION_COMPANIA" FromRole="GUIAS_COMPANIA" ToRole="GUIAS_ESTACION" />
+          <NavigationProperty Name="GUIAS_ESTACION" Relationship="Self.FK_ESTACION_COMPANIA" FromRole="GUIAS_COMPANIA" ToRole="GUIAS_ESTACION" />
         </EntityType>
         <EntityType Name="GUIAS_CONFIGURACIONCORREO">
           <Key>
             <PropertyRef Name="EMAIL" />
           </Key>
-          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CONTRASENA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PUERTO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="HOST" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
@@ -302,39 +307,39 @@
           <Key>
             <PropertyRef Name="CEDULA" />
           </Key>
-          <Property Name="CEDULA" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="CEDULA" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NOMBREEMPLEADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="APELLIDO1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="APELLIDO2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="ESTADO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="ESTADO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
           <Property Name="DIRECCION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CONTRASENA" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TIPOEMPLEADO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NOMBREESTACION" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTRASENA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPOEMPLEADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBREESTACION" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CONFIRMAREMAIL" Type="Decimal" Precision="38" Scale="0" />
-          <NavigationProperty Name="GUIAS_ESTACION" Relationship="Model.FK_EMPLEADO_ESTACION" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ESTACION" />
-          <NavigationProperty Name="GUIAS_ROLDIASLIBRES" Relationship="Model.FK_ROL_INTERNO" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ROLDIASLIBRES" />
-          <NavigationProperty Name="GUIAS_TELEFONO" Relationship="Model.FK_TELEFONO_EMPLEADO" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_TELEFONO" />
-          <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Model.FK_ASIGNACION_GUIA" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ASIGNACION" />
+          <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Self.FK_ASIGNACION_GUIA" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ASIGNACION" />
+          <NavigationProperty Name="GUIAS_ESTACION" Relationship="Self.FK_EMPLEADO_ESTACION" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ESTACION" />
+          <NavigationProperty Name="GUIAS_ROLDIASLIBRES" Relationship="Self.FK_ROL_INTERNO" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_ROLDIASLIBRES" />
+          <NavigationProperty Name="GUIAS_TELEFONO" Relationship="Self.FK_TELEFONO_EMPLEADO" FromRole="GUIAS_EMPLEADO" ToRole="GUIAS_TELEFONO" />
         </EntityType>
         <EntityType Name="GUIAS_ESTACION">
           <Key>
             <PropertyRef Name="NOMBREESTACION" />
           </Key>
-          <Property Name="NOMBREESTACION" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBREESTACION" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UBICACION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="NOMBRECOMPANIA" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GUIAS_COMPANIA" Relationship="Model.FK_ESTACION_COMPANIA" FromRole="GUIAS_ESTACION" ToRole="GUIAS_COMPANIA" />
-          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Model.FK_EMPLEADO_ESTACION" FromRole="GUIAS_ESTACION" ToRole="GUIAS_EMPLEADO" />
-          <NavigationProperty Name="GUIAS_TURNO" Relationship="Model.FK_TURNO_ESTACION" FromRole="GUIAS_ESTACION" ToRole="GUIAS_TURNO" />
+          <Property Name="NOMBRECOMPANIA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GUIAS_COMPANIA" Relationship="Self.FK_ESTACION_COMPANIA" FromRole="GUIAS_ESTACION" ToRole="GUIAS_COMPANIA" />
+          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Self.FK_EMPLEADO_ESTACION" FromRole="GUIAS_ESTACION" ToRole="GUIAS_EMPLEADO" />
+          <NavigationProperty Name="GUIAS_TURNO" Relationship="Self.FK_TURNO_ESTACION" FromRole="GUIAS_ESTACION" ToRole="GUIAS_TURNO" />
         </EntityType>
         <EntityType Name="GUIAS_RESERVACION">
           <Key>
             <PropertyRef Name="NUMERORESERVACION" />
           </Key>
-          <Property Name="NUMERORESERVACION" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERORESERVACION" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NOMBRERESERVACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="NUMEROPERSONAS" Type="Decimal" Precision="38" Scale="0" />
           <Property Name="HORAMODIFICACION" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -343,101 +348,57 @@
           <Property Name="HORA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NOMBREESTACION" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
           <Property Name="CONFIRMACION" Type="Decimal" Precision="38" Scale="0" />
-          <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Model.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_RESERVACION" ToRole="GUIAS_ASIGNACION" />
+          <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Self.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_RESERVACION" ToRole="GUIAS_ASIGNACION" />
         </EntityType>
         <EntityType Name="GUIAS_ROLDIASLIBRES">
           <Key>
             <PropertyRef Name="CEDULAINTERNO" />
           </Key>
           <Property Name="FECHA" Type="DateTime" />
-          <Property Name="CEDULAINTERNO" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Model.FK_ROL_INTERNO" FromRole="GUIAS_ROLDIASLIBRES" ToRole="GUIAS_EMPLEADO" />
+          <Property Name="CEDULAINTERNO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TIPODIALIBRE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Self.FK_ROL_INTERNO" FromRole="GUIAS_ROLDIASLIBRES" ToRole="GUIAS_EMPLEADO" />
         </EntityType>
         <EntityType Name="GUIAS_TELEFONO">
           <Key>
             <PropertyRef Name="CEDULAEMPLEADO" />
             <PropertyRef Name="TELEFONO" />
           </Key>
-          <Property Name="CEDULAEMPLEADO" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="TELEFONO" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Model.FK_TELEFONO_EMPLEADO" FromRole="GUIAS_TELEFONO" ToRole="GUIAS_EMPLEADO" />
-        </EntityType>
-        <Association Name="FK_ESTACION_COMPANIA">
-          <End Type="Model.GUIAS_COMPANIA" Role="GUIAS_COMPANIA" Multiplicity="1" />
-          <End Type="Model.GUIAS_ESTACION" Role="GUIAS_ESTACION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GUIAS_COMPANIA">
-              <PropertyRef Name="NOMBRECOMPANIA" />
-            </Principal>
-            <Dependent Role="GUIAS_ESTACION">
-              <PropertyRef Name="NOMBRECOMPANIA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EMPLEADO_ESTACION">
-          <End Type="Model.GUIAS_ESTACION" Role="GUIAS_ESTACION" Multiplicity="1" />
-          <End Type="Model.GUIAS_EMPLEADO" Role="GUIAS_EMPLEADO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GUIAS_ESTACION">
-              <PropertyRef Name="NOMBREESTACION" />
-            </Principal>
-            <Dependent Role="GUIAS_EMPLEADO">
-              <PropertyRef Name="NOMBREESTACION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ROL_INTERNO">
-          <End Type="Model.GUIAS_EMPLEADO" Role="GUIAS_EMPLEADO" Multiplicity="1" />
-          <End Type="Model.GUIAS_ROLDIASLIBRES" Role="GUIAS_ROLDIASLIBRES" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="GUIAS_EMPLEADO">
-              <PropertyRef Name="CEDULA" />
-            </Principal>
-            <Dependent Role="GUIAS_ROLDIASLIBRES">
-              <PropertyRef Name="CEDULAINTERNO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TELEFONO_EMPLEADO">
-          <End Type="Model.GUIAS_EMPLEADO" Role="GUIAS_EMPLEADO" Multiplicity="1" />
-          <End Type="Model.GUIAS_TELEFONO" Role="GUIAS_TELEFONO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GUIAS_EMPLEADO">
-              <PropertyRef Name="CEDULA" />
-            </Principal>
-            <Dependent Role="GUIAS_TELEFONO">
-              <PropertyRef Name="CEDULAEMPLEADO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="GUIAS_ASIGNACION">
-          <Key>
-            <PropertyRef Name="NUMERORESERVACION" />
-            <PropertyRef Name="CEDULAGUIA" />
-          </Key>
-          <Property Name="NOTASASOCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NUMERORESERVACION" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="TURNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CEDULAGUIA" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Model.FK_ASIGNACION_GUIA" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_EMPLEADO" />
-          <NavigationProperty Name="GUIAS_RESERVACION" Relationship="Model.FK_ASIGNACION_RESERVACION" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_RESERVACION" />
-          <NavigationProperty Name="GUIAS_TURNO" Relationship="Model.FK_TURNO" FromRole="GUIAS_ASIGNACION" ToRole="GUIAS_TURNO" />
+          <Property Name="CEDULAEMPLEADO" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GUIAS_EMPLEADO" Relationship="Self.FK_TELEFONO_EMPLEADO" FromRole="GUIAS_TELEFONO" ToRole="GUIAS_EMPLEADO" />
         </EntityType>
         <EntityType Name="GUIAS_TURNO">
           <Key>
             <PropertyRef Name="NOMBRETURNO" />
           </Key>
-          <Property Name="NOMBRETURNO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NOMBREESTACION" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
-          <Property Name="HORAINICIO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="HORAFIN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Model.FK_TURNO" FromRole="GUIAS_TURNO" ToRole="GUIAS_ASIGNACION" />
-          <NavigationProperty Name="GUIAS_ESTACION" Relationship="Model.FK_TURNO_ESTACION" FromRole="GUIAS_TURNO" ToRole="GUIAS_ESTACION" />
+          <Property Name="NOMBRETURNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBREESTACION" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HORAINICIO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HORAFIN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GUIAS_ASIGNACION" Relationship="Self.FK_TURNO" FromRole="GUIAS_TURNO" ToRole="GUIAS_ASIGNACION" />
+          <NavigationProperty Name="GUIAS_ESTACION" Relationship="Self.FK_TURNO_ESTACION" FromRole="GUIAS_TURNO" ToRole="GUIAS_ESTACION" />
+        </EntityType>
+        <EntityType Name="V_GUIAS_RESERVADOS">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="NOMBRE" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SALUDOID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="PAX" Type="Decimal" Precision="20" Scale="0" />
+          <Property Name="ENTRA" Type="DateTime" />
+          <Property Name="SALE" Type="DateTime" />
+          <Property Name="SOLICITADAEL" Type="DateTime" />
+          <Property Name="MODIFICADO" Type="DateTime" />
+          <Property Name="ULTIMA_MODIFICACION" Type="Int64" />
+          <Property Name="ESTACION" Type="String" MaxLength="26" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_ASIGNACION_GUIA">
-          <End Type="Model.GUIAS_EMPLEADO" Role="GUIAS_EMPLEADO" Multiplicity="1" />
-          <End Type="Model.GUIAS_ASIGNACION" Role="GUIAS_ASIGNACION" Multiplicity="*" />
+          <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+          <End Role="GUIAS_ASIGNACION" Type="Self.GUIAS_ASIGNACION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GUIAS_EMPLEADO">
               <PropertyRef Name="CEDULA" />
@@ -448,8 +409,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ASIGNACION_RESERVACION">
-          <End Type="Model.GUIAS_RESERVACION" Role="GUIAS_RESERVACION" Multiplicity="1" />
-          <End Type="Model.GUIAS_ASIGNACION" Role="GUIAS_ASIGNACION" Multiplicity="*" />
+          <End Role="GUIAS_RESERVACION" Type="Self.GUIAS_RESERVACION" Multiplicity="1" />
+          <End Role="GUIAS_ASIGNACION" Type="Self.GUIAS_ASIGNACION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GUIAS_RESERVACION">
               <PropertyRef Name="NUMERORESERVACION" />
@@ -460,8 +421,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TURNO">
-          <End Type="Model.GUIAS_TURNO" Role="GUIAS_TURNO" Multiplicity="0..1" />
-          <End Type="Model.GUIAS_ASIGNACION" Role="GUIAS_ASIGNACION" Multiplicity="*" />
+          <End Role="GUIAS_TURNO" Type="Self.GUIAS_TURNO" Multiplicity="0..1" />
+          <End Role="GUIAS_ASIGNACION" Type="Self.GUIAS_ASIGNACION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GUIAS_TURNO">
               <PropertyRef Name="NOMBRETURNO" />
@@ -471,9 +432,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ESTACION_COMPANIA">
+          <End Role="GUIAS_COMPANIA" Type="Self.GUIAS_COMPANIA" Multiplicity="1" />
+          <End Role="GUIAS_ESTACION" Type="Self.GUIAS_ESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GUIAS_COMPANIA">
+              <PropertyRef Name="NOMBRECOMPANIA" />
+            </Principal>
+            <Dependent Role="GUIAS_ESTACION">
+              <PropertyRef Name="NOMBRECOMPANIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_ESTACION">
+          <End Role="GUIAS_ESTACION" Type="Self.GUIAS_ESTACION" Multiplicity="1" />
+          <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GUIAS_ESTACION">
+              <PropertyRef Name="NOMBREESTACION" />
+            </Principal>
+            <Dependent Role="GUIAS_EMPLEADO">
+              <PropertyRef Name="NOMBREESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROL_INTERNO">
+          <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+          <End Role="GUIAS_ROLDIASLIBRES" Type="Self.GUIAS_ROLDIASLIBRES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="GUIAS_EMPLEADO">
+              <PropertyRef Name="CEDULA" />
+            </Principal>
+            <Dependent Role="GUIAS_ROLDIASLIBRES">
+              <PropertyRef Name="CEDULAINTERNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TELEFONO_EMPLEADO">
+          <End Role="GUIAS_EMPLEADO" Type="Self.GUIAS_EMPLEADO" Multiplicity="1" />
+          <End Role="GUIAS_TELEFONO" Type="Self.GUIAS_TELEFONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GUIAS_EMPLEADO">
+              <PropertyRef Name="CEDULA" />
+            </Principal>
+            <Dependent Role="GUIAS_TELEFONO">
+              <PropertyRef Name="CEDULAEMPLEADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TURNO_ESTACION">
-          <End Type="Model.GUIAS_ESTACION" Role="GUIAS_ESTACION" Multiplicity="1" />
-          <End Type="Model.GUIAS_TURNO" Role="GUIAS_TURNO" Multiplicity="*" />
+          <End Role="GUIAS_ESTACION" Type="Self.GUIAS_ESTACION" Multiplicity="1" />
+          <End Role="GUIAS_TURNO" Type="Self.GUIAS_TURNO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GUIAS_ESTACION">
               <PropertyRef Name="NOMBREESTACION" />
@@ -483,106 +492,167 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GUIAS_ASIGNACION" EntityType="Self.GUIAS_ASIGNACION" />
+          <EntitySet Name="GUIAS_COMPANIA" EntityType="Self.GUIAS_COMPANIA" />
+          <EntitySet Name="GUIAS_CONFIGURACIONCORREO" EntityType="Self.GUIAS_CONFIGURACIONCORREO" />
+          <EntitySet Name="GUIAS_EMPLEADO" EntityType="Self.GUIAS_EMPLEADO" />
+          <EntitySet Name="GUIAS_ESTACION" EntityType="Self.GUIAS_ESTACION" />
+          <EntitySet Name="GUIAS_RESERVACION" EntityType="Self.GUIAS_RESERVACION" />
+          <EntitySet Name="GUIAS_ROLDIASLIBRES" EntityType="Self.GUIAS_ROLDIASLIBRES" />
+          <EntitySet Name="GUIAS_TELEFONO" EntityType="Self.GUIAS_TELEFONO" />
+          <EntitySet Name="GUIAS_TURNO" EntityType="Self.GUIAS_TURNO" />
+          <EntitySet Name="V_GUIAS_RESERVADOS" EntityType="Self.V_GUIAS_RESERVADOS" />
+          <AssociationSet Name="FK_ASIGNACION_GUIA" Association="Self.FK_ASIGNACION_GUIA">
+            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+            <End Role="GUIAS_ASIGNACION" EntitySet="GUIAS_ASIGNACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ASIGNACION_RESERVACION" Association="Self.FK_ASIGNACION_RESERVACION">
+            <End Role="GUIAS_RESERVACION" EntitySet="GUIAS_RESERVACION" />
+            <End Role="GUIAS_ASIGNACION" EntitySet="GUIAS_ASIGNACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TURNO" Association="Self.FK_TURNO">
+            <End Role="GUIAS_TURNO" EntitySet="GUIAS_TURNO" />
+            <End Role="GUIAS_ASIGNACION" EntitySet="GUIAS_ASIGNACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESTACION_COMPANIA" Association="Self.FK_ESTACION_COMPANIA">
+            <End Role="GUIAS_COMPANIA" EntitySet="GUIAS_COMPANIA" />
+            <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_ESTACION" Association="Self.FK_EMPLEADO_ESTACION">
+            <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
+            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROL_INTERNO" Association="Self.FK_ROL_INTERNO">
+            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+            <End Role="GUIAS_ROLDIASLIBRES" EntitySet="GUIAS_ROLDIASLIBRES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TELEFONO_EMPLEADO" Association="Self.FK_TELEFONO_EMPLEADO">
+            <End Role="GUIAS_EMPLEADO" EntitySet="GUIAS_EMPLEADO" />
+            <End Role="GUIAS_TELEFONO" EntitySet="GUIAS_TELEFONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TURNO_ESTACION" Association="Self.FK_TURNO_ESTACION">
+            <End Role="GUIAS_ESTACION" EntitySet="GUIAS_ESTACION" />
+            <End Role="GUIAS_TURNO" EntitySet="GUIAS_TURNO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="Entities1StoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="GUIAS_ASIGNACION">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_ASIGNACION">
+              <MappingFragment StoreEntitySet="GUIAS_ASIGNACION">
+                <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
+                <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
+                <ScalarProperty Name="TURNO" ColumnName="TURNO" />
+                <ScalarProperty Name="CEDULAGUIA" ColumnName="CEDULAGUIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_COMPANIA">
-            <EntityTypeMapping TypeName="Model.GUIAS_COMPANIA">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_COMPANIA">
               <MappingFragment StoreEntitySet="GUIAS_COMPANIA">
-                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
                 <ScalarProperty Name="NOMBRECOMPANIA" ColumnName="NOMBRECOMPANIA" />
+                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_CONFIGURACIONCORREO">
-            <EntityTypeMapping TypeName="Model.GUIAS_CONFIGURACIONCORREO">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_CONFIGURACIONCORREO">
               <MappingFragment StoreEntitySet="GUIAS_CONFIGURACIONCORREO">
-                <ScalarProperty Name="HOST" ColumnName="HOST" />
-                <ScalarProperty Name="PUERTO" ColumnName="PUERTO" />
-                <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
+                <ScalarProperty Name="PUERTO" ColumnName="PUERTO" />
+                <ScalarProperty Name="HOST" ColumnName="HOST" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_EMPLEADO">
-            <EntityTypeMapping TypeName="Model.GUIAS_EMPLEADO">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_EMPLEADO">
               <MappingFragment StoreEntitySet="GUIAS_EMPLEADO">
-                <ScalarProperty Name="CONFIRMAREMAIL" ColumnName="CONFIRMAREMAIL" />
-                <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
-                <ScalarProperty Name="TIPOEMPLEADO" ColumnName="TIPOEMPLEADO" />
-                <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
-                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
-                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
-                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
-                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
-                <ScalarProperty Name="NOMBREEMPLEADO" ColumnName="NOMBREEMPLEADO" />
                 <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="NOMBREEMPLEADO" ColumnName="NOMBREEMPLEADO" />
+                <ScalarProperty Name="APELLIDO1" ColumnName="APELLIDO1" />
+                <ScalarProperty Name="APELLIDO2" ColumnName="APELLIDO2" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
+                <ScalarProperty Name="TIPOEMPLEADO" ColumnName="TIPOEMPLEADO" />
+                <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
+                <ScalarProperty Name="CONFIRMAREMAIL" ColumnName="CONFIRMAREMAIL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_ESTACION">
-            <EntityTypeMapping TypeName="Model.GUIAS_ESTACION">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_ESTACION">
               <MappingFragment StoreEntitySet="GUIAS_ESTACION">
-                <ScalarProperty Name="NOMBRECOMPANIA" ColumnName="NOMBRECOMPANIA" />
-                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
                 <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
+                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+                <ScalarProperty Name="NOMBRECOMPANIA" ColumnName="NOMBRECOMPANIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_RESERVACION">
-            <EntityTypeMapping TypeName="Model.GUIAS_RESERVACION">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_RESERVACION">
               <MappingFragment StoreEntitySet="GUIAS_RESERVACION">
-                <ScalarProperty Name="CONFIRMACION" ColumnName="CONFIRMACION" />
-                <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
-                <ScalarProperty Name="HORA" ColumnName="HORA" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />
-                <ScalarProperty Name="HORAMODIFICACION" ColumnName="HORAMODIFICACION" />
-                <ScalarProperty Name="NUMEROPERSONAS" ColumnName="NUMEROPERSONAS" />
-                <ScalarProperty Name="NOMBRERESERVACION" ColumnName="NOMBRERESERVACION" />
                 <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
+                <ScalarProperty Name="NOMBRERESERVACION" ColumnName="NOMBRERESERVACION" />
+                <ScalarProperty Name="NUMEROPERSONAS" ColumnName="NUMEROPERSONAS" />
+                <ScalarProperty Name="HORAMODIFICACION" ColumnName="HORAMODIFICACION" />
+                <ScalarProperty Name="FECHAMODIFICACION" ColumnName="FECHAMODIFICACION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="HORA" ColumnName="HORA" />
+                <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
+                <ScalarProperty Name="CONFIRMACION" ColumnName="CONFIRMACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_ROLDIASLIBRES">
-            <EntityTypeMapping TypeName="Model.GUIAS_ROLDIASLIBRES">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_ROLDIASLIBRES">
               <MappingFragment StoreEntitySet="GUIAS_ROLDIASLIBRES">
-                <ScalarProperty Name="TIPODIALIBRE" ColumnName="TIPODIALIBRE" />
-                <ScalarProperty Name="CEDULAINTERNO" ColumnName="CEDULAINTERNO" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CEDULAINTERNO" ColumnName="CEDULAINTERNO" />
+                <ScalarProperty Name="TIPODIALIBRE" ColumnName="TIPODIALIBRE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_TELEFONO">
-            <EntityTypeMapping TypeName="Model.GUIAS_TELEFONO">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_TELEFONO">
               <MappingFragment StoreEntitySet="GUIAS_TELEFONO">
-                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
                 <ScalarProperty Name="CEDULAEMPLEADO" ColumnName="CEDULAEMPLEADO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GUIAS_ASIGNACION">
-            <EntityTypeMapping TypeName="Model.GUIAS_ASIGNACION">
-              <MappingFragment StoreEntitySet="GUIAS_ASIGNACION">
-                <ScalarProperty Name="CEDULAGUIA" ColumnName="CEDULAGUIA" />
-                <ScalarProperty Name="TURNO" ColumnName="TURNO" />
-                <ScalarProperty Name="NUMERORESERVACION" ColumnName="NUMERORESERVACION" />
-                <ScalarProperty Name="NOTASASOCIA" ColumnName="NOTASASOCIA" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GUIAS_TURNO">
-            <EntityTypeMapping TypeName="Model.GUIAS_TURNO">
+            <EntityTypeMapping TypeName="Entities1.GUIAS_TURNO">
               <MappingFragment StoreEntitySet="GUIAS_TURNO">
-                <ScalarProperty Name="HORAFIN" ColumnName="HORAFIN" />
-                <ScalarProperty Name="HORAINICIO" ColumnName="HORAINICIO" />
-                <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
                 <ScalarProperty Name="NOMBRETURNO" ColumnName="NOMBRETURNO" />
+                <ScalarProperty Name="NOMBREESTACION" ColumnName="NOMBREESTACION" />
+                <ScalarProperty Name="HORAINICIO" ColumnName="HORAINICIO" />
+                <ScalarProperty Name="HORAFIN" ColumnName="HORAFIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_GUIAS_RESERVADOS">
+            <EntityTypeMapping TypeName="Entities1.V_GUIAS_RESERVADOS">
+              <MappingFragment StoreEntitySet="V_GUIAS_RESERVADOS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SALUDOID" ColumnName="SALUDOID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="PAX" ColumnName="PAX" />
+                <ScalarProperty Name="ENTRA" ColumnName="ENTRA" />
+                <ScalarProperty Name="SALE" ColumnName="SALE" />
+                <ScalarProperty Name="SOLICITADAEL" ColumnName="SOLICITADAEL" />
+                <ScalarProperty Name="MODIFICADO" ColumnName="MODIFICADO" />
+                <ScalarProperty Name="ULTIMA_MODIFICACION" ColumnName="ULTIMA_MODIFICACION" />
+                <ScalarProperty Name="ESTACION" ColumnName="ESTACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
